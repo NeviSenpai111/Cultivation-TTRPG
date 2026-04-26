@@ -1,0 +1,819 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>GM One-Pager — Cultivator's Ledger</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;500;600;700&family=Cormorant+SC:wght@400;600&family=Noto+Serif+SC:wght@400;600;900&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --paper: #f4ebd6;
+    --paper-dark: #e8dcc0;
+    --paper-edge: #d9c9a5;
+    --ink: #1a1410;
+    --ink-soft: #3d2f22;
+    --ink-faded: #7a6a56;
+    --cinnabar: #a52a2a;
+    --cinnabar-deep: #821a1a;
+    --gold: #b8873a;
+    --rule: #c4b189;
+    --seal-red: #b83227;
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  html, body {
+    background: #2a221a;
+    font-family: 'Cormorant Garamond', Georgia, serif;
+    color: var(--ink);
+    padding: 20px 0;
+    min-height: 100vh;
+  }
+
+  .page {
+    max-width: 1180px;
+    margin: 0 auto;
+    background: var(--paper);
+    background-image:
+      radial-gradient(ellipse at top left, rgba(184,135,58,0.08), transparent 45%),
+      radial-gradient(ellipse at bottom right, rgba(165,42,42,0.05), transparent 50%),
+      repeating-linear-gradient(0deg, transparent 0px, transparent 2px, rgba(26,20,16,0.015) 2px, rgba(26,20,16,0.015) 3px);
+    padding: 40px 50px 60px;
+    position: relative;
+    box-shadow: 0 25px 60px rgba(0,0,0,0.5);
+    border: 1px solid var(--paper-edge);
+  }
+
+  .page::before, .page::after {
+    content: '';
+    position: absolute;
+    width: 90px;
+    height: 90px;
+    pointer-events: none;
+  }
+  .page::before {
+    top: 0; left: 0;
+    background: radial-gradient(circle at top left, rgba(122,106,86,0.25), transparent 60%);
+  }
+  .page::after {
+    bottom: 0; right: 0;
+    background: radial-gradient(circle at bottom right, rgba(122,106,86,0.25), transparent 60%);
+  }
+
+  /* ===== HEADER ===== */
+  .header {
+    display: grid;
+    grid-template-columns: 1fr auto 1fr;
+    align-items: center;
+    gap: 30px;
+    padding-bottom: 20px;
+    border-bottom: 2px double var(--cinnabar);
+    margin-bottom: 28px;
+  }
+
+  .header-title {
+    text-align: center;
+  }
+
+  .header-title .chinese {
+    font-family: 'Noto Serif SC', serif;
+    font-weight: 900;
+    font-size: 28px;
+    color: var(--cinnabar-deep);
+    letter-spacing: 8px;
+    line-height: 1;
+  }
+
+  .header-title .english {
+    font-family: 'Cormorant SC', serif;
+    font-size: 12px;
+    letter-spacing: 4px;
+    color: var(--ink-faded);
+    margin-top: 6px;
+    text-transform: uppercase;
+  }
+
+  .seal {
+    width: 70px; height: 70px;
+    border: 3px solid var(--seal-red);
+    background: var(--paper);
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transform: rotate(-4deg);
+    box-shadow: 0 0 0 1px var(--paper), 0 0 0 2px rgba(184,50,39,0.3);
+  }
+
+  .seal::before {
+    content: '';
+    position: absolute;
+    inset: 4px;
+    border: 1px solid var(--seal-red);
+  }
+
+  .seal-text {
+    font-family: 'Noto Serif SC', serif;
+    font-weight: 900;
+    color: var(--seal-red);
+    font-size: 22px;
+    letter-spacing: 2px;
+    line-height: 1;
+    text-align: center;
+    transform: rotate(4deg);
+  }
+
+  .header-meta {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 11px;
+    color: var(--ink-faded);
+    letter-spacing: 2px;
+    text-transform: uppercase;
+  }
+
+  .header-meta.left { text-align: right; }
+  .header-meta.right { text-align: left; }
+
+  /* ===== THE CORE LOOP (HERO) ===== */
+  .core-loop {
+    border: 2px double var(--cinnabar);
+    background: rgba(165,42,42,0.04);
+    padding: 20px 28px;
+    margin-bottom: 28px;
+    text-align: center;
+    position: relative;
+  }
+
+  .core-loop-label {
+    font-family: 'Cormorant SC', serif;
+    font-size: 10px;
+    letter-spacing: 4px;
+    color: var(--cinnabar);
+    text-transform: uppercase;
+    margin-bottom: 10px;
+  }
+
+  .core-loop-formula {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 22px;
+    font-weight: 500;
+    color: var(--ink);
+    line-height: 1.4;
+  }
+
+  .core-loop-formula strong {
+    color: var(--cinnabar-deep);
+    font-weight: 700;
+  }
+
+  .core-loop-arrow {
+    color: var(--ink-faded);
+    margin: 0 6px;
+  }
+
+  /* ===== GRID LAYOUT ===== */
+  .grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 32px;
+    margin-bottom: 28px;
+  }
+
+  .grid-3 {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 24px;
+    margin-bottom: 28px;
+  }
+
+  .full-width {
+    grid-column: 1 / -1;
+  }
+
+  /* ===== SECTIONS ===== */
+  .section {
+    margin-bottom: 22px;
+  }
+
+  .section-header {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 10px;
+  }
+
+  .section-header::before {
+    content: '';
+    display: block;
+    width: 16px;
+    height: 2px;
+    background: var(--cinnabar);
+  }
+
+  .section-header h2 {
+    font-family: 'Noto Serif SC', serif;
+    font-weight: 600;
+    font-size: 16px;
+    color: var(--cinnabar-deep);
+    letter-spacing: 2px;
+    flex-shrink: 0;
+  }
+
+  .section-header .en {
+    font-family: 'Cormorant SC', serif;
+    font-size: 9px;
+    letter-spacing: 2.5px;
+    color: var(--ink-faded);
+    text-transform: uppercase;
+    flex-grow: 1;
+    padding-left: 2px;
+  }
+
+  .section-header::after {
+    content: '';
+    display: block;
+    flex-grow: 1;
+    height: 1px;
+    background: var(--rule);
+    opacity: 0.5;
+  }
+
+  /* ===== TABLES ===== */
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 13px;
+  }
+
+  th, td {
+    padding: 4px 8px;
+    text-align: left;
+    border-bottom: 1px dotted var(--rule);
+    vertical-align: top;
+  }
+
+  th {
+    font-family: 'Cormorant SC', serif;
+    font-size: 9px;
+    letter-spacing: 2px;
+    color: var(--ink-faded);
+    text-transform: uppercase;
+    font-weight: 600;
+    border-bottom: 1px solid var(--ink-faded);
+    padding-bottom: 5px;
+  }
+
+  td.num, th.num {
+    text-align: right;
+    font-variant-numeric: tabular-nums;
+    white-space: nowrap;
+  }
+
+  td.ctr, th.ctr {
+    text-align: center;
+  }
+
+  tr:last-child td { border-bottom: none; }
+
+  /* ===== BOX (highlighted sections) ===== */
+  .box {
+    border: 1px solid var(--rule);
+    background: rgba(244,235,214,0.4);
+    padding: 10px 14px;
+    margin-bottom: 12px;
+  }
+
+  .box.cinnabar {
+    border-color: var(--cinnabar);
+    background: rgba(165,42,42,0.04);
+  }
+
+  .box.gold {
+    border-color: var(--gold);
+    background: rgba(184,135,58,0.06);
+  }
+
+  /* ===== CHECKLIST ===== */
+  .checklist {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 13px;
+    line-height: 1.55;
+  }
+
+  .checklist li {
+    list-style: none;
+    padding-left: 24px;
+    position: relative;
+    margin-bottom: 4px;
+  }
+
+  .checklist li::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 5px;
+    width: 14px;
+    height: 14px;
+    border: 1.5px solid var(--ink);
+    background: transparent;
+  }
+
+  .checklist li:hover::before {
+    border-color: var(--cinnabar);
+  }
+
+  /* ===== CALLOUT (alert-style) ===== */
+  .callout {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 12px;
+    font-style: italic;
+    color: var(--ink-soft);
+    padding: 8px 14px;
+    background: rgba(184,135,58,0.08);
+    border-left: 3px solid var(--gold);
+    margin: 10px 0;
+    line-height: 1.5;
+  }
+
+  .callout strong {
+    font-style: normal;
+    color: var(--cinnabar-deep);
+    letter-spacing: 1px;
+  }
+
+  .callout.danger {
+    border-left-color: var(--cinnabar);
+    background: rgba(165,42,42,0.05);
+  }
+
+  /* ===== INLINE FORMULA ===== */
+  .formula {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 13px;
+    background: rgba(184,135,58,0.1);
+    padding: 2px 6px;
+    border-radius: 2px;
+    color: var(--ink);
+    font-weight: 500;
+    white-space: nowrap;
+  }
+
+  /* ===== FOOTER ===== */
+  .footer {
+    margin-top: 32px;
+    padding-top: 16px;
+    border-top: 1px solid var(--rule);
+    display: flex;
+    justify-content: space-between;
+    font-family: 'Cormorant SC', serif;
+    font-size: 9px;
+    letter-spacing: 3px;
+    color: var(--ink-faded);
+    text-transform: uppercase;
+  }
+
+  /* Paragraph spacing */
+  p {
+    line-height: 1.55;
+    font-size: 13px;
+    margin-bottom: 8px;
+  }
+
+  p.tight {
+    font-size: 12px;
+    line-height: 1.45;
+    margin-bottom: 6px;
+  }
+
+  /* Dense lists */
+  .dense-list {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 13px;
+    line-height: 1.55;
+    list-style: none;
+  }
+
+  .dense-list li {
+    padding-left: 14px;
+    position: relative;
+    margin-bottom: 3px;
+  }
+
+  .dense-list li::before {
+    content: '·';
+    position: absolute;
+    left: 4px;
+    color: var(--cinnabar);
+    font-weight: 700;
+  }
+
+  /* Two-column definition list */
+  .def-list {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 13px;
+    line-height: 1.5;
+  }
+
+  .def-list dt {
+    font-weight: 700;
+    color: var(--cinnabar-deep);
+    font-size: 12px;
+    letter-spacing: 0.5px;
+    margin-top: 6px;
+  }
+
+  .def-list dd {
+    margin-left: 12px;
+    color: var(--ink);
+  }
+
+  .def-list dt:first-child { margin-top: 0; }
+
+  /* Print */
+  @media print {
+    body { background: white; padding: 0; }
+    .page { box-shadow: none; border: none; }
+    html { background: white; }
+  }
+
+  @media (max-width: 900px) {
+    .grid, .grid-3 { grid-template-columns: 1fr; }
+    .page { padding: 24px 20px; }
+  }
+</style>
+</head>
+<body>
+
+<div class="page">
+
+  <!-- HEADER -->
+  <div class="header">
+    <div class="header-meta left">
+      Session-Ready Reference
+    </div>
+    <div class="header-title">
+      <div class="chinese">仙师之鉴</div>
+      <div class="english">The GM's One-Pager</div>
+    </div>
+    <div class="header-meta right">
+      Keep This Beside You
+    </div>
+  </div>
+
+  <!-- CORE LOOP -->
+  <div class="core-loop">
+    <div class="core-loop-label">The Core Loop · Everything Else Is Modifiers</div>
+    <div class="core-loop-formula">
+      <strong>Attribute Score</strong> <span class="core-loop-arrow">+</span> <strong>Realm Tier</strong> <span class="core-loop-arrow">+</span> modifiers <span class="core-loop-arrow">→</span> d6 pool <span class="core-loop-arrow">→</span> count <strong>4+</strong> as successes <span class="core-loop-arrow">→</span> beat target or opposed roll
+    </div>
+  </div>
+
+  <!-- ROW 1: Quick-Reference Tables -->
+  <div class="grid-3">
+
+    <!-- Default Targets -->
+    <div class="section">
+      <div class="section-header">
+        <h2>难度</h2>
+        <span class="en">Default Targets</span>
+      </div>
+      <table>
+        <thead>
+          <tr><th>Difficulty</th><th class="num">Target</th></tr>
+        </thead>
+        <tbody>
+          <tr><td>Trivial</td><td class="num">1</td></tr>
+          <tr><td>Standard</td><td class="num">3</td></tr>
+          <tr><td>Hard</td><td class="num">5</td></tr>
+          <tr><td>Very hard</td><td class="num">7</td></tr>
+          <tr><td>Extreme</td><td class="num">10+</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <!-- Realm Tiers -->
+    <div class="section">
+      <div class="section-header">
+        <h2>境界</h2>
+        <span class="en">Realm Tier Map</span>
+      </div>
+      <table>
+        <tbody>
+          <tr><td>Mortal</td><td class="num">0</td></tr>
+          <tr><td>Qi Condensation</td><td class="num">1–4</td></tr>
+          <tr><td>Foundation Est.</td><td class="num">5–8</td></tr>
+          <tr><td>Core Formation</td><td class="num">9–12</td></tr>
+          <tr><td>Nascent Soul</td><td class="num">13–16</td></tr>
+          <tr><td>Soul Formation</td><td class="num">17–20</td></tr>
+          <tr><td>Soul Transform.</td><td class="num">21–24</td></tr>
+          <tr><td>Ascendant</td><td class="num">25–28</td></tr>
+          <tr><td>Nirvana stages</td><td class="num">29–40</td></tr>
+        </tbody>
+      </table>
+      <p class="tight" style="margin-top:6px; color: var(--ink-faded); font-style:italic;">E/M/L/P = +0/+1/+2/+3 within realm</p>
+    </div>
+
+    <!-- Technique Tiers -->
+    <div class="section">
+      <div class="section-header">
+        <h2>术阶</h2>
+        <span class="en">Technique Tiers</span>
+      </div>
+      <table>
+        <thead>
+          <tr><th>Tier</th><th class="num">Qi</th><th class="num">Dmg/Succ</th></tr>
+        </thead>
+        <tbody>
+          <tr><td>Spirit</td><td class="num">1</td><td class="num">1</td></tr>
+          <tr><td>Mysterious</td><td class="num">5</td><td class="num">2</td></tr>
+          <tr><td>Celestial</td><td class="num">20</td><td class="num">3</td></tr>
+          <tr><td>Void</td><td class="num">75</td><td class="num">5</td></tr>
+          <tr><td>Nirvana</td><td class="num">300</td><td class="num">8</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <!-- ROW 2: Realm Barrier + Derived Stats + Tribulation Quick -->
+  <div class="grid-3">
+
+    <!-- Realm Barrier -->
+    <div class="section">
+      <div class="section-header">
+        <h2>境隔</h2>
+        <span class="en">Realm Barrier</span>
+      </div>
+      <div class="box cinnabar">
+        <p class="tight">Defender auto-cancels attacker successes equal to tier gap (<strong>max 4 per full realm above</strong>).</p>
+      </div>
+      <p class="tight" style="color: var(--ink-faded);"><strong>Bypass methods:</strong></p>
+      <ul class="dense-list">
+        <li>Higher-tier technique (−1 realm of barrier per tier above)</li>
+        <li>Dao Comprehension (Novice −1 · Initiate −2 · Adept −3 · Master −4 · Grandmaster full)</li>
+        <li>Heavenly Resentment (1 pt = 1 success, 1/scene)</li>
+        <li>Insight Gambit success (1/fight, retroactive −1)</li>
+      </ul>
+    </div>
+
+    <!-- Wounds & Qi -->
+    <div class="section">
+      <div class="section-header">
+        <h2>伤气</h2>
+        <span class="en">Wounds & Qi</span>
+      </div>
+      <p class="tight"><span class="formula">Wounds = Tier + Body</span></p>
+      <p class="tight"><span class="formula">Qi Pool = Tier × 10 + Qi × 5</span></p>
+      <table style="margin-top:8px;">
+        <thead><tr><th>Filled</th><th>Penalty</th></tr></thead>
+        <tbody>
+          <tr><td>0–50%</td><td>none</td></tr>
+          <tr><td>51–75%</td><td>−1d all rolls</td></tr>
+          <tr><td>76–99%</td><td>−2d all rolls</td></tr>
+          <tr><td>100%</td><td><strong style="color:var(--cinnabar-deep);">Dying</strong> — next hit kills unless prepared</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <!-- Derived Stats -->
+    <div class="section">
+      <div class="section-header">
+        <h2>衍算</h2>
+        <span class="en">Derived Stats</span>
+      </div>
+      <dl class="def-list">
+        <dt>Spiritual Sense Range</dt>
+        <dd>(Tier + Soul) × 10m</dd>
+        <dt>Soul Defense</dt>
+        <dd>Tier + Soul</dd>
+        <dt>Presence Tier</dt>
+        <dd>Realm Tier</dd>
+        <dt>Initiative</dt>
+        <dd>Tier + 1d6</dd>
+        <dt>Max Heart Oaths</dt>
+        <dd>(Tier ÷ 2) + 1</dd>
+      </dl>
+    </div>
+  </div>
+
+  <!-- ROW 3: NPC Template + Realm Baseline + Difficulty Calibration -->
+  <div class="grid">
+
+    <!-- NPC Baseline -->
+    <div class="section">
+      <div class="section-header">
+        <h2>角色</h2>
+        <span class="en">Realm Baseline Stats (Typical Cultivator)</span>
+      </div>
+      <table>
+        <thead>
+          <tr>
+            <th>Realm · Tier</th>
+            <th class="ctr">Attr</th>
+            <th class="num">Wnd</th>
+            <th class="num">Qi</th>
+            <th class="num">Sense</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr><td>QC Early · 1</td><td class="ctr">2/2/1</td><td class="num">3</td><td class="num">20</td><td class="num">30m</td></tr>
+          <tr><td>QC Peak · 4</td><td class="ctr">2/3/2</td><td class="num">6</td><td class="num">55</td><td class="num">60m</td></tr>
+          <tr><td>FE Mid · 6</td><td class="ctr">3/3/2</td><td class="num">9</td><td class="num">75</td><td class="num">80m</td></tr>
+          <tr><td>FE Peak · 8</td><td class="ctr">3/4/3</td><td class="num">11</td><td class="num">100</td><td class="num">110m</td></tr>
+          <tr><td>CF Mid · 10</td><td class="ctr">4/4/3</td><td class="num">14</td><td class="num">120</td><td class="num">130m</td></tr>
+          <tr><td>CF Peak · 12</td><td class="ctr">4/5/4</td><td class="num">16</td><td class="num">145</td><td class="num">160m</td></tr>
+          <tr><td>NS Mid · 14</td><td class="ctr">4/5/4</td><td class="num">18</td><td class="num">165</td><td class="num">180m</td></tr>
+          <tr><td>NS Peak · 16</td><td class="ctr">5/5/5</td><td class="num">21</td><td class="num">185</td><td class="num">210m</td></tr>
+          <tr><td>Ascendant · 25+</td><td class="ctr">5/5/5</td><td class="num">30</td><td class="num">275</td><td class="num">300m</td></tr>
+        </tbody>
+      </table>
+      <p class="tight" style="margin-top:6px; font-style:italic; color:var(--ink-faded);">
+        Attr = Body/Qi/Soul. Shift ±1 by archetype (Body cultivator: +1 Body, −1 Soul, etc.)
+      </p>
+    </div>
+
+    <!-- Difficulty Calibration -->
+    <div class="section">
+      <div class="section-header">
+        <h2>挑战</h2>
+        <span class="en">Encounter Calibration</span>
+      </div>
+      <table>
+        <thead>
+          <tr><th>Opposition Realm (vs PCs)</th><th>Feels Like</th></tr>
+        </thead>
+        <tbody>
+          <tr><td>1 realm below</td><td>speed bump</td></tr>
+          <tr><td>Same realm</td><td>even fight</td></tr>
+          <tr><td>1 realm above</td><td>tough — need tools</td></tr>
+          <tr><td>2 realms above</td><td><strong>unwinnable direct</strong></td></tr>
+          <tr><td>3+ realms above</td><td>flee or die</td></tr>
+        </tbody>
+      </table>
+      <div class="callout">
+        <strong>Rule of thumb:</strong> a party of 4 same-realm PCs ≈ one opponent one realm above. A party of 4 can handle ~2–3 same-realm foes without it being routine.
+      </div>
+    </div>
+  </div>
+
+  <!-- ROW 4: Session Prep + Tribulation Template -->
+  <div class="grid">
+
+    <!-- Session Prep -->
+    <div class="section">
+      <div class="section-header">
+        <h2>备会</h2>
+        <span class="en">Session Prep Checklist (30–60 min)</span>
+      </div>
+      <ul class="checklist">
+        <li><strong>Review Seclusion Actions</strong> — resolve each PC's slot spending</li>
+        <li><strong>Advance Karma Clocks</strong> — pursuers, fated events, timers</li>
+        <li><strong>Plot Session Shape</strong> — one quiet, one tension, one action</li>
+        <li><strong>Stat NPCs This Session Needs</strong> — 1–2 is typical</li>
+        <li><strong>Reset Running Sheet</strong> — countermeasures, pools, tensions</li>
+      </ul>
+      <div class="callout danger">
+        <strong>Critical:</strong> always note each PC's remaining countermeasures (talismans, forbidden arts, escape items) before session. You must know what they have before declaring killing blows.
+      </div>
+    </div>
+
+    <!-- Tribulation Template -->
+    <div class="section">
+      <div class="section-header">
+        <h2>天劫</h2>
+        <span class="en">Tribulation Build (Set-Piece)</span>
+      </div>
+      <table>
+        <thead><tr><th>Breakthrough Into</th><th class="num">Waves</th><th class="num">Target</th></tr></thead>
+        <tbody>
+          <tr><td>Core Formation</td><td class="num">3</td><td class="num">5</td></tr>
+          <tr><td>Nascent Soul</td><td class="num">5</td><td class="num">7</td></tr>
+          <tr><td>Soul Formation</td><td class="num">6</td><td class="num">9</td></tr>
+          <tr><td>Soul Transformation</td><td class="num">7</td><td class="num">11</td></tr>
+          <tr><td>Ascendant</td><td colspan="2" class="ctr"><em>Celestial Flame Trial</em></td></tr>
+          <tr><td>Nirvana Scryer</td><td class="num">7</td><td class="num">12</td></tr>
+          <tr><td>Nirvana Cleanser</td><td class="num">8</td><td class="num">15</td></tr>
+          <tr><td>Nirvana Shatterer</td><td class="num">9</td><td class="num">18</td></tr>
+        </tbody>
+      </table>
+      <p class="tight" style="margin-top:6px;"><strong>Karma modifier:</strong> +10W = −1 wave · −10B = +1 wave · −20B = +2 waves + demons named</p>
+      <p class="tight"><strong>Wave mix:</strong> Lightning · Karmic Fire · Heart Demon · Dao Trial · Truth Mirror · Elemental Purge · Memory Erasure</p>
+    </div>
+  </div>
+
+  <!-- ROW 5: In-Combat Insight & Player Invention -->
+  <div class="grid">
+
+    <!-- Insight -->
+    <div class="section">
+      <div class="section-header">
+        <h2>悟</h2>
+        <span class="en">In-Combat Insight</span>
+      </div>
+      <p class="tight"><strong>Moments of Truth (auto +1 Insight):</strong></p>
+      <ul class="dense-list">
+        <li>Survived Above (higher realm opponent)</li>
+        <li>Brink of Death (countermeasure used)</li>
+        <li>Witnessed a Master of your Dao</li>
+        <li>First Blood with a new technique</li>
+        <li>Dao-Resonant kill</li>
+      </ul>
+      <p class="tight" style="margin-top:8px;"><strong>Insight Gambit:</strong> 1/scene, split dice pool before rolling. Insight dice score only if the moment is meaningful.</p>
+      <p class="tight"><strong>Realm modifier:</strong> ×1 same · ×2 one above · ×3 two above · ×4 three+ above. None from fighting down.</p>
+    </div>
+
+    <!-- Player Invention -->
+    <div class="section">
+      <div class="section-header">
+        <h2>变通</h2>
+        <span class="en">Ruling Player Invention</span>
+      </div>
+      <p class="tight"><strong>Three-question heuristic:</strong></p>
+      <ul class="dense-list">
+        <li>Is it mechanically plausible? (If yes, allow it)</li>
+        <li>If not — what existing mechanic is it closest to? Adapt.</li>
+        <li>What does it cost? Qi / Insight / risk — never free.</li>
+      </ul>
+      <div class="callout">
+        <strong>Default ruling:</strong> say yes, set a cost, move on. A slow session from over-adjudicating is worse than a slightly generous call.
+      </div>
+      <p class="tight" style="color: var(--cinnabar-deep);"><strong>Never retcon:</strong> no retroactive countermeasures, no "I actually had a talisman." Preparation must have been declared before combat.</p>
+    </div>
+  </div>
+
+  <!-- ROW 6: Karma & Seclusion -->
+  <div class="grid">
+
+    <!-- Karma Quick -->
+    <div class="section">
+      <div class="section-header">
+        <h2>因果</h2>
+        <span class="en">Karma Types Cheat</span>
+      </div>
+      <dl class="def-list">
+        <dt>Life Debt</dt>
+        <dd>Named. Creditor can call once for major aid.</dd>
+        <dt>Blood Debt</dt>
+        <dd>Named. Pursuer clock — advances each gap.</dd>
+        <dt>Heart Oath</dt>
+        <dd>Cultivation-bound. +Insight on fulfillment, Qi Deviation on breaking.</dd>
+        <dt>Heavenly White/Black</dt>
+        <dd>Pooled. Modifies Tribulation (see template).</dd>
+        <dt>Fated Karma</dt>
+        <dd>Inevitable plot karma. Schedule reveals.</dd>
+      </dl>
+    </div>
+
+    <!-- Seclusion Slots -->
+    <div class="section">
+      <div class="section-header">
+        <h2>闭关</h2>
+        <span class="en">Seclusion Slots by Realm</span>
+      </div>
+      <table>
+        <thead><tr><th>Realm</th><th>Time Gap</th><th class="num">Slots</th></tr></thead>
+        <tbody>
+          <tr><td>Mortal / QC</td><td>Days–weeks</td><td class="num">1–2</td></tr>
+          <tr><td>FE</td><td>Weeks–months</td><td class="num">2–3</td></tr>
+          <tr><td>CF</td><td>Months–year</td><td class="num">3–4</td></tr>
+          <tr><td>NS</td><td>Years</td><td class="num">4–6</td></tr>
+          <tr><td>SoF+</td><td>Decades</td><td class="num">6+</td></tr>
+        </tbody>
+      </table>
+      <p class="tight" style="margin-top:6px;"><strong>Actions:</strong> Cultivate · Study · Refine · Comprehend Dao · Scout/Prepare · Recover · Seek Master</p>
+    </div>
+  </div>
+
+  <!-- ROW 7: House Rule Checklist (full width) -->
+  <div class="section full-width">
+    <div class="section-header">
+      <h2>家规</h2>
+      <span class="en">House-Rule Decisions · Lock In at Session Zero</span>
+    </div>
+    <div class="grid">
+      <ul class="checklist">
+        <li>Insight Gambit works in sparring? (<em>Default: yes, no Brink-of-Death triggers</em>)</li>
+        <li>Resentment refill rate per session? (<em>Default: max 1/session</em>)</li>
+        <li>Multi-Dao comprehension allowed? (<em>Default: yes, Seed's 2× only on one</em>)</li>
+        <li>Karma sharing across party? (<em>Default: individual, not pooled</em>)</li>
+      </ul>
+      <ul class="checklist">
+        <li>Witnessing tribulation = Moment of Truth? (<em>Default: yes, 1× per realm level</em>)</li>
+        <li>PC death replacement style? (<em>Options: sect disciple / reincarnation / fresh start</em>)</li>
+        <li>Can PCs found sect branches? (<em>Default: at Nascent Soul+</em>)</li>
+        <li>Core-Bound treasure destruction on wielder death? (<em>Default: yes, shatters</em>)</li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- FOOTER -->
+  <div class="footer">
+    <span>逆 · defy</span>
+    <span>section 13 · distilled</span>
+    <span>天地记录</span>
+  </div>
+
+</div>
+
+</body>
+</html>

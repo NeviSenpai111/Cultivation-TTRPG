@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Cultivator's Ledger — Campaign Companion</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;500;600;700&family=Cormorant+SC:wght@400;600&family=Noto+Serif+SC:wght@400;600;900&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+<div class="app">
+  <aside class="sidebar">
+    <div class="brand">
+      <div class="brand-chinese">仙逆</div>
+      <div class="brand-english">Cultivator's Ledger</div>
+    </div>
+
+    <div class="mode-toggle">
+      <button class="mode-btn" data-mode="gm">GM</button>
+      <button class="mode-btn" data-mode="player">Player</button>
+    </div>
+
+    <div class="nav-group">
+      <div class="nav-group-label">Overview</div>
+      <div class="nav-item" data-view="home"><span class="nav-icon">道</span> Dashboard</div>
+    </div>
+
+    <div class="nav-group">
+      <div class="nav-group-label">Library</div>
+      <div class="nav-item" data-view="techniques"><span class="nav-icon">术</span> Techniques <span class="count" id="count-techniques"></span></div>
+      <div class="nav-item" data-view="treasures"><span class="nav-icon">宝</span> Treasures <span class="count" id="count-treasures"></span></div>
+      <div class="nav-item" data-view="methods"><span class="nav-icon">功</span> Methods <span class="count" id="count-methods"></span></div>
+      <div class="nav-item" data-view="items"><span class="nav-icon">物</span> Items <span class="count" id="count-items"></span></div>
+    </div>
+
+    <div class="nav-group">
+      <div class="nav-group-label">Play</div>
+      <div class="nav-item" data-view="characters"><span class="nav-icon">人</span> Characters <span class="count" id="count-characters"></span></div>
+    </div>
+
+    <div class="nav-group" style="margin-top: auto;">
+      <div class="nav-group-label">Data</div>
+      <div class="nav-item" data-view="data"><span class="nav-icon">籍</span> Export / Import</div>
+      <div class="connection" id="connection"></div>
+    </div>
+  </aside>
+
+  <main class="main" id="main"></main>
+</div>
+
+<div class="dialog-overlay" id="dialog-overlay">
+  <div class="dialog" id="dialog">
+    <button class="dialog-close" id="dialog-close">&times;</button>
+    <div id="dialog-content"></div>
+  </div>
+</div>
+
+<div class="notice" id="notice"></div>
+
+<script type="module" src="js/main.js"></script>
+</body>
+</html>

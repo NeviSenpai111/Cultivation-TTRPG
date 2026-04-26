@@ -1,0 +1,3207 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Cultivator's Ledger — Campaign Companion</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;500;600;700&family=Cormorant+SC:wght@400;600&family=Noto+Serif+SC:wght@400;600;900&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --paper: #f4ebd6;
+    --paper-dark: #e8dcc0;
+    --paper-edge: #d9c9a5;
+    --ink: #1a1410;
+    --ink-soft: #3d2f22;
+    --ink-faded: #7a6a56;
+    --cinnabar: #a52a2a;
+    --cinnabar-deep: #821a1a;
+    --gold: #b8873a;
+    --rule: #c4b189;
+    --seal-red: #b83227;
+    --green-jade: #3e6b4a;
+    --white-karma: #d9cba0;
+    --black-karma: #1a1410;
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  html, body {
+    background: #2a221a;
+    font-family: 'Cormorant Garamond', Georgia, serif;
+    color: var(--ink);
+    min-height: 100vh;
+  }
+
+  .app {
+    display: grid;
+    grid-template-columns: 260px 1fr;
+    min-height: 100vh;
+    max-width: 1600px;
+    margin: 0 auto;
+    background: var(--paper);
+    box-shadow: 0 25px 60px rgba(0,0,0,0.5);
+    background-image:
+      radial-gradient(ellipse at top left, rgba(184,135,58,0.08), transparent 45%),
+      radial-gradient(ellipse at bottom right, rgba(165,42,42,0.05), transparent 50%),
+      repeating-linear-gradient(0deg, transparent 0px, transparent 2px, rgba(26,20,16,0.015) 2px, rgba(26,20,16,0.015) 3px);
+  }
+
+  /* ===== SIDEBAR ===== */
+  .sidebar {
+    background: rgba(26,20,16,0.04);
+    border-right: 1px solid var(--paper-edge);
+    padding: 28px 0;
+    display: flex;
+    flex-direction: column;
+  }
+
+  .brand {
+    padding: 0 24px 24px;
+    border-bottom: 2px double var(--cinnabar);
+    margin-bottom: 20px;
+  }
+
+  .brand-chinese {
+    font-family: 'Noto Serif SC', serif;
+    font-weight: 900;
+    font-size: 28px;
+    color: var(--cinnabar-deep);
+    letter-spacing: 5px;
+    line-height: 1;
+  }
+
+  .brand-english {
+    font-family: 'Cormorant SC', serif;
+    font-size: 11px;
+    letter-spacing: 4px;
+    color: var(--ink-faded);
+    margin-top: 6px;
+    text-transform: uppercase;
+  }
+
+  .nav-group {
+    margin-bottom: 18px;
+  }
+
+  .nav-group-label {
+    font-family: 'Cormorant SC', serif;
+    font-size: 10px;
+    letter-spacing: 3px;
+    color: var(--ink-faded);
+    text-transform: uppercase;
+    padding: 8px 24px;
+  }
+
+  .nav-item {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 9px 24px;
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 15px;
+    color: var(--ink-soft);
+    cursor: pointer;
+    border-left: 3px solid transparent;
+    transition: background 0.1s, border-color 0.1s;
+  }
+
+  .nav-item:hover {
+    background: rgba(165,42,42,0.05);
+    color: var(--ink);
+  }
+
+  .nav-item.active {
+    border-left-color: var(--cinnabar);
+    background: rgba(165,42,42,0.08);
+    color: var(--cinnabar-deep);
+    font-weight: 600;
+  }
+
+  .nav-item .nav-icon {
+    font-family: 'Noto Serif SC', serif;
+    font-size: 16px;
+    color: var(--cinnabar);
+    min-width: 20px;
+    text-align: center;
+  }
+
+  .nav-item .count {
+    margin-left: auto;
+    font-family: 'Cormorant SC', serif;
+    font-size: 10px;
+    color: var(--ink-faded);
+    letter-spacing: 1px;
+  }
+
+  /* ===== MAIN ===== */
+  .main {
+    padding: 36px 48px 60px;
+    min-width: 0;
+  }
+
+  .page-header {
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+    gap: 24px;
+    padding-bottom: 18px;
+    border-bottom: 2px double var(--cinnabar);
+    margin-bottom: 28px;
+  }
+
+  .page-title {
+    display: flex;
+    align-items: baseline;
+    gap: 18px;
+  }
+
+  .page-title .chinese {
+    font-family: 'Noto Serif SC', serif;
+    font-weight: 900;
+    font-size: 30px;
+    color: var(--cinnabar-deep);
+    letter-spacing: 6px;
+    line-height: 1;
+  }
+
+  .page-title .english {
+    font-family: 'Cormorant SC', serif;
+    font-size: 13px;
+    letter-spacing: 4px;
+    color: var(--ink-faded);
+    text-transform: uppercase;
+  }
+
+  .page-actions {
+    display: flex;
+    gap: 10px;
+  }
+
+  /* ===== BUTTONS ===== */
+  .btn {
+    font-family: 'Cormorant SC', serif;
+    font-size: 11px;
+    letter-spacing: 2.5px;
+    padding: 9px 18px;
+    border: 1px solid var(--ink);
+    background: transparent;
+    color: var(--ink);
+    cursor: pointer;
+    text-transform: uppercase;
+    transition: background 0.1s, color 0.1s, border-color 0.1s;
+  }
+
+  .btn:hover {
+    background: var(--ink);
+    color: var(--paper);
+  }
+
+  .btn.primary {
+    background: var(--cinnabar);
+    border-color: var(--cinnabar);
+    color: var(--paper);
+  }
+
+  .btn.primary:hover {
+    background: var(--cinnabar-deep);
+    border-color: var(--cinnabar-deep);
+  }
+
+  .btn.small {
+    padding: 5px 10px;
+    font-size: 9px;
+    letter-spacing: 1.5px;
+  }
+
+  .btn.ghost {
+    border: 1px dashed var(--rule);
+    color: var(--ink-faded);
+  }
+
+  .btn.ghost:hover {
+    color: var(--cinnabar);
+    border-color: var(--cinnabar);
+    background: transparent;
+  }
+
+  .btn.danger {
+    border-color: var(--cinnabar);
+    color: var(--cinnabar);
+  }
+  .btn.danger:hover {
+    background: var(--cinnabar);
+    color: var(--paper);
+  }
+
+  /* ===== SECTION ===== */
+  .section {
+    margin-bottom: 28px;
+  }
+
+  .section-header {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    margin-bottom: 14px;
+  }
+
+  .section-header::before {
+    content: '';
+    display: block;
+    width: 18px;
+    height: 2px;
+    background: var(--cinnabar);
+  }
+
+  .section-header h2 {
+    font-family: 'Noto Serif SC', serif;
+    font-weight: 600;
+    font-size: 18px;
+    color: var(--cinnabar-deep);
+    letter-spacing: 3px;
+    flex-shrink: 0;
+  }
+
+  .section-header .en {
+    font-family: 'Cormorant SC', serif;
+    font-size: 10px;
+    letter-spacing: 3px;
+    color: var(--ink-faded);
+    text-transform: uppercase;
+    padding-left: 4px;
+  }
+
+  .section-header::after {
+    content: '';
+    display: block;
+    flex-grow: 1;
+    height: 1px;
+    background: var(--rule);
+    opacity: 0.5;
+  }
+
+  /* ===== GRID LIST (library cards) ===== */
+  .grid-list {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 16px;
+  }
+
+  .card {
+    border: 1px solid var(--rule);
+    background: rgba(244,235,214,0.5);
+    padding: 16px 18px;
+    position: relative;
+    transition: border-color 0.1s, box-shadow 0.1s;
+  }
+
+  .card:hover {
+    border-color: var(--cinnabar);
+    box-shadow: 0 3px 10px rgba(0,0,0,0.08);
+  }
+
+  .card-tier {
+    position: absolute;
+    top: 10px;
+    right: 12px;
+    font-family: 'Cormorant SC', serif;
+    font-size: 9px;
+    letter-spacing: 2px;
+    color: var(--cinnabar);
+    text-transform: uppercase;
+  }
+
+  .card-name {
+    font-family: 'Noto Serif SC', serif;
+    font-weight: 600;
+    font-size: 16px;
+    color: var(--cinnabar-deep);
+    margin-bottom: 4px;
+    padding-right: 60px;
+  }
+
+  .card-subtitle {
+    font-family: 'Cormorant SC', serif;
+    font-size: 10px;
+    letter-spacing: 2px;
+    color: var(--ink-faded);
+    text-transform: uppercase;
+    margin-bottom: 10px;
+  }
+
+  .card-body {
+    font-size: 14px;
+    color: var(--ink-soft);
+    line-height: 1.45;
+    min-height: 20px;
+  }
+
+  .card-meta {
+    display: flex;
+    gap: 12px;
+    margin-top: 10px;
+    padding-top: 10px;
+    border-top: 1px dotted var(--rule);
+    font-family: 'Cormorant SC', serif;
+    font-size: 10px;
+    letter-spacing: 1.5px;
+    color: var(--ink-faded);
+    text-transform: uppercase;
+  }
+
+  .card-actions {
+    display: flex;
+    gap: 6px;
+    margin-top: 10px;
+  }
+
+  .card.empty {
+    border-style: dashed;
+    color: var(--ink-faded);
+    text-align: center;
+    padding: 36px 16px;
+    cursor: pointer;
+  }
+
+  .card.empty:hover {
+    border-color: var(--cinnabar);
+    color: var(--cinnabar);
+  }
+
+  /* ===== FIELDS ===== */
+  .field {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 14px;
+  }
+
+  .field-label {
+    font-family: 'Cormorant SC', serif;
+    font-size: 10px;
+    letter-spacing: 3px;
+    color: var(--ink-faded);
+    text-transform: uppercase;
+    margin-bottom: 5px;
+  }
+
+  .field-input, .field-select, .field-textarea {
+    border: none;
+    border-bottom: 1px solid var(--ink);
+    background: transparent;
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 16px;
+    color: var(--ink);
+    padding: 4px 0;
+    font-weight: 500;
+    outline: none;
+    width: 100%;
+  }
+
+  .field-textarea {
+    border: 1px solid var(--rule);
+    padding: 10px 12px;
+    resize: vertical;
+    min-height: 80px;
+    line-height: 1.5;
+    background: rgba(244,235,214,0.3);
+  }
+
+  .field-select {
+    cursor: pointer;
+  }
+
+  .field-input:focus, .field-select:focus, .field-textarea:focus {
+    border-bottom-color: var(--cinnabar);
+  }
+  .field-textarea:focus, .field-select:focus {
+    border-color: var(--cinnabar);
+  }
+
+  .field-row {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+    gap: 18px;
+  }
+
+  .field-row.two { grid-template-columns: 1fr 1fr; }
+  .field-row.three { grid-template-columns: 1fr 1fr 1fr; }
+
+  /* ===== DIALOG / MODAL ===== */
+  .dialog-overlay {
+    position: fixed;
+    inset: 0;
+    background: rgba(26,20,16,0.65);
+    display: none;
+    align-items: flex-start;
+    justify-content: center;
+    padding: 40px 20px;
+    z-index: 100;
+    overflow-y: auto;
+  }
+
+  .dialog-overlay.open { display: flex; }
+
+  .dialog {
+    background: var(--paper);
+    max-width: 760px;
+    width: 100%;
+    padding: 32px 36px 28px;
+    box-shadow: 0 20px 50px rgba(0,0,0,0.5);
+    border: 1px solid var(--paper-edge);
+    position: relative;
+  }
+
+  .dialog-close {
+    position: absolute;
+    top: 12px;
+    right: 16px;
+    background: transparent;
+    border: none;
+    font-size: 28px;
+    color: var(--ink-faded);
+    cursor: pointer;
+    line-height: 1;
+  }
+
+  .dialog-close:hover { color: var(--cinnabar); }
+
+  .dialog-title {
+    font-family: 'Noto Serif SC', serif;
+    font-size: 22px;
+    font-weight: 600;
+    color: var(--cinnabar-deep);
+    letter-spacing: 4px;
+    padding-bottom: 14px;
+    border-bottom: 2px double var(--cinnabar);
+    margin-bottom: 22px;
+  }
+
+  .dialog-footer {
+    display: flex;
+    gap: 10px;
+    justify-content: flex-end;
+    margin-top: 22px;
+    padding-top: 16px;
+    border-top: 1px solid var(--rule);
+  }
+
+  /* ===== CHARACTER EDITOR ===== */
+  .char-editor {
+    display: grid;
+    grid-template-columns: 1.15fr 1fr;
+    gap: 38px;
+  }
+
+  .char-editor > div { min-width: 0; }
+
+  .identity-band {
+    display: grid;
+    grid-template-columns: 2fr 1fr 1fr;
+    gap: 18px;
+    margin-bottom: 22px;
+  }
+
+  .attributes {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 14px;
+  }
+
+  .attr {
+    border: 1px solid var(--rule);
+    padding: 12px 14px;
+    background: rgba(244,235,214,0.4);
+    text-align: center;
+  }
+
+  .attr-label {
+    font-family: 'Noto Serif SC', serif;
+    font-size: 18px;
+    font-weight: 600;
+    color: var(--cinnabar-deep);
+    letter-spacing: 2px;
+  }
+
+  .attr-en {
+    font-family: 'Cormorant SC', serif;
+    font-size: 9px;
+    letter-spacing: 2px;
+    color: var(--ink-faded);
+    text-transform: uppercase;
+    margin: 2px 0 8px;
+  }
+
+  .attr-input {
+    border: none;
+    border-bottom: 1px solid var(--ink);
+    background: transparent;
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 22px;
+    font-weight: 600;
+    color: var(--ink);
+    padding: 2px 0;
+    text-align: center;
+    width: 80%;
+    outline: none;
+  }
+
+  .attr-input:focus { border-bottom-color: var(--cinnabar); }
+
+  /* ===== DOT TRACKS ===== */
+  .dot-row {
+    display: flex;
+    gap: 5px;
+    align-items: center;
+  }
+
+  .dot {
+    width: 14px;
+    height: 14px;
+    border-radius: 50%;
+    border: 1.5px solid var(--ink);
+    cursor: pointer;
+    background: transparent;
+    transition: background 0.1s;
+  }
+
+  .dot.filled { background: var(--ink); }
+  .dot.cinnabar { border-color: var(--cinnabar); }
+  .dot.cinnabar.filled { background: var(--cinnabar); }
+  .dot.white-filled { background: var(--white-karma); border-color: var(--gold); }
+  .dot.black-filled { background: var(--black-karma); }
+
+  /* ===== LIST ROWS (in character editor) ===== */
+  .list-rows {
+    border: 1px solid var(--rule);
+    background: rgba(244,235,214,0.3);
+    padding: 6px 0;
+  }
+
+  .list-row {
+    display: grid;
+    grid-template-columns: 1fr auto auto;
+    gap: 10px;
+    align-items: center;
+    padding: 7px 14px;
+    border-bottom: 1px dotted var(--rule);
+  }
+
+  .list-row:last-child { border-bottom: none; }
+
+  .list-row-name {
+    font-size: 14px;
+    color: var(--ink);
+    font-weight: 500;
+  }
+
+  .list-row-meta {
+    font-family: 'Cormorant SC', serif;
+    font-size: 10px;
+    letter-spacing: 1.5px;
+    color: var(--ink-faded);
+    text-transform: uppercase;
+  }
+
+  .row-delete {
+    background: transparent;
+    border: none;
+    font-size: 18px;
+    color: var(--ink-faded);
+    cursor: pointer;
+    line-height: 1;
+    padding: 2px 6px;
+  }
+
+  .row-delete:hover { color: var(--cinnabar); }
+
+  .list-empty {
+    padding: 18px;
+    text-align: center;
+    font-family: 'Cormorant SC', serif;
+    font-size: 11px;
+    letter-spacing: 2px;
+    color: var(--ink-faded);
+    text-transform: uppercase;
+  }
+
+  /* ===== PICKER (modal for picking library items) ===== */
+  .picker-list {
+    max-height: 400px;
+    overflow-y: auto;
+    border: 1px solid var(--rule);
+    background: rgba(244,235,214,0.3);
+  }
+
+  .picker-item {
+    padding: 10px 14px;
+    border-bottom: 1px dotted var(--rule);
+    cursor: pointer;
+    transition: background 0.1s;
+  }
+
+  .picker-item:hover { background: rgba(165,42,42,0.08); }
+
+  .picker-item-name {
+    font-family: 'Noto Serif SC', serif;
+    font-weight: 600;
+    font-size: 14px;
+    color: var(--cinnabar-deep);
+  }
+
+  .picker-item-meta {
+    font-family: 'Cormorant SC', serif;
+    font-size: 10px;
+    letter-spacing: 1.5px;
+    color: var(--ink-faded);
+    margin-top: 2px;
+    text-transform: uppercase;
+  }
+
+  .picker-search {
+    width: 100%;
+    padding: 8px 12px;
+    border: 1px solid var(--rule);
+    background: var(--paper);
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 14px;
+    margin-bottom: 10px;
+    outline: none;
+  }
+  .picker-search:focus { border-color: var(--cinnabar); }
+
+  /* ===== NOTICE ===== */
+  .notice {
+    position: fixed;
+    bottom: 24px;
+    right: 24px;
+    background: var(--ink);
+    color: var(--paper);
+    padding: 12px 20px;
+    font-family: 'Cormorant SC', serif;
+    font-size: 12px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    box-shadow: 0 6px 20px rgba(0,0,0,0.4);
+    opacity: 0;
+    transition: opacity 0.25s;
+    z-index: 200;
+  }
+
+  .notice.show { opacity: 1; }
+
+  .notice.cinnabar { background: var(--cinnabar); }
+
+  /* ===== MODE TOGGLE ===== */
+  .mode-toggle {
+    display: flex;
+    border: 1px solid var(--ink);
+    margin: 0 24px 18px;
+  }
+
+  .mode-btn {
+    flex: 1;
+    padding: 7px 8px;
+    background: transparent;
+    border: none;
+    font-family: 'Cormorant SC', serif;
+    font-size: 10px;
+    letter-spacing: 2px;
+    color: var(--ink);
+    cursor: pointer;
+    text-transform: uppercase;
+  }
+
+  .mode-btn.active {
+    background: var(--ink);
+    color: var(--paper);
+  }
+
+  /* ===== SEARCH BAR ===== */
+  .toolbar {
+    display: flex;
+    gap: 12px;
+    margin-bottom: 20px;
+    align-items: center;
+  }
+
+  .search-input {
+    flex: 1;
+    max-width: 400px;
+    padding: 8px 14px;
+    border: 1px solid var(--rule);
+    background: var(--paper);
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 14px;
+    outline: none;
+  }
+  .search-input:focus { border-color: var(--cinnabar); }
+
+  .filter-chips {
+    display: flex;
+    gap: 6px;
+    flex-wrap: wrap;
+  }
+
+  .chip {
+    font-family: 'Cormorant SC', serif;
+    font-size: 10px;
+    letter-spacing: 1.5px;
+    padding: 5px 12px;
+    border: 1px solid var(--rule);
+    color: var(--ink-faded);
+    cursor: pointer;
+    text-transform: uppercase;
+    background: transparent;
+  }
+
+  .chip.active {
+    border-color: var(--cinnabar);
+    color: var(--cinnabar);
+    background: rgba(165,42,42,0.06);
+  }
+
+  /* ===== HOME / DASHBOARD ===== */
+  .stat-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+    gap: 16px;
+    margin-bottom: 32px;
+  }
+
+  .stat {
+    border: 1px solid var(--rule);
+    padding: 18px 20px;
+    background: rgba(244,235,214,0.4);
+  }
+
+  .stat-value {
+    font-family: 'Noto Serif SC', serif;
+    font-size: 32px;
+    font-weight: 600;
+    color: var(--cinnabar-deep);
+    line-height: 1;
+  }
+
+  .stat-label {
+    font-family: 'Cormorant SC', serif;
+    font-size: 10px;
+    letter-spacing: 2.5px;
+    color: var(--ink-faded);
+    text-transform: uppercase;
+    margin-top: 8px;
+  }
+
+  .ethos {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 15px;
+    font-style: italic;
+    color: var(--ink-soft);
+    line-height: 1.6;
+    padding: 18px 22px;
+    border-left: 3px solid var(--cinnabar);
+    background: rgba(244,235,214,0.4);
+    margin-bottom: 24px;
+  }
+
+  .footer {
+    margin-top: 40px;
+    padding-top: 20px;
+    border-top: 1px solid var(--rule);
+    font-family: 'Noto Serif SC', serif;
+    font-size: 11px;
+    letter-spacing: 3px;
+    color: var(--ink-faded);
+    text-align: center;
+    text-transform: uppercase;
+  }
+
+  /* Narrative-weight box */
+  .note-box {
+    padding: 12px 14px;
+    border: 1px dashed var(--rule);
+    font-size: 13px;
+    color: var(--ink-soft);
+    font-style: italic;
+    background: rgba(244,235,214,0.3);
+    margin-bottom: 14px;
+  }
+
+  /* Track of filled/unfilled boxes (wounds, seclusion) */
+  .box-track {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 4px;
+  }
+
+  .box-cell {
+    width: 18px;
+    height: 18px;
+    border: 1px solid var(--ink);
+    cursor: pointer;
+    transition: background 0.1s;
+  }
+
+  .box-cell.filled { background: var(--cinnabar); }
+  .box-cell.critical { background: var(--cinnabar-deep); border-color: var(--cinnabar-deep); }
+
+  .inline-label {
+    font-family: 'Cormorant SC', serif;
+    font-size: 10px;
+    letter-spacing: 2px;
+    color: var(--ink-faded);
+    text-transform: uppercase;
+    margin-right: 8px;
+  }
+
+  /* ===== DERIVED STATS PANEL ===== */
+  .derived-panel {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 8px 22px;
+    background: rgba(184,135,58,0.06);
+    border: 1px solid var(--rule);
+    padding: 14px 18px;
+  }
+
+  .derived-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    gap: 8px;
+    border-bottom: 1px dotted var(--rule);
+    padding: 4px 0;
+  }
+
+  .derived-row.full {
+    grid-column: 1 / -1;
+  }
+
+  .derived-label {
+    font-family: 'Cormorant SC', serif;
+    font-size: 10px;
+    letter-spacing: 2px;
+    color: var(--ink-faded);
+    text-transform: uppercase;
+  }
+
+  .derived-val {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 16px;
+    font-weight: 600;
+    color: var(--cinnabar-deep);
+  }
+
+  .qi-line {
+    display: flex;
+    align-items: baseline;
+    gap: 10px;
+    padding: 8px 0;
+  }
+
+  .qi-current {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 22px;
+    font-weight: 600;
+    color: var(--ink);
+    border: none;
+    border-bottom: 1px solid var(--ink);
+    background: transparent;
+    width: 70px;
+    padding: 2px 0;
+    text-align: center;
+    outline: none;
+  }
+
+  .qi-current:focus { border-bottom-color: var(--cinnabar); }
+
+  .qi-slash {
+    font-size: 20px;
+    color: var(--ink-faded);
+  }
+
+  .qi-max {
+    font-family: 'Noto Serif SC', serif;
+    font-size: 22px;
+    font-weight: 600;
+    color: var(--cinnabar-deep);
+  }
+
+  .stage-controls {
+    display: flex;
+    gap: 8px;
+    margin-top: 12px;
+  }
+
+  .hidden { display: none !important; }
+
+  @media (max-width: 900px) {
+    .app { grid-template-columns: 1fr; }
+    .sidebar { border-right: none; border-bottom: 1px solid var(--paper-edge); }
+    .char-editor { grid-template-columns: 1fr; }
+    .main { padding: 24px 20px 40px; }
+  }
+</style>
+</head>
+<body>
+
+<div class="app">
+
+  <!-- SIDEBAR -->
+  <aside class="sidebar">
+    <div class="brand">
+      <div class="brand-chinese">仙逆</div>
+      <div class="brand-english">Cultivator's Ledger</div>
+    </div>
+
+    <div class="mode-toggle">
+      <button class="mode-btn" data-mode="gm">GM</button>
+      <button class="mode-btn" data-mode="player">Player</button>
+    </div>
+
+    <div class="nav-group">
+      <div class="nav-group-label">Overview</div>
+      <div class="nav-item" data-view="home"><span class="nav-icon">道</span> Dashboard</div>
+    </div>
+
+    <div class="nav-group">
+      <div class="nav-group-label">Library</div>
+      <div class="nav-item" data-view="techniques"><span class="nav-icon">术</span> Techniques <span class="count" id="count-techniques"></span></div>
+      <div class="nav-item" data-view="methods"><span class="nav-icon">功</span> Methods <span class="count" id="count-methods"></span></div>
+      <div class="nav-item" data-view="items"><span class="nav-icon">物</span> Items <span class="count" id="count-items"></span></div>
+    </div>
+
+    <div class="nav-group">
+      <div class="nav-group-label">Play</div>
+      <div class="nav-item" data-view="characters"><span class="nav-icon">人</span> Characters <span class="count" id="count-characters"></span></div>
+    </div>
+
+    <div class="nav-group" style="margin-top: auto;">
+      <div class="nav-group-label">Data</div>
+      <div class="nav-item" data-view="data"><span class="nav-icon">籍</span> Export / Import</div>
+    </div>
+  </aside>
+
+  <!-- MAIN -->
+  <main class="main" id="main">
+    <!-- Rendered by router -->
+  </main>
+</div>
+
+<!-- DIALOG -->
+<div class="dialog-overlay" id="dialog-overlay">
+  <div class="dialog" id="dialog">
+    <button class="dialog-close" id="dialog-close">&times;</button>
+    <div id="dialog-content"></div>
+  </div>
+</div>
+
+<!-- NOTICE -->
+<div class="notice" id="notice"></div>
+
+<script>
+// ============================================================================
+// STATE & STORAGE
+// ============================================================================
+
+const STORAGE_KEY = 'cultivation_ttrpg_v1';
+const SCHEMA_VERSION = 1;
+
+const DEFAULT_STATE = {
+  version: SCHEMA_VERSION,
+  meta: { mode: 'gm' },
+  library: {
+    techniques: [],
+    methods: [],
+    items: []
+  },
+  characters: []
+};
+
+let state = loadState();
+
+function loadState() {
+  try {
+    const raw = localStorage.getItem(STORAGE_KEY);
+    if (!raw) return structuredClone(DEFAULT_STATE);
+    const parsed = JSON.parse(raw);
+    // Ensure shape
+    if (!parsed.library) parsed.library = { techniques: [], methods: [], items: [] };
+    if (!parsed.library.techniques) parsed.library.techniques = [];
+    if (!parsed.library.methods) parsed.library.methods = [];
+    if (!parsed.library.items) parsed.library.items = [];
+    if (!parsed.characters) parsed.characters = [];
+    if (!parsed.meta) parsed.meta = { mode: 'gm' };
+    return parsed;
+  } catch (e) {
+    console.error('Failed to load state', e);
+    return structuredClone(DEFAULT_STATE);
+  }
+}
+
+function saveState() {
+  localStorage.setItem(STORAGE_KEY, JSON.stringify(state));
+  refreshCounts();
+}
+
+function uid() {
+  return 'id_' + Date.now().toString(36) + '_' + Math.random().toString(36).slice(2, 8);
+}
+
+function nowIso() { return new Date().toISOString(); }
+
+// ============================================================================
+// UTILITIES
+// ============================================================================
+
+function h(tag, attrs = {}, ...children) {
+  const el = document.createElement(tag);
+  for (const [k, v] of Object.entries(attrs)) {
+    if (k === 'class') el.className = v;
+    else if (k === 'html') el.innerHTML = v;
+    else if (k.startsWith('on')) el.addEventListener(k.slice(2), v);
+    else if (k === 'style' && typeof v === 'object') Object.assign(el.style, v);
+    else if (v === true) el.setAttribute(k, '');
+    else if (v === false || v == null) {}
+    else el.setAttribute(k, v);
+  }
+  for (const child of children.flat()) {
+    if (child == null || child === false) continue;
+    el.appendChild(typeof child === 'string' ? document.createTextNode(child) : child);
+  }
+  return el;
+}
+
+function clear(el) { while (el.firstChild) el.removeChild(el.firstChild); }
+
+function escapeHtml(s) {
+  if (s == null) return '';
+  return String(s).replace(/[&<>"']/g, c => ({
+    '&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'
+  })[c]);
+}
+
+function notice(msg, color) {
+  const n = document.getElementById('notice');
+  n.textContent = msg;
+  n.className = 'notice show' + (color ? ' ' + color : '');
+  clearTimeout(notice._t);
+  notice._t = setTimeout(() => { n.className = 'notice'; }, 2200);
+}
+
+function confirmDialog(msg) {
+  return new Promise(resolve => {
+    openDialog({
+      title: 'Confirm',
+      content: h('div', {}, h('p', { style: { fontSize: '15px', lineHeight: '1.5' } }, msg)),
+      actions: [
+        { label: 'Cancel', handler: () => { closeDialog(); resolve(false); } },
+        { label: 'Confirm', primary: true, handler: () => { closeDialog(); resolve(true); } }
+      ]
+    });
+  });
+}
+
+// ============================================================================
+// DIALOG
+// ============================================================================
+
+function openDialog({ title, content, actions }) {
+  const overlay = document.getElementById('dialog-overlay');
+  const holder = document.getElementById('dialog-content');
+  clear(holder);
+  if (title) {
+    holder.appendChild(h('div', { class: 'dialog-title' }, title));
+  }
+  if (content) {
+    holder.appendChild(content);
+  }
+  if (actions && actions.length) {
+    const footer = h('div', { class: 'dialog-footer' });
+    actions.forEach(a => {
+      footer.appendChild(h('button', {
+        class: 'btn' + (a.primary ? ' primary' : '') + (a.danger ? ' danger' : ''),
+        onclick: a.handler
+      }, a.label));
+    });
+    holder.appendChild(footer);
+  }
+  overlay.classList.add('open');
+}
+
+function closeDialog() {
+  document.getElementById('dialog-overlay').classList.remove('open');
+}
+
+document.getElementById('dialog-close').addEventListener('click', closeDialog);
+document.getElementById('dialog-overlay').addEventListener('click', (e) => {
+  if (e.target === e.currentTarget) closeDialog();
+});
+
+// ============================================================================
+// DOMAIN CONSTANTS
+// ============================================================================
+
+const TECHNIQUE_TIERS = ['Spirit', 'Mysterious', 'Celestial', 'Void', 'Nirvana'];
+const TECHNIQUE_TYPES = ['Attack', 'Defense', 'Movement', 'Utility', 'Soul', 'Healing', 'Forbidden'];
+const METHOD_TYPES = ['Orthodox', 'Demonic', 'Body Refinement', 'Incomplete / Heirloom', 'Self-Taught'];
+const PEAK_REALMS = [
+  'Qi Condensation', 'Foundation Establishment', 'Core Formation',
+  'Nascent Soul', 'Soul Formation', 'Ascendant', 'Nirvana', 'Variable'
+];
+const ITEM_CATEGORIES = ['Pill', 'Talisman', 'Artifact', 'Weapon', 'Armor', 'Tool', 'Herb', 'Spirit Stone', 'Formation Flag', 'Treasure', 'Consumable', 'Other'];
+const ITEM_GRADES = ['Mortal', 'Spirit', 'Mysterious', 'Celestial', 'Void', 'Nirvana'];
+
+const REALMS = [
+  'Mortal', 'Qi Condensation', 'Foundation Establishment', 'Core Formation',
+  'Nascent Soul', 'Soul Formation', 'Soul Transformation', 'Ascendant',
+  'Nirvana Scryer', 'Nirvana Cleanser', 'Nirvana Shatterer'
+];
+const SUB_STAGES = ['Early', 'Mid', 'Late', 'Peak'];
+
+// Realm → base tier (Early sub-stage). Add 0/1/2/3 for Early/Mid/Late/Peak.
+const REALM_BASE_TIER = {
+  'Mortal': 0,
+  'Qi Condensation': 1,
+  'Foundation Establishment': 5,
+  'Core Formation': 9,
+  'Nascent Soul': 13,
+  'Soul Formation': 17,
+  'Soul Transformation': 21,
+  'Ascendant': 25,
+  'Nirvana Scryer': 29,
+  'Nirvana Cleanser': 33,
+  'Nirvana Shatterer': 37
+};
+
+const LIFESPAN_BY_REALM = {
+  'Mortal': '~80 years',
+  'Qi Condensation': '~120 years',
+  'Foundation Establishment': '~200 years',
+  'Core Formation': '~500 years',
+  'Nascent Soul': '~1,000 years',
+  'Soul Formation': '~3,000 years',
+  'Soul Transformation': '~10,000 years',
+  'Ascendant': '~30,000 years',
+  'Nirvana Scryer': 'Immortal',
+  'Nirvana Cleanser': 'Immortal',
+  'Nirvana Shatterer': 'Immortal'
+};
+
+function getTier(realm, substage) {
+  if (!realm) return 0;
+  if (realm === 'Mortal') return 0;
+  const base = REALM_BASE_TIER[realm];
+  if (base == null) return 0;
+  const idx = Math.max(0, SUB_STAGES.indexOf(substage || 'Early'));
+  return base + idx;
+}
+
+function computeDerived(c) {
+  const tier = getTier(c.realm, c.substage);
+  const body = c.attributes?.body || 0;
+  const qi = c.attributes?.qi || 0;
+  const soul = c.attributes?.soul || 0;
+  return {
+    tier,
+    woundCap: tier + body,
+    qiMax: tier * 10 + qi * 5,
+    senseRange: (tier + soul) * 10,
+    soulDefense: tier + soul,
+    presence: tier,
+    heartOaths: Math.floor(tier / 2) + 1,
+    lifespan: LIFESPAN_BY_REALM[c.realm] || '—'
+  };
+}
+
+// Advance/regress by one sub-stage. Handles realm transitions.
+function advanceCharacterStage(c, dir) {
+  const realmIdx = REALMS.indexOf(c.realm || 'Mortal');
+  const subIdx = SUB_STAGES.indexOf(c.substage || 'Early');
+
+  if (dir > 0) {
+    if (c.realm === 'Mortal') {
+      c.realm = 'Qi Condensation';
+      c.substage = 'Early';
+      return;
+    }
+    if (subIdx < SUB_STAGES.length - 1) {
+      c.substage = SUB_STAGES[subIdx + 1];
+    } else if (realmIdx < REALMS.length - 1) {
+      c.realm = REALMS[realmIdx + 1];
+      c.substage = 'Early';
+    }
+  } else {
+    if (c.realm === 'Mortal') return;
+    if (subIdx > 0) {
+      c.substage = SUB_STAGES[subIdx - 1];
+    } else {
+      // Regress to previous realm's Peak (or Mortal)
+      const prev = REALMS[realmIdx - 1];
+      c.realm = prev;
+      c.substage = prev === 'Mortal' ? 'Early' : 'Peak';
+    }
+  }
+}
+
+const ORIGINS = [
+  'Mortal Village Youth', 'Fallen Noble', "Merchant's Child", 'Mountain Hunter / Herbalist',
+  'Servant of a Sect', 'Orphan / Wanderer', 'Battlefield Survivor', 'Young Master / Clan Heir',
+  'Temple Initiate', 'Criminal / Outlaw', 'Other'
+];
+
+const ROOT_GRADES = [
+  'Heavenly Spiritual Root (×3)',
+  'Heavenly Dao Root (×2.5)',
+  'Superior Root (×2)',
+  'Common Root (×1)',
+  'Mortal / Waste Root (×0.5)',
+  'Broken Root (—)',
+  'Mutant Root (Variable)',
+  'Heavenly Body'
+];
+
+// --- Five Elements System (per framework §3.3) ---
+const FIVE_ELEMENTS = ['Metal', 'Wood', 'Water', 'Fire', 'Earth'];
+const ELEMENT_CN = { Metal: '金', Wood: '木', Water: '水', Fire: '火', Earth: '土' };
+
+// Generative cycle (相生) — harmonious adjacencies
+const HARMONIOUS_PAIRS = [
+  ['Wood', 'Fire'], ['Fire', 'Earth'], ['Earth', 'Metal'],
+  ['Metal', 'Water'], ['Water', 'Wood']
+];
+// Destructive cycle (相克)
+const DESTRUCTIVE_PAIRS = [
+  ['Wood', 'Earth'], ['Earth', 'Water'], ['Water', 'Fire'],
+  ['Fire', 'Metal'], ['Metal', 'Wood']
+];
+
+function arePairHarmonious(a, b) {
+  return HARMONIOUS_PAIRS.some(([x, y]) => (x === a && y === b) || (x === b && y === a));
+}
+
+// Mutant Root d6 table
+const MUTANT_ROOTS = [
+  { name: 'Ice Root', desc: 'Water variant — ×1 speed; ice techniques +2 dice, fire techniques −2 dice. Excels in cold regions.' },
+  { name: 'Thunder Root', desc: 'Lightning variant (Metal+Fire fusion) — ×1.25 speed; tribulations +1 wave.' },
+  { name: 'Wood-Metal Hybrid', desc: '×0.75 speed; produces unique "Blood Silver" qi that pierces armor. Sect alchemists will study you.' },
+  { name: 'Yin Spirit Root', desc: 'Darkness/ghost-adjacent — ×1 in Soul-path, ×0.5 in Body-path. Excels in Ghost/Corpse Daos. Orthodox sects may distrust you.' },
+  { name: 'Yang Spirit Root', desc: 'Light/life-adjacent — ×1 in Life/Medicine Daos; weak in concealment (aura shines). Resists demonic corruption.' },
+  { name: 'Unnamed / Unique', desc: 'GM-invented one-of-a-kind root — tied to a cosmic phenomenon, bloodline echo, or ancient pact.' }
+];
+
+// Heavenly Body d12 table
+const HEAVENLY_BODIES = [
+  { name: 'Demonic Body', desc: 'Feeds on qi of others. Grows stronger by devouring cultivators. Hunted.' },
+  { name: 'Immortal Bone', desc: 'Skeleton indestructible below Immortal tier. Body regenerates around it. Slow but unkillable.' },
+  { name: "Heaven's Will Body", desc: 'Luck favors you — reroll 1s on all dice. Tribulations are harsher; the Heavens test you more.' },
+  { name: 'Primordial Chaos Body', desc: 'All five elements harmonize. Can learn any method. Breakthroughs twice as hard.' },
+  { name: 'Void Spirit Body', desc: 'Partly intangible. Natural resistance to physical/qi attacks; struggles with material treasures.' },
+  { name: 'Sword Heart Body', desc: '+1 Realm equivalent vs. sword Dao opponents. Cannot wield non-sword weapons effectively.' },
+  { name: 'Nine-Yin / Nine-Yang Body', desc: 'Extreme yin or yang. Massive cultivation speed in one element. Poisonous to self without counterweight.' },
+  { name: 'Undying Body', desc: 'Cannot permanently die below realm cap. Resurrect after 7 days — each costs a memory, a tie, or a piece of your Dao.' },
+  { name: 'Devouring Body', desc: 'Consumes resources at 10× rate; converts at 10× efficiency. Cultivation is a logistics problem.' },
+  { name: 'Heretical God Body', desc: 'Draws faith from mortals. Strong where worshipped, weak where forgotten. A god-building campaign.' },
+  { name: 'Ancient Bloodline Body', desc: 'Primordial-beast or ancient-race bloodline awakens through cultivation. Inhuman features; lose some humanity.' },
+  { name: 'Hollow Body', desc: 'Can imprint any method, bloodline, or body encountered. Ultimate wildcard. One of a kind per setting.' }
+];
+
+// Spec per root grade: what element selection is required?
+function getRootElementSpec(grade) {
+  if (!grade) return null;
+  if (grade.startsWith('Heavenly Spiritual')) return { type: 'pick', min: 1, max: 1, hint: 'Pick 1 pure element.' };
+  if (grade.startsWith('Heavenly Dao'))       return { type: 'pick', min: 2, max: 2, harmonious: true, hint: 'Pick 2 harmonious elements — adjacent on the generative cycle.' };
+  if (grade.startsWith('Superior'))           return { type: 'pick', min: 3, max: 3, hint: 'Pick any 3 elements. Three harmonious in sequence are strongest.' };
+  if (grade.startsWith('Common'))             return { type: 'pick', min: 4, max: 5, hint: 'Pick 4 or 5 elements. Some internal conflict is unavoidable.' };
+  if (grade.startsWith('Mortal'))             return { type: 'fixed', elements: [...FIVE_ELEMENTS], hint: 'All five elements, impure. No element bonus — and no penalty.' };
+  if (grade.startsWith('Broken'))             return { type: 'none', hint: 'Damaged root. Cannot cultivate through normal means.' };
+  if (grade.startsWith('Mutant'))             return { type: 'mutant', hint: 'The mutation picked you. Roll 1d6 or pick below.' };
+  if (grade.startsWith('Heavenly Body'))      return { type: 'body', hint: 'Roll d12 or pick below. Each body has a bonus, a cost, and a hunger.' };
+  return null;
+}
+
+const DAOS = [
+  'Sword', 'Fire', 'Water', 'Earth', 'Metal', 'Wood', 'Wind', 'Lightning',
+  'Space', 'Time', 'Karma', 'Cause & Effect',
+  'Slaughter', 'Demonic', 'Ghost', 'Corpse',
+  'Life', 'Death', 'Medicine', 'Poison',
+  'Formation', 'Artifact', 'Alchemy',
+  'Solitude', 'Endurance', 'Resentment', 'Perseverance'
+];
+
+const AFFILIATIONS = ['Sect Disciple', 'Clan Heir', 'Rogue Cultivator', 'Mortal World Starter'];
+
+// ============================================================================
+// ROUTER
+// ============================================================================
+
+let currentView = 'home';
+
+const views = {
+  home: renderHome,
+  techniques: () => renderLibrary('techniques'),
+  methods: () => renderLibrary('methods'),
+  items: () => renderLibrary('items'),
+  characters: renderCharacterList,
+  'character-edit': renderCharacterEdit,
+  data: renderData
+};
+
+let routeParams = {};
+
+function navigate(view, params = {}) {
+  currentView = view;
+  routeParams = params;
+  document.querySelectorAll('.nav-item').forEach(el => {
+    el.classList.toggle('active', el.dataset.view === view ||
+      (view === 'character-edit' && el.dataset.view === 'characters'));
+  });
+  const main = document.getElementById('main');
+  clear(main);
+  const fn = views[view] || renderHome;
+  fn(main);
+  window.scrollTo(0, 0);
+}
+
+document.querySelectorAll('.nav-item').forEach(el => {
+  el.addEventListener('click', () => navigate(el.dataset.view));
+});
+
+// Mode toggle (cosmetic — shows/hides some sections)
+function setMode(mode) {
+  state.meta.mode = mode;
+  saveState();
+  document.querySelectorAll('.mode-btn').forEach(b => {
+    b.classList.toggle('active', b.dataset.mode === mode);
+  });
+}
+
+document.querySelectorAll('.mode-btn').forEach(btn => {
+  btn.addEventListener('click', () => setMode(btn.dataset.mode));
+});
+
+function refreshCounts() {
+  document.getElementById('count-techniques').textContent = state.library.techniques.length || '';
+  document.getElementById('count-methods').textContent = state.library.methods.length || '';
+  document.getElementById('count-items').textContent = state.library.items.length || '';
+  document.getElementById('count-characters').textContent = state.characters.length || '';
+}
+
+// ============================================================================
+// VIEW: HOME
+// ============================================================================
+
+function renderHome(root) {
+  root.appendChild(h('div', { class: 'page-header' },
+    h('div', { class: 'page-title' },
+      h('span', { class: 'chinese' }, '逆'),
+      h('span', { class: 'english' }, 'Dashboard')
+    ),
+    h('div', { class: 'page-actions' },
+      h('button', { class: 'btn primary', onclick: () => { navigate('characters'); openNewCharacterDialog(); } }, 'New Character'),
+      h('button', { class: 'btn', onclick: () => { navigate('techniques'); openTechniqueEditor(); } }, 'New Technique')
+    )
+  ));
+
+  root.appendChild(h('div', { class: 'ethos' },
+    'Ruthless pragmatism. Talent is a cruel lottery. Preparation beats power. ' +
+    'The Heavens are hostile, and defiance is earned through suffering — not granted. ' +
+    'No plot armor, no chosen-one safety net. If you die unprepared, you die.'
+  ));
+
+  const stats = h('div', { class: 'stat-grid' });
+  stats.appendChild(h('div', { class: 'stat' },
+    h('div', { class: 'stat-value' }, String(state.characters.length)),
+    h('div', { class: 'stat-label' }, 'Characters')
+  ));
+  stats.appendChild(h('div', { class: 'stat' },
+    h('div', { class: 'stat-value' }, String(state.library.techniques.length)),
+    h('div', { class: 'stat-label' }, 'Techniques')
+  ));
+  stats.appendChild(h('div', { class: 'stat' },
+    h('div', { class: 'stat-value' }, String(state.library.methods.length)),
+    h('div', { class: 'stat-label' }, 'Methods')
+  ));
+  stats.appendChild(h('div', { class: 'stat' },
+    h('div', { class: 'stat-value' }, String(state.library.items.length)),
+    h('div', { class: 'stat-label' }, 'Items')
+  ));
+  root.appendChild(stats);
+
+  // Recent characters
+  if (state.characters.length) {
+    const sec = h('div', { class: 'section' });
+    sec.appendChild(h('div', { class: 'section-header' },
+      h('h2', {}, '人物'),
+      h('span', { class: 'en' }, 'Characters')
+    ));
+    const grid = h('div', { class: 'grid-list' });
+    const recent = [...state.characters].sort((a, b) =>
+      (b.updatedAt || '').localeCompare(a.updatedAt || '')
+    ).slice(0, 6);
+    recent.forEach(c => grid.appendChild(characterCard(c)));
+    sec.appendChild(grid);
+    root.appendChild(sec);
+  }
+
+  // Recent library additions
+  const allLib = [
+    ...state.library.techniques.map(t => ({ ...t, kind: 'technique' })),
+    ...state.library.methods.map(m => ({ ...m, kind: 'method' })),
+    ...state.library.items.map(i => ({ ...i, kind: 'item' }))
+  ].sort((a, b) => (b.updatedAt || '').localeCompare(a.updatedAt || '')).slice(0, 6);
+
+  if (allLib.length) {
+    const sec = h('div', { class: 'section' });
+    sec.appendChild(h('div', { class: 'section-header' },
+      h('h2', {}, '典籍'),
+      h('span', { class: 'en' }, 'Recent Library Entries')
+    ));
+    const grid = h('div', { class: 'grid-list' });
+    allLib.forEach(entry => {
+      if (entry.kind === 'technique') grid.appendChild(techniqueCard(entry));
+      else if (entry.kind === 'method') grid.appendChild(methodCard(entry));
+      else grid.appendChild(itemCard(entry));
+    });
+    sec.appendChild(grid);
+    root.appendChild(sec);
+  }
+
+  if (!state.characters.length && !allLib.length) {
+    root.appendChild(h('div', { class: 'note-box' },
+      'Empty ledger. Begin by creating Techniques, Methods, or Items in the Library — then create a Character and equip them.'
+    ));
+  }
+
+  root.appendChild(h('div', { class: 'footer' },
+    '逆 · defy · 天地记录 · the heavens forget nothing'
+  ));
+}
+
+// ============================================================================
+// VIEW: LIBRARY (techniques / methods / items)
+// ============================================================================
+
+const LIBRARY_LABELS = {
+  techniques: { cn: '术法', en: 'Techniques', singular: 'Technique' },
+  methods: { cn: '功法', en: 'Cultivation Methods', singular: 'Method' },
+  items: { cn: '器物', en: 'Items · Pills · Artifacts', singular: 'Item' }
+};
+
+let librarySearchState = { techniques: '', methods: '', items: '' };
+let libraryFilterState = { techniques: 'All', methods: 'All', items: 'All' };
+
+function renderLibrary(kind) {
+  const root = document.getElementById('main');
+  const label = LIBRARY_LABELS[kind];
+
+  root.appendChild(h('div', { class: 'page-header' },
+    h('div', { class: 'page-title' },
+      h('span', { class: 'chinese' }, label.cn),
+      h('span', { class: 'english' }, label.en)
+    ),
+    h('div', { class: 'page-actions' },
+      h('button', {
+        class: 'btn primary',
+        onclick: () => {
+          if (kind === 'techniques') openTechniqueEditor();
+          else if (kind === 'methods') openMethodEditor();
+          else openItemEditor();
+        }
+      }, '+ New ' + label.singular)
+    )
+  ));
+
+  // Toolbar
+  const toolbar = h('div', { class: 'toolbar' });
+  const searchInput = h('input', {
+    type: 'text',
+    class: 'search-input',
+    placeholder: 'Search ' + label.en.toLowerCase() + '…',
+    value: librarySearchState[kind]
+  });
+  searchInput.addEventListener('input', () => {
+    librarySearchState[kind] = searchInput.value;
+    renderLibraryGrid(kind, grid);
+  });
+  toolbar.appendChild(searchInput);
+
+  // Filter chips
+  const chips = h('div', { class: 'filter-chips' });
+  const filters = kind === 'techniques' ? ['All', ...TECHNIQUE_TIERS]
+    : kind === 'methods' ? ['All', ...METHOD_TYPES]
+    : ['All', ...ITEM_CATEGORIES];
+  filters.forEach(f => {
+    const chip = h('button', {
+      class: 'chip' + (libraryFilterState[kind] === f ? ' active' : ''),
+      onclick: () => {
+        libraryFilterState[kind] = f;
+        navigate(kind);
+      }
+    }, f);
+    chips.appendChild(chip);
+  });
+  toolbar.appendChild(chips);
+
+  root.appendChild(toolbar);
+
+  const grid = h('div', { class: 'grid-list' });
+  root.appendChild(grid);
+  renderLibraryGrid(kind, grid);
+}
+
+function renderLibraryGrid(kind, grid) {
+  clear(grid);
+  const search = (librarySearchState[kind] || '').toLowerCase().trim();
+  const filter = libraryFilterState[kind];
+  let entries = state.library[kind];
+
+  if (filter && filter !== 'All') {
+    entries = entries.filter(e => {
+      if (kind === 'techniques') return e.tier === filter;
+      if (kind === 'methods') return e.type === filter;
+      if (kind === 'items') return e.category === filter;
+    });
+  }
+  if (search) {
+    entries = entries.filter(e =>
+      (e.name || '').toLowerCase().includes(search) ||
+      (e.description || '').toLowerCase().includes(search) ||
+      (e.effect || '').toLowerCase().includes(search)
+    );
+  }
+
+  if (!entries.length) {
+    grid.appendChild(h('div', { class: 'card empty' },
+      'No entries. Click "+ New" above to create one.'
+    ));
+    return;
+  }
+
+  entries.sort((a, b) => (a.name || '').localeCompare(b.name || ''));
+
+  entries.forEach(e => {
+    if (kind === 'techniques') grid.appendChild(techniqueCard(e));
+    else if (kind === 'methods') grid.appendChild(methodCard(e));
+    else grid.appendChild(itemCard(e));
+  });
+}
+
+function techniqueCard(t) {
+  return h('div', { class: 'card' },
+    t.tier ? h('div', { class: 'card-tier' }, t.tier) : null,
+    h('div', { class: 'card-name' }, t.name || '(Unnamed)'),
+    h('div', { class: 'card-subtitle' },
+      [t.type, t.cost != null ? (t.cost + ' qi') : null].filter(Boolean).join(' · ')
+    ),
+    h('div', { class: 'card-body' }, t.effect || t.description || h('em', {}, 'No effect listed.')),
+    h('div', { class: 'card-meta' },
+      t.dao ? h('span', {}, 'Dao: ' + t.dao) : null,
+      t.requires ? h('span', {}, 'Req: ' + t.requires) : null
+    ),
+    h('div', { class: 'card-actions' },
+      h('button', { class: 'btn small', onclick: () => openTechniqueEditor(t) }, 'Edit'),
+      h('button', { class: 'btn small danger', onclick: () => deleteLibraryEntry('techniques', t.id) }, 'Delete')
+    )
+  );
+}
+
+function methodCard(m) {
+  return h('div', { class: 'card' },
+    m.type ? h('div', { class: 'card-tier' }, m.type) : null,
+    h('div', { class: 'card-name' }, m.name || '(Unnamed)'),
+    h('div', { class: 'card-subtitle' },
+      ['Peak: ' + (m.peakRealm || '—'), m.rootReq].filter(Boolean).join(' · ')
+    ),
+    h('div', { class: 'card-body' }, m.description || h('em', {}, 'No description.')),
+    (m.bonus || m.cost) ? h('div', { class: 'card-meta' },
+      m.bonus ? h('span', {}, 'Bonus: ' + m.bonus) : null,
+      m.cost ? h('span', {}, 'Cost: ' + m.cost) : null
+    ) : null,
+    h('div', { class: 'card-actions' },
+      h('button', { class: 'btn small', onclick: () => openMethodEditor(m) }, 'Edit'),
+      h('button', { class: 'btn small danger', onclick: () => deleteLibraryEntry('methods', m.id) }, 'Delete')
+    )
+  );
+}
+
+function itemCard(i) {
+  return h('div', { class: 'card' },
+    i.grade ? h('div', { class: 'card-tier' }, i.grade) : null,
+    h('div', { class: 'card-name' }, i.name || '(Unnamed)'),
+    h('div', { class: 'card-subtitle' },
+      [i.category, i.consumable ? 'Consumable' : null].filter(Boolean).join(' · ')
+    ),
+    h('div', { class: 'card-body' }, i.effect || i.description || h('em', {}, 'No effect listed.')),
+    i.value ? h('div', { class: 'card-meta' }, h('span', {}, 'Value: ' + i.value)) : null,
+    h('div', { class: 'card-actions' },
+      h('button', { class: 'btn small', onclick: () => openItemEditor(i) }, 'Edit'),
+      h('button', { class: 'btn small danger', onclick: () => deleteLibraryEntry('items', i.id) }, 'Delete')
+    )
+  );
+}
+
+async function deleteLibraryEntry(kind, id) {
+  const ok = await confirmDialog('Delete this entry? Characters that reference it will keep a frozen copy.');
+  if (!ok) return;
+  state.library[kind] = state.library[kind].filter(e => e.id !== id);
+  saveState();
+  navigate(kind);
+  notice('Deleted.', 'cinnabar');
+}
+
+// ============================================================================
+// EDITORS
+// ============================================================================
+
+function fieldText(label, value, onChange, opts = {}) {
+  const input = h('input', {
+    type: opts.type || 'text',
+    class: 'field-input',
+    value: value || '',
+    placeholder: opts.placeholder || ''
+  });
+  input.addEventListener('input', () => onChange(input.value));
+  return h('div', { class: 'field' },
+    h('label', { class: 'field-label' }, label),
+    input
+  );
+}
+
+function fieldNumber(label, value, onChange, opts = {}) {
+  const input = h('input', {
+    type: 'number',
+    class: 'field-input',
+    value: value != null ? value : '',
+    min: opts.min != null ? opts.min : '',
+    max: opts.max != null ? opts.max : '',
+    step: opts.step || '1'
+  });
+  input.addEventListener('input', () => {
+    const v = input.value === '' ? null : Number(input.value);
+    onChange(v);
+  });
+  return h('div', { class: 'field' },
+    h('label', { class: 'field-label' }, label),
+    input
+  );
+}
+
+function fieldSelect(label, value, options, onChange, opts = {}) {
+  const sel = h('select', { class: 'field-select' });
+  if (opts.allowEmpty) sel.appendChild(h('option', { value: '' }, '— choose —'));
+  options.forEach(o => {
+    const [val, disp] = Array.isArray(o) ? o : [o, o];
+    const optEl = h('option', { value: val }, disp);
+    if (val === value) optEl.setAttribute('selected', '');
+    sel.appendChild(optEl);
+  });
+  sel.value = value || '';
+  sel.addEventListener('change', () => onChange(sel.value));
+  return h('div', { class: 'field' },
+    h('label', { class: 'field-label' }, label),
+    sel
+  );
+}
+
+function fieldTextarea(label, value, onChange, placeholder) {
+  const area = h('textarea', {
+    class: 'field-textarea',
+    placeholder: placeholder || ''
+  }, value || '');
+  area.addEventListener('input', () => onChange(area.value));
+  return h('div', { class: 'field' },
+    h('label', { class: 'field-label' }, label),
+    area
+  );
+}
+
+// ---- Technique editor ----
+function openTechniqueEditor(existing) {
+  const isNew = !existing;
+  const t = existing ? { ...existing } : {
+    id: uid(), name: '', tier: 'Spirit', type: 'Attack', cost: 1,
+    dao: '', requires: '', effect: '', description: ''
+  };
+
+  const body = h('div', {});
+  body.appendChild(fieldText('Name', t.name, v => t.name = v, { placeholder: 'Cloud Piercing Finger' }));
+  const row1 = h('div', { class: 'field-row three' });
+  row1.appendChild(fieldSelect('Tier', t.tier, TECHNIQUE_TIERS, v => t.tier = v));
+  row1.appendChild(fieldSelect('Type', t.type, TECHNIQUE_TYPES, v => t.type = v));
+  row1.appendChild(fieldNumber('Qi Cost', t.cost, v => t.cost = v, { min: 0, max: 99 }));
+  body.appendChild(row1);
+  const row2 = h('div', { class: 'field-row two' });
+  row2.appendChild(fieldText('Dao Affinity', t.dao, v => t.dao = v, { placeholder: 'Sword, Fire…' }));
+  row2.appendChild(fieldText('Prerequisites', t.requires, v => t.requires = v, { placeholder: 'Qi Condensation Mid, Soul 2+' }));
+  body.appendChild(row2);
+  body.appendChild(fieldText('Effect (short)', t.effect, v => t.effect = v, {
+    placeholder: '+2 dice, ranged Qi attack'
+  }));
+  body.appendChild(fieldTextarea('Full Description', t.description, v => t.description = v,
+    'Flavor, extended rules, edge cases…'));
+
+  openDialog({
+    title: (isNew ? 'New Technique' : 'Edit Technique'),
+    content: body,
+    actions: [
+      { label: 'Cancel', handler: closeDialog },
+      { label: isNew ? 'Create' : 'Save', primary: true, handler: () => {
+        if (!t.name || !t.name.trim()) { notice('Name required.', 'cinnabar'); return; }
+        t.name = t.name.trim();
+        t.updatedAt = nowIso();
+        if (isNew) {
+          t.createdAt = t.updatedAt;
+          state.library.techniques.push(t);
+        } else {
+          const idx = state.library.techniques.findIndex(x => x.id === t.id);
+          if (idx >= 0) state.library.techniques[idx] = t;
+        }
+        saveState();
+        closeDialog();
+        if (currentView === 'techniques' || currentView === 'home') navigate(currentView);
+        notice('Saved.');
+      }}
+    ]
+  });
+}
+
+// ---- Method editor ----
+function openMethodEditor(existing) {
+  const isNew = !existing;
+  const m = existing ? { ...existing } : {
+    id: uid(), name: '', type: 'Orthodox', peakRealm: 'Foundation Establishment',
+    rootReq: '', bonus: '', cost: '', description: ''
+  };
+
+  const body = h('div', {});
+  body.appendChild(fieldText('Name', m.name, v => m.name = v, { placeholder: 'Heng Yue Pure Heart Method' }));
+  const row1 = h('div', { class: 'field-row two' });
+  row1.appendChild(fieldSelect('Type', m.type, METHOD_TYPES, v => m.type = v));
+  row1.appendChild(fieldSelect('Peak Realm', m.peakRealm, PEAK_REALMS, v => m.peakRealm = v));
+  body.appendChild(row1);
+  body.appendChild(fieldText('Root Requirements', m.rootReq, v => m.rootReq = v,
+    { placeholder: 'e.g. Fire affinity required' }));
+  body.appendChild(fieldText('Bonus', m.bonus, v => m.bonus = v,
+    { placeholder: '+1 cultivation speed tier' }));
+  body.appendChild(fieldText('Cost', m.cost, v => m.cost = v,
+    { placeholder: '+1 Black Karma per major use' }));
+  body.appendChild(fieldTextarea('Description', m.description, v => m.description = v,
+    'Method philosophy, lineage, special rules…'));
+
+  openDialog({
+    title: isNew ? 'New Cultivation Method' : 'Edit Method',
+    content: body,
+    actions: [
+      { label: 'Cancel', handler: closeDialog },
+      { label: isNew ? 'Create' : 'Save', primary: true, handler: () => {
+        if (!m.name || !m.name.trim()) { notice('Name required.', 'cinnabar'); return; }
+        m.name = m.name.trim();
+        m.updatedAt = nowIso();
+        if (isNew) { m.createdAt = m.updatedAt; state.library.methods.push(m); }
+        else {
+          const idx = state.library.methods.findIndex(x => x.id === m.id);
+          if (idx >= 0) state.library.methods[idx] = m;
+        }
+        saveState();
+        closeDialog();
+        if (currentView === 'methods' || currentView === 'home') navigate(currentView);
+        notice('Saved.');
+      }}
+    ]
+  });
+}
+
+// ---- Item editor ----
+function openItemEditor(existing) {
+  const isNew = !existing;
+  const i = existing ? { ...existing } : {
+    id: uid(), name: '', category: 'Pill', grade: 'Spirit',
+    consumable: true, value: '', effect: '', description: ''
+  };
+
+  const body = h('div', {});
+  body.appendChild(fieldText('Name', i.name, v => i.name = v,
+    { placeholder: 'Foundation Establishment Pill' }));
+  const row1 = h('div', { class: 'field-row three' });
+  row1.appendChild(fieldSelect('Category', i.category, ITEM_CATEGORIES, v => i.category = v));
+  row1.appendChild(fieldSelect('Grade', i.grade, ITEM_GRADES, v => i.grade = v));
+  row1.appendChild(fieldText('Value', i.value, v => i.value = v, { placeholder: '50 low-grade stones' }));
+  body.appendChild(row1);
+
+  const consumable = h('input', { type: 'checkbox' });
+  consumable.checked = !!i.consumable;
+  consumable.addEventListener('change', () => i.consumable = consumable.checked);
+  body.appendChild(h('div', { class: 'field' },
+    h('label', {
+      class: 'field-label',
+      style: { display: 'flex', alignItems: 'center', gap: '8px', cursor: 'pointer' }
+    }, consumable, h('span', {}, 'Consumable (single-use)'))
+  ));
+
+  body.appendChild(fieldText('Effect (short)', i.effect, v => i.effect = v,
+    { placeholder: '+3 dice to breakthrough roll; consumed' }));
+  body.appendChild(fieldTextarea('Full Description', i.description, v => i.description = v,
+    'Appearance, lore, special rules, binding requirements…'));
+
+  openDialog({
+    title: isNew ? 'New Item' : 'Edit Item',
+    content: body,
+    actions: [
+      { label: 'Cancel', handler: closeDialog },
+      { label: isNew ? 'Create' : 'Save', primary: true, handler: () => {
+        if (!i.name || !i.name.trim()) { notice('Name required.', 'cinnabar'); return; }
+        i.name = i.name.trim();
+        i.updatedAt = nowIso();
+        if (isNew) { i.createdAt = i.updatedAt; state.library.items.push(i); }
+        else {
+          const idx = state.library.items.findIndex(x => x.id === i.id);
+          if (idx >= 0) state.library.items[idx] = i;
+        }
+        saveState();
+        closeDialog();
+        if (currentView === 'items' || currentView === 'home') navigate(currentView);
+        notice('Saved.');
+      }}
+    ]
+  });
+}
+
+// ============================================================================
+// VIEW: CHARACTERS LIST
+// ============================================================================
+
+function renderCharacterList(root) {
+  root.appendChild(h('div', { class: 'page-header' },
+    h('div', { class: 'page-title' },
+      h('span', { class: 'chinese' }, '人物'),
+      h('span', { class: 'english' }, 'Characters')
+    ),
+    h('div', { class: 'page-actions' },
+      h('button', { class: 'btn primary', onclick: openNewCharacterDialog }, '+ New Character')
+    )
+  ));
+
+  if (!state.characters.length) {
+    root.appendChild(h('div', { class: 'note-box' },
+      'No characters yet. Click "+ New Character" to forge your first cultivator.'
+    ));
+    return;
+  }
+
+  const grid = h('div', { class: 'grid-list' });
+  const sorted = [...state.characters].sort((a, b) =>
+    (b.updatedAt || '').localeCompare(a.updatedAt || '')
+  );
+  sorted.forEach(c => grid.appendChild(characterCard(c)));
+  root.appendChild(grid);
+}
+
+function characterCard(c) {
+  const realmLine = [c.realm, c.substage].filter(Boolean).join(' · ') || 'Mortal';
+  return h('div', { class: 'card' },
+    h('div', { class: 'card-tier' }, c.origin || ''),
+    h('div', { class: 'card-name' }, c.name || '(Unnamed Cultivator)'),
+    h('div', { class: 'card-subtitle' }, realmLine),
+    h('div', { class: 'card-body' },
+      h('div', {}, 'Body ' + (c.attributes?.body ?? 1) +
+        ' · Qi ' + (c.attributes?.qi ?? 1) +
+        ' · Soul ' + (c.attributes?.soul ?? 1)),
+      c.daoSeed ? h('div', { style: { marginTop: '4px', color: 'var(--ink-faded)' } },
+        h('em', {}, 'Dao Seed: ' + c.daoSeed)) : null
+    ),
+    h('div', { class: 'card-meta' },
+      c.affiliation ? h('span', {}, c.affiliation) : null,
+      c.player ? h('span', {}, c.player) : null
+    ),
+    h('div', { class: 'card-actions' },
+      h('button', { class: 'btn small', onclick: () => navigate('character-edit', { id: c.id }) }, 'Open'),
+      h('button', { class: 'btn small danger', onclick: () => deleteCharacter(c.id) }, 'Delete')
+    )
+  );
+}
+
+function openNewCharacterDialog() {
+  const c = {
+    id: uid(),
+    name: '', player: '',
+    origin: 'Mortal Village Youth',
+    affiliation: 'Sect Disciple',
+    realm: 'Mortal', substage: 'Early',
+    attributes: { body: 2, qi: 2, soul: 1 },
+    root: { grade: 'Common Root (×1)', elements: [], mutant: '', heavenlyBody: '', notes: '' },
+    daoSeed: '',
+    daos: [],
+    method: { ref: null, frozen: null, notes: '' },
+    techniques: [],
+    items: [],
+    lores: [],
+    practices: [],
+    wealth: { low: 0, mid: 0, high: 0 },
+    karma: { white: 0, black: 0, resentment: 0, resentmentMax: 3 },
+    face: { value: 1, type: 'Righteous', notes: '' },
+    qi: { current: 0 },
+    wounds: 0, woundsCritical: 0,
+    ties: '',
+    notes: '',
+    createdAt: nowIso(),
+    updatedAt: nowIso()
+  };
+
+  const body = h('div', {});
+  body.appendChild(fieldText('Character Name', c.name, v => c.name = v, { placeholder: 'Wang Lin' }));
+  body.appendChild(fieldText("Player's Name", c.player, v => c.player = v, { placeholder: 'Optional' }));
+  const row1 = h('div', { class: 'field-row two' });
+  row1.appendChild(fieldSelect('Origin', c.origin, ORIGINS, v => c.origin = v));
+  row1.appendChild(fieldSelect('Affiliation', c.affiliation, AFFILIATIONS, v => c.affiliation = v));
+  body.appendChild(row1);
+  body.appendChild(h('div', { class: 'note-box' },
+    "You can refine attributes, realm, roots, and everything else on the next screen."
+  ));
+
+  openDialog({
+    title: 'Forge a New Cultivator',
+    content: body,
+    actions: [
+      { label: 'Cancel', handler: closeDialog },
+      { label: 'Create', primary: true, handler: () => {
+        if (!c.name || !c.name.trim()) { notice('Name required.', 'cinnabar'); return; }
+        c.name = c.name.trim();
+        state.characters.push(c);
+        saveState();
+        closeDialog();
+        navigate('character-edit', { id: c.id });
+        notice('Character forged.');
+      }}
+    ]
+  });
+}
+
+async function deleteCharacter(id) {
+  const ok = await confirmDialog('Delete this character permanently? This cannot be undone.');
+  if (!ok) return;
+  state.characters = state.characters.filter(c => c.id !== id);
+  saveState();
+  navigate('characters');
+  notice('Character removed.', 'cinnabar');
+}
+
+// ============================================================================
+// VIEW: CHARACTER EDIT
+// ============================================================================
+
+function renderCharacterEdit(root) {
+  const id = routeParams.id;
+  const c = state.characters.find(x => x.id === id);
+  if (!c) {
+    root.appendChild(h('div', { class: 'note-box' }, 'Character not found.'));
+    return;
+  }
+
+  const save = () => {
+    c.updatedAt = nowIso();
+    saveState();
+  };
+  const debouncedSave = debounce(save, 300);
+
+  // Derived-stat recalc system — sections can register updaters
+  const updaters = [];
+  const recalc = () => updaters.forEach(fn => fn());
+
+  // Header
+  root.appendChild(h('div', { class: 'page-header' },
+    h('div', { class: 'page-title' },
+      h('span', { class: 'chinese' }, '人'),
+      h('span', { class: 'english' }, c.name || 'Cultivator')
+    ),
+    h('div', { class: 'page-actions' },
+      h('button', { class: 'btn', onclick: () => navigate('characters') }, '← Back'),
+      h('button', { class: 'btn danger', onclick: () => deleteCharacter(c.id) }, 'Delete')
+    )
+  ));
+
+  // ==== Identity band ====
+  const idBand = h('div', { class: 'identity-band' });
+  idBand.appendChild(fieldText('Character Name', c.name, v => { c.name = v; debouncedSave(); }));
+  idBand.appendChild(fieldText("Player", c.player, v => { c.player = v; debouncedSave(); }));
+  idBand.appendChild(fieldSelect('Origin', c.origin, ORIGINS, v => { c.origin = v; debouncedSave(); }));
+  root.appendChild(idBand);
+
+  const grid = h('div', { class: 'char-editor' });
+  root.appendChild(grid);
+  const left = h('div', {});
+  const right = h('div', {});
+  grid.appendChild(left);
+  grid.appendChild(right);
+
+  // ===== LEFT COLUMN =====
+
+  // --- Realm ---
+  {
+    const sec = h('div', { class: 'section' });
+    sec.appendChild(sectionHeader('境界', 'Realm & Sub-stage'));
+    const realmWrap = h('div', {});
+    sec.appendChild(realmWrap);
+
+    const renderRealmRow = () => {
+      clear(realmWrap);
+      const row = h('div', { class: 'field-row two' });
+      row.appendChild(fieldSelect('Realm', c.realm, REALMS, v => {
+        c.realm = v;
+        if (v === 'Mortal') c.substage = 'Early';
+        debouncedSave();
+        recalc();
+        renderRealmRow();
+      }));
+      const isMortal = c.realm === 'Mortal';
+      if (!isMortal) {
+        row.appendChild(fieldSelect('Sub-stage', c.substage, SUB_STAGES, v => {
+          c.substage = v;
+          debouncedSave();
+          recalc();
+        }));
+      } else {
+        row.appendChild(h('div', { class: 'field' },
+          h('label', { class: 'field-label' }, 'Sub-stage'),
+          h('div', { style: { padding: '8px 0', color: 'var(--ink-faded)', fontStyle: 'italic' } },
+            'Mortal (Tier 0) — no sub-stages')
+        ));
+      }
+      realmWrap.appendChild(row);
+
+      // Tier readout + advance controls
+      const tier = getTier(c.realm, c.substage);
+      const tierLine = h('div', {
+        style: {
+          marginTop: '6px',
+          fontFamily: 'Cormorant SC, serif', fontSize: '11px', letterSpacing: '2px',
+          color: 'var(--ink-faded)', textTransform: 'uppercase'
+        }
+      }, 'Realm Tier: ', h('span', { style: { color: 'var(--cinnabar-deep)', fontWeight: '600' } }, String(tier)));
+      realmWrap.appendChild(tierLine);
+
+      const ctrls = h('div', { class: 'stage-controls' });
+      ctrls.appendChild(h('button', {
+        class: 'btn small',
+        disabled: c.realm === 'Mortal' ? 'disabled' : null,
+        onclick: () => {
+          advanceCharacterStage(c, -1);
+          save();
+          recalc();
+          renderRealmRow();
+          notice('Regressed to ' + c.realm + (c.realm === 'Mortal' ? '' : ' ' + c.substage));
+        }
+      }, '← Regress'));
+      ctrls.appendChild(h('button', {
+        class: 'btn small primary',
+        disabled: (c.realm === 'Nirvana Shatterer' && c.substage === 'Peak') ? 'disabled' : null,
+        onclick: () => {
+          const prevQiMax = computeDerived(c).qiMax;
+          advanceCharacterStage(c, 1);
+          const newQiMax = computeDerived(c).qiMax;
+          // Top off qi on advance (canonical: breakthrough restores pool)
+          if (c.qi && typeof c.qi.current === 'number' && newQiMax > prevQiMax) {
+            c.qi.current = newQiMax;
+          }
+          save();
+          recalc();
+          renderRealmRow();
+          notice('Advanced to ' + c.realm + (c.realm === 'Mortal' ? '' : ' ' + c.substage));
+        }
+      }, 'Advance Sub-stage →'));
+      realmWrap.appendChild(ctrls);
+    };
+    renderRealmRow();
+
+    sec.appendChild(h('div', { style: { marginTop: '14px' } },
+      fieldSelect('Affiliation', c.affiliation, AFFILIATIONS,
+        v => { c.affiliation = v; debouncedSave(); })
+    ));
+    left.appendChild(sec);
+  }
+
+  // --- Attributes ---
+  {
+    const sec = h('div', { class: 'section' });
+    sec.appendChild(sectionHeader('本命', 'Attributes'));
+    const attrs = h('div', { class: 'attributes' });
+    [
+      { key: 'body', cn: '体', en: 'Body' },
+      { key: 'qi', cn: '气', en: 'Qi' },
+      { key: 'soul', cn: '魂', en: 'Soul' }
+    ].forEach(a => {
+      const input = h('input', {
+        type: 'number', class: 'attr-input', min: '1', max: '5',
+        value: c.attributes[a.key]
+      });
+      input.addEventListener('input', () => {
+        c.attributes[a.key] = Number(input.value) || 1;
+        debouncedSave();
+        recalc();
+      });
+      attrs.appendChild(h('div', { class: 'attr' },
+        h('div', { class: 'attr-label' }, a.cn),
+        h('div', { class: 'attr-en' }, a.en),
+        input
+      ));
+    });
+    sec.appendChild(attrs);
+    left.appendChild(sec);
+  }
+
+  // --- Spiritual Root & Dao Seed ---
+  {
+    const sec = h('div', { class: 'section' });
+    sec.appendChild(sectionHeader('根·道', 'Spiritual Root & Dao Seed'));
+
+    // Normalize legacy data
+    if (typeof c.root.elements === 'string') {
+      c.root.elements = c.root.elements.split(',').map(s => s.trim()).filter(Boolean);
+    }
+    if (!Array.isArray(c.root.elements)) c.root.elements = [];
+    if (c.root.mutant == null) c.root.mutant = '';
+    if (c.root.heavenlyBody == null) c.root.heavenlyBody = '';
+
+    const rootBody = h('div', {});
+    sec.appendChild(rootBody);
+
+    const renderRoot = () => {
+      clear(rootBody);
+
+      // Grade selector
+      rootBody.appendChild(fieldSelect('Root Grade', c.root.grade, ROOT_GRADES, v => {
+        c.root.grade = v;
+        const spec = getRootElementSpec(v);
+        if (spec?.type === 'fixed') c.root.elements = [...spec.elements];
+        else if (spec?.type === 'none') c.root.elements = [];
+        else if (spec?.type === 'pick') c.root.elements = (c.root.elements || []).filter(e => FIVE_ELEMENTS.includes(e));
+        else if (spec?.type === 'mutant' || spec?.type === 'body') c.root.elements = [];
+        if (spec?.type !== 'mutant') c.root.mutant = '';
+        if (spec?.type !== 'body') c.root.heavenlyBody = '';
+        save();
+        renderRoot();
+      }));
+
+      const spec = getRootElementSpec(c.root.grade);
+      if (spec?.hint) {
+        rootBody.appendChild(h('div', {
+          style: {
+            fontSize: '12px', marginTop: '6px', marginBottom: '10px',
+            padding: '8px 12px', border: '1px dashed var(--rule)',
+            color: 'var(--ink-soft)', fontStyle: 'italic',
+            background: 'rgba(244,235,214,0.3)'
+          }
+        }, spec.hint));
+      }
+
+      // Element picker (for pick/fixed)
+      if (spec && (spec.type === 'pick' || spec.type === 'fixed')) {
+        const wrap = h('div', { class: 'field' });
+        wrap.appendChild(h('label', { class: 'field-label' }, 'Elements — 五行 Five Elements'));
+        const grid = h('div', {
+          style: { display: 'grid', gridTemplateColumns: 'repeat(5, 1fr)', gap: '6px' }
+        });
+        FIVE_ELEMENTS.forEach(el => {
+          const selected = c.root.elements.includes(el);
+          const disabled = spec.type === 'fixed';
+          const btn = h('button', {
+            class: 'chip' + (selected ? ' active' : ''),
+            style: { padding: '10px 8px', textAlign: 'center', cursor: disabled ? 'not-allowed' : 'pointer' },
+            disabled: disabled,
+            onclick: () => {
+              if (disabled) return;
+              if (selected) c.root.elements = c.root.elements.filter(x => x !== el);
+              else c.root.elements = [...c.root.elements, el];
+              save();
+              renderRoot();
+            }
+          },
+            h('div', { style: { fontFamily: 'Noto Serif SC, serif', fontSize: '16px', fontWeight: '600' } }, ELEMENT_CN[el]),
+            h('div', { style: { fontSize: '10px', letterSpacing: '1.5px' } }, el)
+          );
+          grid.appendChild(btn);
+        });
+        wrap.appendChild(grid);
+
+        // Validation feedback
+        const count = c.root.elements.length;
+        const warnings = [];
+        if (spec.min && count < spec.min) warnings.push(`Pick ${spec.min - count} more element${spec.min - count > 1 ? 's' : ''}.`);
+        if (spec.max && count > spec.max) warnings.push(`Remove ${count - spec.max} element${count - spec.max > 1 ? 's' : ''}.`);
+        if (spec.harmonious && count === 2) {
+          const [a, b] = c.root.elements;
+          if (!arePairHarmonious(a, b)) warnings.push(`${a}+${b} is not a harmonious pair.`);
+        }
+        if (warnings.length) {
+          wrap.appendChild(h('div', {
+            style: {
+              fontSize: '11px', color: 'var(--cinnabar)', marginTop: '8px',
+              fontFamily: 'Cormorant SC, serif', letterSpacing: '1.5px', textTransform: 'uppercase'
+            }
+          }, warnings.join(' ')));
+        }
+
+        // Show generative cycle hint for harmonious-required grades
+        if (spec.harmonious) {
+          wrap.appendChild(h('div', {
+            style: {
+              fontSize: '11px', color: 'var(--ink-faded)', marginTop: '6px',
+              fontFamily: 'Cormorant SC, serif', letterSpacing: '1px'
+            }
+          }, 'Generative: Wood → Fire → Earth → Metal → Water → Wood'));
+        }
+
+        rootBody.appendChild(wrap);
+      }
+
+      // Mutant picker
+      if (spec && spec.type === 'mutant') {
+        const wrap = h('div', { class: 'field' });
+        wrap.appendChild(h('label', { class: 'field-label' }, 'Mutant Root (d6)'));
+        const sel = h('select', { class: 'field-select' });
+        sel.appendChild(h('option', { value: '' }, '— choose —'));
+        MUTANT_ROOTS.forEach((m, i) => {
+          const o = h('option', { value: m.name }, `${i + 1}. ${m.name}`);
+          if (m.name === c.root.mutant) o.setAttribute('selected', '');
+          sel.appendChild(o);
+        });
+        sel.value = c.root.mutant || '';
+        sel.addEventListener('change', () => { c.root.mutant = sel.value; save(); renderRoot(); });
+        wrap.appendChild(sel);
+        if (c.root.mutant) {
+          const m = MUTANT_ROOTS.find(x => x.name === c.root.mutant);
+          if (m) wrap.appendChild(h('div', {
+            style: { fontSize: '13px', color: 'var(--ink-soft)', marginTop: '8px', fontStyle: 'italic', lineHeight: '1.5' }
+          }, m.desc));
+        }
+        rootBody.appendChild(wrap);
+      }
+
+      // Heavenly Body picker
+      if (spec && spec.type === 'body') {
+        const wrap = h('div', { class: 'field' });
+        wrap.appendChild(h('label', { class: 'field-label' }, 'Heavenly Body (d12)'));
+        const sel = h('select', { class: 'field-select' });
+        sel.appendChild(h('option', { value: '' }, '— choose —'));
+        HEAVENLY_BODIES.forEach((b, i) => {
+          const o = h('option', { value: b.name }, `${i + 1}. ${b.name}`);
+          if (b.name === c.root.heavenlyBody) o.setAttribute('selected', '');
+          sel.appendChild(o);
+        });
+        sel.value = c.root.heavenlyBody || '';
+        sel.addEventListener('change', () => { c.root.heavenlyBody = sel.value; save(); renderRoot(); });
+        wrap.appendChild(sel);
+        if (c.root.heavenlyBody) {
+          const b = HEAVENLY_BODIES.find(x => x.name === c.root.heavenlyBody);
+          if (b) wrap.appendChild(h('div', {
+            style: { fontSize: '13px', color: 'var(--ink-soft)', marginTop: '8px', fontStyle: 'italic', lineHeight: '1.5' }
+          }, b.desc));
+          wrap.appendChild(h('div', {
+            style: { fontSize: '11px', color: 'var(--cinnabar)', marginTop: '8px',
+              fontFamily: 'Cormorant SC, serif', letterSpacing: '1.5px', textTransform: 'uppercase' }
+          }, 'Heavenly Body characters carry the extra karma: The World Knows.'));
+        }
+        rootBody.appendChild(wrap);
+      }
+
+      // Dao Seed
+      rootBody.appendChild(fieldSelect('Dao Seed', c.daoSeed, ['', ...DAOS],
+        v => { c.daoSeed = v; debouncedSave(); }, { allowEmpty: true }));
+
+      rootBody.appendChild(fieldText('Root Notes', c.root.notes, v => { c.root.notes = v; debouncedSave(); },
+        { placeholder: 'Lineage notes, awakened quirks, ceremony details…' }));
+    };
+    renderRoot();
+    left.appendChild(sec);
+  }
+
+  // --- Cultivation Method ---
+  {
+    const sec = h('div', { class: 'section' });
+    sec.appendChild(sectionHeader('功法', 'Cultivation Method'));
+
+    const displayBox = h('div', { class: 'list-rows' });
+    const renderMethod = () => {
+      clear(displayBox);
+      const ref = c.method.ref ? state.library.methods.find(m => m.id === c.method.ref) : null;
+      const source = ref || c.method.frozen;
+      if (!source) {
+        displayBox.appendChild(h('div', { class: 'list-empty' }, 'No method selected.'));
+        return;
+      }
+      const row = h('div', { class: 'list-row' });
+      row.appendChild(h('div', {},
+        h('div', { class: 'list-row-name' }, source.name),
+        h('div', { class: 'list-row-meta' },
+          [source.type, 'Peak: ' + (source.peakRealm || '—')].filter(Boolean).join(' · ')),
+        source.effect || source.description ?
+          h('div', { style: { fontSize: '13px', marginTop: '4px', color: 'var(--ink-soft)' } },
+            source.effect || source.description) : null
+      ));
+      const btn = h('button', { class: 'row-delete', onclick: () => {
+        c.method = { ref: null, frozen: null, notes: c.method.notes || '' };
+        save();
+        renderMethod();
+      }}, '×');
+      row.appendChild(h('span', {}));
+      row.appendChild(btn);
+      displayBox.appendChild(row);
+    };
+    renderMethod();
+    sec.appendChild(displayBox);
+
+    const actions = h('div', { style: { marginTop: '8px', display: 'flex', gap: '8px' } });
+    actions.appendChild(h('button', {
+      class: 'btn small',
+      onclick: () => openPicker({
+        title: 'Choose Cultivation Method',
+        entries: state.library.methods,
+        subtitleFn: m => [m.type, 'Peak: ' + (m.peakRealm || '—')].filter(Boolean).join(' · '),
+        onPick: (m) => {
+          c.method.ref = m.id;
+          c.method.frozen = { ...m };
+          save();
+          renderMethod();
+          closeDialog();
+        }
+      })
+    }, 'Pick from Library'));
+    actions.appendChild(h('button', {
+      class: 'btn small ghost',
+      onclick: () => {
+        const custom = { id: 'custom_' + uid(), name: '', type: 'Orthodox',
+          peakRealm: 'Foundation Establishment', description: '' };
+        openCharacterMethodEditor(c, custom, renderMethod);
+      }
+    }, '+ Custom Method'));
+    sec.appendChild(actions);
+    sec.appendChild(fieldText('Method Notes', c.method.notes, v => { c.method.notes = v; debouncedSave(); },
+      { placeholder: 'Reconciliation progress, quirks…' }));
+    left.appendChild(sec);
+  }
+
+  // --- Techniques ---
+  {
+    const sec = h('div', { class: 'section' });
+    sec.appendChild(sectionHeader('术法', 'Techniques'));
+    const list = h('div', { class: 'list-rows' });
+    const renderTechList = () => {
+      clear(list);
+      if (!c.techniques.length) {
+        list.appendChild(h('div', { class: 'list-empty' }, 'No techniques learned.'));
+        return;
+      }
+      c.techniques.forEach((tech, idx) => {
+        const source = tech.ref ? state.library.techniques.find(t => t.id === tech.ref) : null;
+        const info = source || tech.frozen || {};
+        const dotsContainer = h('div', { class: 'dot-row', title: 'Mastery (0–4)' });
+        for (let i = 0; i < 5; i++) {
+          const dot = h('div', { class: 'dot cinnabar' + (i < (tech.mastery || 0) ? ' filled' : '') });
+          dot.addEventListener('click', () => {
+            if (tech.mastery === i + 1) tech.mastery = i;
+            else tech.mastery = i + 1;
+            save();
+            renderTechList();
+          });
+          dotsContainer.appendChild(dot);
+        }
+        const row = h('div', { class: 'list-row' });
+        row.appendChild(h('div', {},
+          h('div', { class: 'list-row-name' }, info.name || '(Unnamed)'),
+          h('div', { class: 'list-row-meta' },
+            [info.tier, info.type, info.cost != null ? (info.cost + ' qi') : null].filter(Boolean).join(' · ')),
+          info.effect ? h('div', { style: { fontSize: '12px', marginTop: '3px', color: 'var(--ink-soft)' } },
+            info.effect) : null
+        ));
+        row.appendChild(dotsContainer);
+        row.appendChild(h('button', {
+          class: 'row-delete',
+          onclick: () => { c.techniques.splice(idx, 1); save(); renderTechList(); }
+        }, '×'));
+        list.appendChild(row);
+      });
+    };
+    renderTechList();
+    sec.appendChild(list);
+    const actions = h('div', { style: { marginTop: '8px' } });
+    actions.appendChild(h('button', {
+      class: 'btn small',
+      onclick: () => openPicker({
+        title: 'Choose a Technique',
+        entries: state.library.techniques,
+        subtitleFn: t => [t.tier, t.type, t.cost != null ? (t.cost + ' qi') : null]
+          .filter(Boolean).join(' · '),
+        onPick: (t) => {
+          c.techniques.push({ ref: t.id, frozen: { ...t }, mastery: 0 });
+          save();
+          renderTechList();
+          closeDialog();
+        }
+      })
+    }, '+ Add Technique'));
+    sec.appendChild(actions);
+    left.appendChild(sec);
+  }
+
+  // --- Items / Inventory ---
+  {
+    const sec = h('div', { class: 'section' });
+    sec.appendChild(sectionHeader('物品', 'Inventory'));
+    const list = h('div', { class: 'list-rows' });
+    const renderItems = () => {
+      clear(list);
+      if (!c.items.length) {
+        list.appendChild(h('div', { class: 'list-empty' }, 'Nothing carried.'));
+        return;
+      }
+      c.items.forEach((entry, idx) => {
+        const source = entry.ref ? state.library.items.find(i => i.id === entry.ref) : null;
+        const info = source || entry.frozen || {};
+        const row = h('div', { class: 'list-row' });
+
+        const qtyInput = h('input', {
+          type: 'number', class: 'field-input', min: '0', value: entry.qty != null ? entry.qty : 1,
+          style: { width: '50px', textAlign: 'center' }
+        });
+        qtyInput.addEventListener('input', () => {
+          entry.qty = Number(qtyInput.value) || 0;
+          debouncedSave();
+        });
+
+        row.appendChild(h('div', {},
+          h('div', { class: 'list-row-name' }, info.name || '(Unnamed)'),
+          h('div', { class: 'list-row-meta' },
+            [info.category, info.grade, info.consumable ? 'Consumable' : null].filter(Boolean).join(' · ')),
+          info.effect ? h('div', { style: { fontSize: '12px', marginTop: '3px', color: 'var(--ink-soft)' } },
+            info.effect) : null
+        ));
+        row.appendChild(h('div', { style: { display: 'flex', alignItems: 'center', gap: '6px' } },
+          h('span', { class: 'inline-label' }, '×'),
+          qtyInput
+        ));
+        row.appendChild(h('button', {
+          class: 'row-delete',
+          onclick: () => { c.items.splice(idx, 1); save(); renderItems(); }
+        }, '×'));
+        list.appendChild(row);
+      });
+    };
+    renderItems();
+    sec.appendChild(list);
+
+    const actions = h('div', { style: { marginTop: '8px' } });
+    actions.appendChild(h('button', {
+      class: 'btn small',
+      onclick: () => openPicker({
+        title: 'Add Item from Library',
+        entries: state.library.items,
+        subtitleFn: i => [i.category, i.grade].filter(Boolean).join(' · '),
+        onPick: (i) => {
+          c.items.push({ ref: i.id, frozen: { ...i }, qty: 1 });
+          save();
+          renderItems();
+          closeDialog();
+        }
+      })
+    }, '+ Add Item'));
+    sec.appendChild(actions);
+    left.appendChild(sec);
+  }
+
+  // ===== RIGHT COLUMN =====
+
+  // --- Derived Stats (auto-computed) ---
+  {
+    const sec = h('div', { class: 'section' });
+    sec.appendChild(sectionHeader('推算', 'Derived Stats'));
+    const panel = h('div', { class: 'derived-panel' });
+    sec.appendChild(panel);
+
+    const renderDerived = () => {
+      clear(panel);
+      const d = computeDerived(c);
+      const rows = [
+        ['Realm Tier', String(d.tier)],
+        ['Wound Capacity', String(d.woundCap)],
+        ['Qi Pool', String(d.qiMax)],
+        ['Spiritual Sense', d.senseRange + ' m'],
+        ['Soul Defense', String(d.soulDefense)],
+        ['Presence Tier', String(d.presence)],
+        ['Max Heart Oaths', String(d.heartOaths)],
+        ['Lifespan', d.lifespan]
+      ];
+      rows.forEach(([l, v]) => {
+        panel.appendChild(h('div', { class: 'derived-row' },
+          h('span', { class: 'derived-label' }, l),
+          h('span', { class: 'derived-val' }, v)
+        ));
+      });
+    };
+    renderDerived();
+    updaters.push(renderDerived);
+
+    sec.appendChild(h('div', {
+      style: {
+        fontFamily: 'Cormorant SC, serif', fontSize: '10px', letterSpacing: '1.5px',
+        color: 'var(--ink-faded)', marginTop: '10px', textAlign: 'right', fontStyle: 'italic'
+      }
+    }, 'Auto-calculated from Realm Tier + Attributes'));
+
+    right.appendChild(sec);
+  }
+
+  // --- Vitals (Qi pool + Wounds) ---
+  {
+    const sec = h('div', { class: 'section' });
+    sec.appendChild(sectionHeader('气血', 'Vitals'));
+
+    // Normalize legacy data
+    if (!c.qi || typeof c.qi !== 'object') c.qi = { current: 0 };
+    if (typeof c.qi.current !== 'number') c.qi.current = 0;
+    if ('max' in c.qi) delete c.qi.max;
+    if (typeof c.wounds !== 'number') c.wounds = 0;
+    if (typeof c.woundsCritical !== 'number') c.woundsCritical = 0;
+
+    // Qi line
+    const qiWrap = h('div', { class: 'field' });
+    qiWrap.appendChild(h('label', { class: 'field-label' }, 'Qi — current / max'));
+    const qiLine = h('div', { class: 'qi-line' });
+    const qiCur = h('input', { type: 'number', class: 'qi-current', min: '0', value: c.qi.current });
+    qiCur.addEventListener('input', () => { c.qi.current = Number(qiCur.value) || 0; debouncedSave(); });
+    const qiSlash = h('span', { class: 'qi-slash' }, '/');
+    const qiMaxEl = h('span', { class: 'qi-max' }, String(computeDerived(c).qiMax));
+    qiLine.appendChild(qiCur);
+    qiLine.appendChild(qiSlash);
+    qiLine.appendChild(qiMaxEl);
+    qiLine.appendChild(h('button', {
+      class: 'btn small ghost', style: { marginLeft: 'auto' },
+      onclick: () => {
+        c.qi.current = computeDerived(c).qiMax;
+        qiCur.value = c.qi.current;
+        save();
+      }
+    }, 'Fill Pool'));
+    qiWrap.appendChild(qiLine);
+    sec.appendChild(qiWrap);
+
+    // Wounds
+    const woundWrap = h('div', { class: 'field', style: { marginTop: '14px' } });
+    const woundLabel = h('div', { class: 'field-label' });
+    woundWrap.appendChild(woundLabel);
+    const woundBox = h('div', { class: 'box-track' });
+    woundWrap.appendChild(woundBox);
+    const woundStatus = h('div', {
+      style: {
+        fontFamily: 'Cormorant SC, serif', fontSize: '10px', letterSpacing: '2px',
+        color: 'var(--ink-faded)', marginTop: '8px', textTransform: 'uppercase'
+      }
+    });
+    woundWrap.appendChild(woundStatus);
+
+    const renderWounds = () => {
+      const d = computeDerived(c);
+      const TOTAL = Math.max(1, d.woundCap);
+      // Clamp
+      c.wounds = Math.min(Math.max(0, c.wounds), TOTAL);
+      c.woundsCritical = Math.min(Math.max(0, c.woundsCritical), c.wounds);
+
+      // Update max display
+      qiMaxEl.textContent = String(d.qiMax);
+      woundLabel.textContent = `Wounds — click once for surface, twice for critical (${c.wounds}/${TOTAL})`;
+
+      clear(woundBox);
+      for (let i = 0; i < TOTAL; i++) {
+        const cls = i < c.woundsCritical ? ' critical' : (i < c.wounds ? ' filled' : '');
+        const cell = h('div', { class: 'box-cell' + cls });
+        cell.addEventListener('click', () => {
+          // 3-state cycle per slot
+          if (i >= c.wounds) {
+            c.wounds = i + 1;
+          } else if (i >= c.woundsCritical) {
+            c.woundsCritical = i + 1;
+          } else {
+            c.wounds = i;
+            c.woundsCritical = Math.min(c.woundsCritical, i);
+          }
+          save();
+          renderWounds();
+        });
+        woundBox.appendChild(cell);
+      }
+
+      const half = Math.ceil(TOTAL / 2);
+      const filled = c.wounds;
+      let statusText = '';
+      if (filled >= TOTAL) statusText = 'DYING — take the killing blow, or spend a prepared countermeasure.';
+      else if (filled >= half) statusText = `Wounded (${filled}/${TOTAL}) — penalties active at ≥ ${half}.`;
+      else if (filled > 0) statusText = `Lightly wounded (${filled}/${TOTAL}).`;
+      else statusText = `Unhurt — penalties begin at ${half} of ${TOTAL}.`;
+      woundStatus.textContent = statusText;
+      woundStatus.style.color = filled >= TOTAL ? 'var(--cinnabar-deep)'
+        : filled >= half ? 'var(--cinnabar)'
+        : 'var(--ink-faded)';
+    };
+    renderWounds();
+    updaters.push(renderWounds);
+
+    sec.appendChild(woundWrap);
+    right.appendChild(sec);
+  }
+
+  // --- Karma & Resentment ---
+  {
+    const sec = h('div', { class: 'section' });
+    sec.appendChild(sectionHeader('因果', 'Karma & Resentment'));
+
+    const makeKarmaRow = (label, key, color, max) => {
+      const container = h('div', { class: 'field' });
+      container.appendChild(h('label', { class: 'field-label' }, label));
+      const dots = h('div', { class: 'dot-row' });
+      const render = () => {
+        clear(dots);
+        for (let i = 0; i < max; i++) {
+          const filled = i < c.karma[key];
+          const cls = 'dot' + (filled ? ' ' + color : '');
+          const dot = h('div', { class: cls });
+          dot.addEventListener('click', () => {
+            c.karma[key] = (c.karma[key] === i + 1) ? i : i + 1;
+            save();
+            render();
+          });
+          dots.appendChild(dot);
+        }
+      };
+      render();
+      container.appendChild(dots);
+      return container;
+    };
+
+    sec.appendChild(makeKarmaRow('White Karma', 'white', 'white-filled', 10));
+    sec.appendChild(makeKarmaRow('Black Karma', 'black', 'black-filled', 10));
+
+    const rr = h('div', { class: 'field-row two' });
+    const resMaxInput = h('input', { type: 'number', class: 'field-input', value: c.karma.resentmentMax, min: '0' });
+    resMaxInput.addEventListener('input', () => { c.karma.resentmentMax = Number(resMaxInput.value) || 0; debouncedSave(); });
+    rr.appendChild(h('div', { class: 'field' },
+      h('label', { class: 'field-label' }, 'Resentment Max'), resMaxInput));
+
+    const resWrap = h('div', { class: 'field' });
+    resWrap.appendChild(h('label', { class: 'field-label' }, 'Heavenly Resentment'));
+    const resDots = h('div', { class: 'dot-row' });
+    const renderRes = () => {
+      clear(resDots);
+      for (let i = 0; i < Math.max(c.karma.resentmentMax, 5); i++) {
+        const filled = i < c.karma.resentment;
+        const cls = 'dot cinnabar' + (filled ? ' filled' : '');
+        const dot = h('div', { class: cls });
+        dot.addEventListener('click', () => {
+          c.karma.resentment = (c.karma.resentment === i + 1) ? i : i + 1;
+          save();
+          renderRes();
+        });
+        resDots.appendChild(dot);
+      }
+    };
+    renderRes();
+    resWrap.appendChild(resDots);
+    rr.appendChild(resWrap);
+    sec.appendChild(rr);
+
+    right.appendChild(sec);
+  }
+
+  // --- Face ---
+  {
+    const sec = h('div', { class: 'section' });
+    sec.appendChild(sectionHeader('面子', 'Face'));
+    const row = h('div', { class: 'field-row two' });
+    row.appendChild(fieldNumber('Face Value', c.face.value, v => { c.face.value = v || 0; debouncedSave(); }, { min: -5, max: 10 }));
+    row.appendChild(fieldSelect('Type', c.face.type, ['Righteous', 'Demonic', 'Neutral', 'Infamous'],
+      v => { c.face.type = v; debouncedSave(); }));
+    sec.appendChild(row);
+    sec.appendChild(fieldText('Face Notes', c.face.notes, v => { c.face.notes = v; debouncedSave(); },
+      { placeholder: 'Face 2 in Heng Yue Sect; Face 0 elsewhere' }));
+    right.appendChild(sec);
+  }
+
+  // --- Wealth ---
+  {
+    const sec = h('div', { class: 'section' });
+    sec.appendChild(sectionHeader('灵石', 'Spirit Stones'));
+    const row = h('div', { class: 'field-row three' });
+    row.appendChild(fieldNumber('Low-grade', c.wealth.low, v => { c.wealth.low = v || 0; debouncedSave(); }, { min: 0 }));
+    row.appendChild(fieldNumber('Mid-grade', c.wealth.mid, v => { c.wealth.mid = v || 0; debouncedSave(); }, { min: 0 }));
+    row.appendChild(fieldNumber('High-grade', c.wealth.high, v => { c.wealth.high = v || 0; debouncedSave(); }, { min: 0 }));
+    sec.appendChild(row);
+    right.appendChild(sec);
+  }
+
+  // --- Daos ---
+  {
+    const sec = h('div', { class: 'section' });
+    sec.appendChild(sectionHeader('诸道', 'Daos & Insight'));
+    const list = h('div', { class: 'list-rows' });
+    const renderDaos = () => {
+      clear(list);
+      if (!c.daos.length) {
+        list.appendChild(h('div', { class: 'list-empty' }, 'No Dao comprehension yet.'));
+        return;
+      }
+      c.daos.forEach((d, idx) => {
+        const row = h('div', { class: 'list-row' });
+        row.appendChild(h('div', {},
+          h('div', { class: 'list-row-name' }, d.name),
+          h('div', { class: 'list-row-meta' }, (d.level || 'Novice') + ' · Insight: ' + (d.insight || 0))
+        ));
+
+        const lvl = h('select', { class: 'field-select', style: { width: '120px' } });
+        ['Novice', 'Adept', 'Master', 'Grandmaster', 'Void Mastery'].forEach(l => {
+          const o = h('option', { value: l }, l);
+          if (l === (d.level || 'Novice')) o.setAttribute('selected', '');
+          lvl.appendChild(o);
+        });
+        lvl.value = d.level || 'Novice';
+        lvl.addEventListener('change', () => { d.level = lvl.value; save(); renderDaos(); });
+
+        const ins = h('input', {
+          type: 'number', class: 'field-input', style: { width: '60px', textAlign: 'center' },
+          value: d.insight || 0, min: '0'
+        });
+        ins.addEventListener('input', () => { d.insight = Number(ins.value) || 0; debouncedSave(); });
+
+        row.appendChild(h('div', { style: { display: 'flex', gap: '6px', alignItems: 'center' } }, lvl, ins));
+        row.appendChild(h('button', {
+          class: 'row-delete',
+          onclick: () => { c.daos.splice(idx, 1); save(); renderDaos(); }
+        }, '×'));
+        list.appendChild(row);
+      });
+    };
+    renderDaos();
+    sec.appendChild(list);
+
+    const addRow = h('div', { style: { marginTop: '8px', display: 'flex', gap: '8px' } });
+    const sel = h('select', { class: 'field-select', style: { flex: '1' } });
+    sel.appendChild(h('option', { value: '' }, '— choose Dao —'));
+    DAOS.forEach(d => sel.appendChild(h('option', { value: d }, d)));
+    addRow.appendChild(sel);
+    addRow.appendChild(h('button', { class: 'btn small', onclick: () => {
+      if (!sel.value) return;
+      c.daos.push({ name: sel.value, level: 'Novice', insight: 0 });
+      sel.value = '';
+      save();
+      renderDaos();
+    }}, '+ Add'));
+    sec.appendChild(addRow);
+    right.appendChild(sec);
+  }
+
+  // --- Lores & Practices ---
+  {
+    const sec = h('div', { class: 'section' });
+    sec.appendChild(sectionHeader('学·行', 'Lores & Practices'));
+    sec.appendChild(fieldTextarea('Lores (comma-separated)',
+      c.lores.join(', '),
+      v => { c.lores = v.split(',').map(s => s.trim()).filter(Boolean); debouncedSave(); },
+      'Mortal Lore, Herb Lore, Sect Politics…'));
+
+    const pracList = h('div', { class: 'list-rows' });
+    const renderPrac = () => {
+      clear(pracList);
+      if (!c.practices.length) {
+        pracList.appendChild(h('div', { class: 'list-empty' }, 'No practices trained.'));
+        return;
+      }
+      c.practices.forEach((p, idx) => {
+        const row = h('div', { class: 'list-row' });
+        const nameInput = h('input', { class: 'field-input', value: p.name });
+        nameInput.addEventListener('input', () => { p.name = nameInput.value; debouncedSave(); });
+        row.appendChild(nameInput);
+        const rankSel = h('select', { class: 'field-select', style: { width: '140px' } });
+        ['Trained (+1)', 'Well-Practiced (+2)', 'Masterful (+3)'].forEach((r, ri) => {
+          const o = h('option', { value: ri + 1 }, r);
+          if ((p.rank || 1) === ri + 1) o.setAttribute('selected', '');
+          rankSel.appendChild(o);
+        });
+        rankSel.value = p.rank || 1;
+        rankSel.addEventListener('change', () => { p.rank = Number(rankSel.value); save(); });
+        row.appendChild(rankSel);
+        row.appendChild(h('button', {
+          class: 'row-delete',
+          onclick: () => { c.practices.splice(idx, 1); save(); renderPrac(); }
+        }, '×'));
+        pracList.appendChild(row);
+      });
+    };
+    renderPrac();
+    sec.appendChild(h('div', { class: 'field-label', style: { marginTop: '10px' } }, 'Practices'));
+    sec.appendChild(pracList);
+    const addPrac = h('button', { class: 'btn small', style: { marginTop: '8px' },
+      onclick: () => { c.practices.push({ name: '', rank: 1 }); save(); renderPrac(); }
+    }, '+ Add Practice');
+    sec.appendChild(addPrac);
+    right.appendChild(sec);
+  }
+
+  // --- Ties & Notes ---
+  {
+    const sec = h('div', { class: 'section' });
+    sec.appendChild(sectionHeader('缘·记', 'Ties & Notes'));
+    sec.appendChild(fieldTextarea('Ties (family, allies, oaths, blood debts)',
+      c.ties, v => { c.ties = v; debouncedSave(); },
+      'Living parents in home village · Sworn brother Zhang Hu · Blood debt owed to Lu family…'));
+    sec.appendChild(fieldTextarea('Player Notes',
+      c.notes, v => { c.notes = v; debouncedSave(); },
+      'Countermeasures prepared, favor tracking, session to-dos…'));
+    right.appendChild(sec);
+  }
+}
+
+function sectionHeader(cn, en) {
+  return h('div', { class: 'section-header' },
+    h('h2', {}, cn),
+    h('span', { class: 'en' }, en)
+  );
+}
+
+function openCharacterMethodEditor(c, custom, onSaved) {
+  const body = h('div', {});
+  body.appendChild(fieldText('Name', custom.name, v => custom.name = v));
+  const row1 = h('div', { class: 'field-row two' });
+  row1.appendChild(fieldSelect('Type', custom.type, METHOD_TYPES, v => custom.type = v));
+  row1.appendChild(fieldSelect('Peak Realm', custom.peakRealm, PEAK_REALMS, v => custom.peakRealm = v));
+  body.appendChild(row1);
+  body.appendChild(fieldTextarea('Description', custom.description, v => custom.description = v));
+  openDialog({
+    title: 'Custom Method',
+    content: body,
+    actions: [
+      { label: 'Cancel', handler: closeDialog },
+      { label: 'Set Method', primary: true, handler: () => {
+        if (!custom.name.trim()) { notice('Name required.', 'cinnabar'); return; }
+        c.method.ref = null;
+        c.method.frozen = { ...custom };
+        c.updatedAt = nowIso();
+        saveState();
+        closeDialog();
+        onSaved();
+      }}
+    ]
+  });
+}
+
+// ============================================================================
+// PICKER
+// ============================================================================
+
+function openPicker({ title, entries, subtitleFn, onPick }) {
+  const body = h('div', {});
+  const search = h('input', { class: 'picker-search', placeholder: 'Filter…' });
+  body.appendChild(search);
+
+  const list = h('div', { class: 'picker-list' });
+  body.appendChild(list);
+
+  const renderList = () => {
+    clear(list);
+    const q = search.value.toLowerCase().trim();
+    let filtered = entries;
+    if (q) {
+      filtered = entries.filter(e =>
+        (e.name || '').toLowerCase().includes(q) ||
+        (e.effect || '').toLowerCase().includes(q) ||
+        (e.description || '').toLowerCase().includes(q)
+      );
+    }
+    filtered = [...filtered].sort((a, b) => (a.name || '').localeCompare(b.name || ''));
+    if (!filtered.length) {
+      list.appendChild(h('div', { class: 'list-empty' }, 'No matches. Add entries in the Library first.'));
+      return;
+    }
+    filtered.forEach(e => {
+      const item = h('div', { class: 'picker-item', onclick: () => onPick(e) });
+      item.appendChild(h('div', { class: 'picker-item-name' }, e.name || '(Unnamed)'));
+      const sub = subtitleFn ? subtitleFn(e) : '';
+      if (sub) item.appendChild(h('div', { class: 'picker-item-meta' }, sub));
+      if (e.effect) item.appendChild(h('div', {
+        style: { fontSize: '13px', color: 'var(--ink-soft)', marginTop: '3px' }
+      }, e.effect));
+      list.appendChild(item);
+    });
+  };
+  renderList();
+  search.addEventListener('input', renderList);
+  setTimeout(() => search.focus(), 50);
+
+  openDialog({
+    title,
+    content: body,
+    actions: [{ label: 'Cancel', handler: closeDialog }]
+  });
+}
+
+// ============================================================================
+// VIEW: DATA (Export / Import)
+// ============================================================================
+
+function renderData(root) {
+  root.appendChild(h('div', { class: 'page-header' },
+    h('div', { class: 'page-title' },
+      h('span', { class: 'chinese' }, '籍录'),
+      h('span', { class: 'english' }, 'Export & Import')
+    )
+  ));
+
+  root.appendChild(h('div', { class: 'note-box' },
+    'All data is stored in this browser only. Use Export to save a JSON file — share the Library with players, send character files to your GM, back up your campaign.'
+  ));
+
+  // Export everything
+  const sec1 = h('div', { class: 'section' });
+  sec1.appendChild(sectionHeader('导出', 'Export'));
+  const row1 = h('div', { class: 'field-row three' });
+  row1.appendChild(exportCard('Everything', 'Entire ledger: library + characters + settings.',
+    () => exportData(state, 'cultivation_campaign')));
+  row1.appendChild(exportCard('Library only', 'Techniques, Methods, Items (no characters). GM → players.',
+    () => exportData({ version: SCHEMA_VERSION, library: state.library }, 'cultivation_library')));
+  row1.appendChild(exportCard('Characters only', 'All characters (no library).',
+    () => exportData({ version: SCHEMA_VERSION, characters: state.characters }, 'cultivation_characters')));
+  sec1.appendChild(row1);
+  root.appendChild(sec1);
+
+  // Export single character
+  if (state.characters.length) {
+    const sec2 = h('div', { class: 'section' });
+    sec2.appendChild(sectionHeader('单人', 'Export Single Character'));
+    const grid = h('div', { class: 'grid-list' });
+    state.characters.forEach(c => {
+      const card = h('div', { class: 'card' });
+      card.appendChild(h('div', { class: 'card-name' }, c.name || '(Unnamed)'));
+      card.appendChild(h('div', { class: 'card-subtitle' },
+        [c.origin, c.realm].filter(Boolean).join(' · ')));
+      card.appendChild(h('div', { class: 'card-actions' },
+        h('button', { class: 'btn small', onclick: () =>
+          exportData({ version: SCHEMA_VERSION, character: c },
+            'cultivation_char_' + (c.name || 'unnamed').replace(/\s+/g, '_').toLowerCase())
+        }, 'Export')
+      ));
+      grid.appendChild(card);
+    });
+    sec2.appendChild(grid);
+    root.appendChild(sec2);
+  }
+
+  // Import
+  const sec3 = h('div', { class: 'section' });
+  sec3.appendChild(sectionHeader('导入', 'Import'));
+  const note = h('div', { class: 'note-box' },
+    'Import merges into your current data. Library entries with the same ID are updated; new ones are added. Characters are always added as new copies (never overwritten).'
+  );
+  sec3.appendChild(note);
+
+  const fileInput = h('input', { type: 'file', accept: '.json', style: { display: 'none' } });
+  fileInput.addEventListener('change', async () => {
+    const file = fileInput.files[0];
+    if (!file) return;
+    try {
+      const text = await file.text();
+      const data = JSON.parse(text);
+      await importData(data);
+    } catch (e) {
+      notice('Import failed: invalid JSON.', 'cinnabar');
+      console.error(e);
+    }
+    fileInput.value = '';
+  });
+
+  sec3.appendChild(h('button', { class: 'btn primary',
+    onclick: () => fileInput.click() }, 'Choose JSON File'));
+  sec3.appendChild(fileInput);
+  root.appendChild(sec3);
+
+  // Danger zone
+  const sec4 = h('div', { class: 'section' });
+  sec4.appendChild(sectionHeader('毁', 'Danger'));
+  sec4.appendChild(h('div', { class: 'note-box' },
+    'Clear all data from this browser. Make sure you have exported a backup first.'
+  ));
+  sec4.appendChild(h('button', { class: 'btn danger', onclick: async () => {
+    const ok = await confirmDialog('Erase ALL data in this browser — library, characters, settings? This cannot be undone.');
+    if (!ok) return;
+    const ok2 = await confirmDialog('Are you absolutely sure? One more confirmation.');
+    if (!ok2) return;
+    localStorage.removeItem(STORAGE_KEY);
+    state = structuredClone(DEFAULT_STATE);
+    saveState();
+    navigate('home');
+    notice('All data erased.', 'cinnabar');
+  }}, 'Erase Everything'));
+  root.appendChild(sec4);
+}
+
+function exportCard(title, desc, onClick) {
+  return h('div', { class: 'card' },
+    h('div', { class: 'card-name' }, title),
+    h('div', { class: 'card-body' }, desc),
+    h('div', { class: 'card-actions' },
+      h('button', { class: 'btn small', onclick: onClick }, 'Download')
+    )
+  );
+}
+
+function exportData(data, baseName) {
+  const blob = new Blob([JSON.stringify(data, null, 2)], { type: 'application/json' });
+  const url = URL.createObjectURL(blob);
+  const stamp = new Date().toISOString().slice(0, 10);
+  const a = h('a', { href: url, download: baseName + '_' + stamp + '.json' });
+  document.body.appendChild(a);
+  a.click();
+  a.remove();
+  URL.revokeObjectURL(url);
+  notice('Exported.');
+}
+
+async function importData(data) {
+  if (!data || typeof data !== 'object') {
+    notice('Invalid data file.', 'cinnabar');
+    return;
+  }
+
+  let summary = [];
+
+  // Single character export
+  if (data.character && !data.characters) {
+    data.characters = [data.character];
+  }
+
+  if (data.library) {
+    for (const kind of ['techniques', 'methods', 'items']) {
+      const entries = data.library[kind];
+      if (!Array.isArray(entries)) continue;
+      let added = 0, updated = 0;
+      entries.forEach(e => {
+        if (!e || !e.id) { e && (e.id = uid()); }
+        const idx = state.library[kind].findIndex(x => x.id === e.id);
+        if (idx >= 0) { state.library[kind][idx] = e; updated++; }
+        else { state.library[kind].push(e); added++; }
+      });
+      if (added || updated) summary.push(`${kind}: +${added} new, ${updated} updated`);
+    }
+  }
+
+  if (Array.isArray(data.characters)) {
+    let added = 0;
+    data.characters.forEach(c => {
+      if (!c) return;
+      // Always import as a new character to avoid overwriting; give fresh ID
+      c.id = uid();
+      c.importedAt = nowIso();
+      if (!c.updatedAt) c.updatedAt = nowIso();
+      state.characters.push(c);
+      added++;
+    });
+    if (added) summary.push(`characters: +${added}`);
+  }
+
+  saveState();
+  navigate(currentView);
+  notice('Imported. ' + (summary.join('; ') || 'No changes.'));
+}
+
+// ============================================================================
+// UTILS
+// ============================================================================
+
+function debounce(fn, ms) {
+  let t;
+  return (...args) => {
+    clearTimeout(t);
+    t = setTimeout(() => fn(...args), ms);
+  };
+}
+
+// ============================================================================
+// SEED (first-run sample entries)
+// ============================================================================
+
+function seedIfEmpty() {
+  const empty = !state.library.techniques.length &&
+                !state.library.methods.length &&
+                !state.library.items.length;
+  if (!empty) return;
+
+  const now = nowIso();
+
+  // Sample techniques
+  [
+    { name: 'Cloud Piercing Finger', tier: 'Spirit', type: 'Attack', cost: 1,
+      dao: '', requires: 'Qi Condensation', effect: 'Ranged Qi attack, +2 dice.',
+      description: 'A sharp thread of qi projected from the fingertip. Basic but reliable — the first technique of countless orthodox sects.' },
+    { name: 'Azure Wind Slash', tier: 'Spirit', type: 'Attack', cost: 1,
+      dao: 'Sword', requires: 'Qi Condensation', effect: 'Sword/blade attack, +2 dice.',
+      description: '' },
+    { name: 'Concealment Step', tier: 'Spirit', type: 'Movement', cost: 1,
+      dao: 'Wind', requires: '', effect: '+2 dice to evasion or stealth for one action.',
+      description: '' },
+    { name: 'Iron Skin (Lesser)', tier: 'Spirit', type: 'Defense', cost: 1,
+      dao: '', requires: '', effect: '+1 die to physical defense for a scene.',
+      description: '' },
+    { name: 'Spirit Sight', tier: 'Spirit', type: 'Utility', cost: 1,
+      dao: '', requires: '', effect: 'Reveals spiritual presences / auras nearby.',
+      description: '' }
+  ].forEach(t => state.library.techniques.push({ id: uid(), ...t, createdAt: now, updatedAt: now }));
+
+  // Sample methods
+  [
+    { name: 'Heng Yue Pure Heart Method', type: 'Orthodox', peakRealm: 'Foundation Establishment',
+      rootReq: 'Any common or better', bonus: '+1 die to Spirit-Gathering formations',
+      cost: 'Sect-branded — loyalty expected; not portable',
+      description: "Wang Lin's first sect method. Safe, unremarkable, broadly compatible." },
+    { name: 'Underworld Ascension Method', type: 'Demonic', peakRealm: 'Ascendant',
+      rootReq: '', bonus: '+1 cultivation speed tier; faster Insight',
+      cost: '+1 Demonic Heart per seclusion; +1 Black Karma per major use',
+      description: "Fast but corrupting. Canonically Situ Nan's gift." },
+    { name: 'Iron Flesh Scripture', type: 'Body Refinement', peakRealm: 'Soul Formation',
+      rootReq: '', bonus: '+1 Body tier advancement; Body wounds halved',
+      cost: 'Qi growth cut in half permanently',
+      description: 'Brutal physical grinding method.' }
+  ].forEach(m => state.library.methods.push({ id: uid(), ...m, createdAt: now, updatedAt: now }));
+
+  // Sample items
+  [
+    { name: 'Qi Gathering Pill', category: 'Pill', grade: 'Spirit', consumable: true,
+      value: '1 low-grade stone',
+      effect: 'Restores moderate qi. Single-use.',
+      description: 'Standard sect-issued pill for low-level disciples.' },
+    { name: 'Foundation Establishment Pill', category: 'Pill', grade: 'Mysterious', consumable: true,
+      value: '50 low-grade stones',
+      effect: '+3 dice to Foundation Establishment breakthrough roll; consumed.',
+      description: 'Consumed during the breakthrough scene itself. Do not waste on lesser milestones.' },
+    { name: 'Life-Saving Talisman (Teleport)', category: 'Talisman', grade: 'Spirit', consumable: true,
+      value: 'Issued',
+      effect: 'One-use: instant short-range teleport (~50m) out of danger.',
+      description: 'Sect-issued to all disciples. Activate by tearing or crushing.' },
+    { name: 'Spatial Ring (Small)', category: 'Artifact', grade: 'Spirit', consumable: false,
+      value: '10 mid-grade stones',
+      effect: 'Holds items equivalent to a small room. Requires binding.',
+      description: 'Standard for Inner Disciples. Binds to the soul on first use.' }
+  ].forEach(i => state.library.items.push({ id: uid(), ...i, createdAt: now, updatedAt: now }));
+
+  saveState();
+}
+
+// ============================================================================
+// INIT
+// ============================================================================
+
+function init() {
+  seedIfEmpty();
+  setMode(state.meta.mode || 'gm');
+  refreshCounts();
+  navigate('home');
+}
+
+init();
+</script>
+
+</body>
+</html>

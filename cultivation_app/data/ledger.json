@@ -1,0 +1,254 @@
+{
+  "version": 2,
+  "meta": {
+    "mode": "gm"
+  },
+  "library": {
+    "items": [
+      {
+        "category": "Pill",
+        "consumable": true,
+        "createdAt": "2026-04-26T16:00:45.968Z",
+        "description": "Consumed during the breakthrough scene itself.",
+        "effect": "+3 dice to Foundation Establishment breakthrough roll; consumed.",
+        "grade": "Mysterious",
+        "id": "id_mofygakw_7b1toe",
+        "name": "Foundation Establishment Pill",
+        "updatedAt": "2026-04-26T16:00:45.968Z",
+        "value": "50 low-grade stones"
+      },
+      {
+        "category": "Talisman",
+        "consumable": true,
+        "createdAt": "2026-04-26T16:00:45.968Z",
+        "description": "Sect-issued. Activate by tearing or crushing.",
+        "effect": "One-use: instant short-range teleport (~50m) out of danger.",
+        "grade": "Spirit",
+        "id": "id_mofygakw_znmwxl",
+        "name": "Life-Saving Talisman (Teleport)",
+        "updatedAt": "2026-04-26T16:00:45.968Z",
+        "value": "Issued"
+      }
+    ],
+    "methods": [
+      {
+        "bonus": "+1 die to Spirit-Gathering formations",
+        "cost": "Sect-branded — loyalty expected; not portable",
+        "createdAt": "2026-04-26T16:00:45.968Z",
+        "description": "Wang Lin's first sect method. Safe, unremarkable, broadly compatible.",
+        "id": "id_mofygakw_y65uhx",
+        "name": "Heng Yue Pure Heart Method",
+        "peakRealm": "Foundation Establishment",
+        "rootReq": "Any common or better",
+        "type": "Orthodox",
+        "updatedAt": "2026-04-26T16:00:45.968Z"
+      },
+      {
+        "bonus": "+1 Body tier advancement; Body wounds halved",
+        "cost": "Qi growth cut in half permanently",
+        "createdAt": "2026-04-26T16:00:45.968Z",
+        "description": "Brutal physical grinding method.",
+        "id": "id_mofygakw_8ao3ry",
+        "name": "Iron Flesh Scripture",
+        "peakRealm": "Soul Formation",
+        "rootReq": "",
+        "type": "Body Refinement",
+        "updatedAt": "2026-04-26T16:00:45.968Z"
+      }
+    ],
+    "techniques": [
+      {
+        "action": "Standard",
+        "chosenEffects": [
+          {
+            "cost": 2,
+            "name": "Environmental manipulation (minor)",
+            "qty": 1
+          },
+          {
+            "cost": 1,
+            "name": "Short range (10m)",
+            "qty": 1
+          },
+          {
+            "cost": 1,
+            "name": "+1 die to roll",
+            "qty": 1,
+            "repeatable": true
+          }
+        ],
+        "chosenProps": [],
+        "chosenRestrictions": [],
+        "cost": 1,
+        "createdAt": "2026-04-26T16:00:45.968Z",
+        "dao": "any",
+        "description": "Foundational. Required to wield flying-sword treasures.",
+        "effect": "Telekinetic grip: lift, restrain, throw, or strike at range.",
+        "id": "id_mofygakw_b49ad5",
+        "masteryMastered": "Manipulate up to 3 objects; grip holds opponents within 1 realm.",
+        "masteryPerfected": "Mysterious-tier; UNLOCKS SWORD SOARING.",
+        "masteryProficient": "Range to 30m; ~50kg objects.",
+        "masteryRecipe": "reach",
+        "name": "Attraction Force Technique",
+        "range": "Short (10m)",
+        "source": "Qi",
+        "tags": "qi, telekinesis, foundational",
+        "tier": "Spirit",
+        "type": "Utility",
+        "updatedAt": "2026-04-26T16:00:45.968Z"
+      },
+      {
+        "action": "Standard",
+        "chosenEffects": [
+          {
+            "cost": 1,
+            "name": "+1 die to roll",
+            "qty": 2,
+            "repeatable": true
+          },
+          {
+            "cost": 1,
+            "name": "Short range (10m)",
+            "qty": 1
+          }
+        ],
+        "chosenProps": [],
+        "chosenRestrictions": [],
+        "cost": 1,
+        "createdAt": "2026-04-26T16:00:45.968Z",
+        "dao": "Wind, Metal",
+        "description": "The Heng Yue Sect's standard Spirit-tier attack technique.",
+        "effect": "+2 dice to a ranged attack roll.",
+        "id": "id_mofygakw_qroj5t",
+        "masteryMastered": "2 shots per action at −1 die each.",
+        "masteryPerfected": "Evolves into Mysterious-tier Cloud Shattering Finger.",
+        "masteryProficient": "Range extends to 30m.",
+        "masteryRecipe": "reach",
+        "name": "Cloud Piercing Finger",
+        "range": "Short (10m)",
+        "source": "Qi",
+        "tags": "qi, ranged, standard",
+        "tier": "Spirit",
+        "type": "Attack",
+        "updatedAt": "2026-04-26T16:00:45.968Z"
+      },
+      {
+        "action": "Standard",
+        "chosenEffects": [
+          {
+            "cost": 2,
+            "name": "Stealth / concealment",
+            "qty": 1
+          },
+          {
+            "cost": 2,
+            "name": "Evasion (+dice vs single attack)",
+            "qty": 1
+          }
+        ],
+        "chosenProps": [],
+        "chosenRestrictions": [],
+        "cost": 1,
+        "createdAt": "2026-04-26T16:00:45.968Z",
+        "dao": "Wind, Solitude",
+        "description": "",
+        "effect": "+2 dice to evasion or stealth for one action.",
+        "id": "id_mofygakw_7e7fov",
+        "masteryRecipe": "reach",
+        "name": "Concealment Step",
+        "range": "Self",
+        "source": "Qi",
+        "tags": "stealth",
+        "tier": "Spirit",
+        "type": "Movement",
+        "updatedAt": "2026-04-26T16:00:45.968Z"
+      }
+    ],
+    "treasures": [
+      {
+        "abilities": [
+          {
+            "cost": 2,
+            "kind": "passive",
+            "name": "Elemental damage (fire/lightning/etc.)",
+            "qty": 1
+          },
+          {
+            "cost": 2,
+            "kind": "passive",
+            "name": "Detection (specific things)",
+            "qty": 1
+          }
+        ],
+        "binding": "Blood-bound",
+        "category": "Weapon",
+        "createdAt": "2026-04-26T16:00:45.968Z",
+        "dao": "",
+        "description": "A fire-scorched short sword that hisses when unsheathed near a lie.",
+        "evolution": {
+          "effect": "+1 die vs targets who have lied to wielder within last day.",
+          "threshold": "20",
+          "trigger": "After 20 lies exposed"
+        },
+        "id": "id_mofygakw_dqr0n4",
+        "name": "Ashen Whisper",
+        "origin": "Refined",
+        "quality": "Standard",
+        "realmReq": "Qi Condensation",
+        "restrictions": [],
+        "sentience": "Inert",
+        "sentienceFlavor": {
+          "aversion": "",
+          "preference": "",
+          "temperament": "",
+          "voice": ""
+        },
+        "swordShape": true,
+        "swordSpirit": null,
+        "tags": "fire, sword",
+        "tier": "Spirit",
+        "updatedAt": "2026-04-26T16:00:45.968Z"
+      },
+      {
+        "abilities": [
+          {
+            "cost": 1,
+            "kind": "passive",
+            "name": "Storage space (per tier-level)",
+            "qty": 4,
+            "repeatable": true
+          }
+        ],
+        "binding": "Soul-bound",
+        "category": "Utility",
+        "createdAt": "2026-04-26T16:00:45.968Z",
+        "dao": "",
+        "description": "Standard Inner Disciple gear. Binds to the soul on first use.",
+        "evolution": {
+          "effect": "",
+          "threshold": "",
+          "trigger": ""
+        },
+        "id": "id_mofygakw_ktnuzl",
+        "name": "Spatial Ring (Small)",
+        "origin": "Refined",
+        "quality": "Standard",
+        "realmReq": "Qi Condensation",
+        "restrictions": [],
+        "sentience": "Inert",
+        "sentienceFlavor": {
+          "aversion": "",
+          "preference": "",
+          "temperament": "",
+          "voice": ""
+        },
+        "swordShape": false,
+        "swordSpirit": null,
+        "tags": "storage",
+        "tier": "Spirit",
+        "updatedAt": "2026-04-26T16:00:45.968Z"
+      }
+    ]
+  },
+  "characters": []
+}
