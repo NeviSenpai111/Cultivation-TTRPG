@@ -13,7 +13,27 @@ import {
   uid, nowIso
 } from './ui.js';
 
-import { state, saveState } from './api.js';
+import { state, createLibraryEntry, saveLibraryEntry } from './api.js';
+
+// Helper: persist a library entry (POST if new, PUT if existing) AND keep
+// the in-memory state array in sync. Returns true on success.
+async function persistLibraryEntry(kind, entry, isNew) {
+  try {
+    if (isNew) {
+      await createLibraryEntry(kind, entry);
+      state.library[kind].push(entry);
+    } else {
+      await saveLibraryEntry(kind, entry);
+      const i = state.library[kind].findIndex(x => x.id === entry.id);
+      if (i >= 0) state.library[kind][i] = entry;
+      else state.library[kind].push(entry);
+    }
+    return true;
+  } catch (e) {
+    notice('Save failed: ' + e.message, 'cinnabar');
+    return false;
+  }
+}
 
 import {
   TECHNIQUE_TIERS, TECHNIQUE_TIER_DATA, TECHNIQUE_SOURCES, TECHNIQUE_TYPES,
@@ -300,18 +320,12 @@ export function openTechniqueEditor(existing, onSavedView) {
     content: body,
     actions: [
       { label: 'Cancel', handler: closeDialog },
-      { label: isNew ? 'Create' : 'Save', primary: true, handler: () => {
+      { label: isNew ? 'Create' : 'Save', primary: true, handler: async () => {
         if (!t.name?.trim()) { notice('Name required.', 'cinnabar'); return; }
         t.name = t.name.trim();
         t.updatedAt = nowIso();
-        if (isNew) {
-          t.createdAt = t.updatedAt;
-          state.library.techniques.push(t);
-        } else {
-          const i = state.library.techniques.findIndex(x => x.id === t.id);
-          if (i >= 0) state.library.techniques[i] = t;
-        }
-        saveState();
+        if (isNew) t.createdAt = t.updatedAt;
+        if (!await persistLibraryEntry('techniques', t, isNew)) return;
         closeDialog();
         if (onSavedView) onSavedView();
         notice('Saved.');
@@ -690,18 +704,12 @@ export function openTreasureEditor(existing, onSavedView) {
     content: body,
     actions: [
       { label: 'Cancel', handler: closeDialog },
-      { label: isNew ? 'Create' : 'Save', primary: true, handler: () => {
+      { label: isNew ? 'Create' : 'Save', primary: true, handler: async () => {
         if (!tr.name?.trim()) { notice('Name required.', 'cinnabar'); return; }
         tr.name = tr.name.trim();
         tr.updatedAt = nowIso();
-        if (isNew) {
-          tr.createdAt = tr.updatedAt;
-          state.library.treasures.push(tr);
-        } else {
-          const i = state.library.treasures.findIndex(x => x.id === tr.id);
-          if (i >= 0) state.library.treasures[i] = tr;
-        }
-        saveState();
+        if (isNew) tr.createdAt = tr.updatedAt;
+        if (!await persistLibraryEntry('treasures', tr, isNew)) return;
         closeDialog();
         if (onSavedView) onSavedView();
         notice('Saved.');
@@ -735,16 +743,12 @@ export function openMethodEditor(existing, onSavedView) {
     content: body,
     actions: [
       { label: 'Cancel', handler: closeDialog },
-      { label: isNew ? 'Create' : 'Save', primary: true, handler: () => {
+      { label: isNew ? 'Create' : 'Save', primary: true, handler: async () => {
         if (!m.name?.trim()) { notice('Name required.', 'cinnabar'); return; }
         m.name = m.name.trim();
         m.updatedAt = nowIso();
-        if (isNew) { m.createdAt = m.updatedAt; state.library.methods.push(m); }
-        else {
-          const i = state.library.methods.findIndex(x => x.id === m.id);
-          if (i >= 0) state.library.methods[i] = m;
-        }
-        saveState();
+        if (isNew) m.createdAt = m.updatedAt;
+        if (!await persistLibraryEntry('methods', m, isNew)) return;
         closeDialog();
         if (onSavedView) onSavedView();
         notice('Saved.');
@@ -789,16 +793,12 @@ export function openItemEditor(existing, onSavedView) {
     content: body,
     actions: [
       { label: 'Cancel', handler: closeDialog },
-      { label: isNew ? 'Create' : 'Save', primary: true, handler: () => {
+      { label: isNew ? 'Create' : 'Save', primary: true, handler: async () => {
         if (!it.name?.trim()) { notice('Name required.', 'cinnabar'); return; }
         it.name = it.name.trim();
         it.updatedAt = nowIso();
-        if (isNew) { it.createdAt = it.updatedAt; state.library.items.push(it); }
-        else {
-          const i = state.library.items.findIndex(x => x.id === it.id);
-          if (i >= 0) state.library.items[i] = it;
-        }
-        saveState();
+        if (isNew) it.createdAt = it.updatedAt;
+        if (!await persistLibraryEntry('items', it, isNew)) return;
         closeDialog();
         if (onSavedView) onSavedView();
         notice('Saved.');
