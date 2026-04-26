@@ -55,6 +55,33 @@ python server.py --host 0.0.0.0
 Players on the same network open `http://<gm-ip>:5050/`. Everyone shares the
 same library and character roster — no JSON ferrying required.
 
+#### Roles when sharing
+- **GM** — has the password; can edit anything (library, characters, import/erase).
+- **Player** — claims one character on first connect; can only edit that character.
+- **Anonymous** (not signed in) — read-only view of everything.
+
+The server prints a freshly-generated GM password on each launch:
+```
+GM password:      hVZpQz1k    (auto-generated for this run)
+```
+To set a stable password instead, export `LEDGER_GM_PASSWORD` before starting:
+```bash
+LEDGER_GM_PASSWORD='your-passphrase' python server.py --host 0.0.0.0
+```
+On Windows:
+```bat
+set LEDGER_GM_PASSWORD=your-passphrase
+python server.py --host 0.0.0.0
+```
+
+Players sign in by clicking **Sign in** in the sidebar and picking their
+character from the list. Sessions are kept in a cookie. The server holds
+sessions in memory only — restarting the server signs everyone out, and
+they sign back in.
+
+This is a UX guardrail so players can't accidentally rewrite the bestiary,
+not security against a hostile actor on your network.
+
 ## Migrating from the single-file `cultivation_app.html`
 
 1. Open `cultivation_app.html` (the old one in the parent folder) in your browser.

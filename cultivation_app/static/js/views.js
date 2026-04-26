@@ -5,10 +5,15 @@
 import {
   h, clear, openDialog, closeDialog, confirmDialog, notice,
   fieldText, fieldNumber, fieldSelect, fieldTextarea, sectionHeader,
-  openPicker, uid, nowIso, debounce
+  openPicker, uid, nowIso
 } from './ui.js';
 
-import { state, saveState, replaceState } from './api.js';
+import {
+  state, session, isGM, isPlayer, canEditCharacter,
+  loginAsGM, logout, claimCharacter, onSessionChange,
+  saveCharacter, createCharacterRemote, deleteCharacterRemote,
+  deleteLibraryEntryRemote, replaceState
+} from './api.js';
 
 import {
   REALMS, SUB_STAGES, ORIGINS, AFFILIATIONS, DAOS,
@@ -69,15 +74,17 @@ export function refreshCounts() {
 // ============================================================================
 
 function renderHome(root) {
+  const actions = h('div', { class: 'page-actions' });
+  if (isGM()) {
+    actions.appendChild(h('button', { class: 'btn primary', onclick: openNewCharacterDialog }, 'New Character'));
+    actions.appendChild(h('button', { class: 'btn', onclick: () => openTechniqueEditor(null, () => navigate('home')) }, 'New Technique'));
+    actions.appendChild(h('button', { class: 'btn', onclick: () => openTreasureEditor(null, () => navigate('home')) }, 'New Treasure'));
+  }
   root.appendChild(h('div', { class: 'page-header' },
     h('div', { class: 'page-title' },
       h('span', { class: 'chinese' }, '逆'),
       h('span', { class: 'english' }, 'Dashboard')),
-    h('div', { class: 'page-actions' },
-      h('button', { class: 'btn primary', onclick: openNewCharacterDialog }, 'New Character'),
-      h('button', { class: 'btn', onclick: () => openTechniqueEditor(null, () => navigate('home')) }, 'New Technique'),
-      h('button', { class: 'btn', onclick: () => openTreasureEditor(null, () => navigate('home')) }, 'New Treasure')
-    )
+    actions
   ));
 
   root.appendChild(h('div', { class: 'ethos' },
@@ -150,14 +157,17 @@ function renderLibrary(kind) {
   const root = document.getElementById('main');
   const label = LIBRARY_LABELS[kind];
 
+  const libActions = h('div', { class: 'page-actions' });
+  if (isGM()) {
+    libActions.appendChild(h('button', { class: 'btn primary',
+      onclick: () => label.openEditor(null, () => navigate(kind))
+    }, '+ New ' + label.singular));
+  }
   root.appendChild(h('div', { class: 'page-header' },
     h('div', { class: 'page-title' },
       h('span', { class: 'chinese' }, label.cn),
       h('span', { class: 'english' }, label.en)),
-    h('div', { class: 'page-actions' },
-      h('button', { class: 'btn primary',
-        onclick: () => label.openEditor(null, () => navigate(kind))
-      }, '+ New ' + label.singular))
+    libActions
   ));
 
   const toolbar = h('div', { class: 'toolbar' });
@@ -236,14 +246,16 @@ function libraryCard(kind, e) {
   const meta = metaFor(kind, e);
   if (meta) card.appendChild(h('div', { class: 'card-meta' }, ...meta));
 
-  card.appendChild(h('div', { class: 'card-actions' },
+  const cardActions = h('div', { class: 'card-actions' },
     h('button', { class: 'btn small',
-      onclick: () => openDetails(kind, e) }, 'View'),
-    h('button', { class: 'btn small',
-      onclick: () => label.openEditor(e, () => navigate(kind)) }, 'Edit'),
-    h('button', { class: 'btn small danger',
-      onclick: () => deleteLibraryEntry(kind, e.id) }, 'Delete')
-  ));
+      onclick: () => openDetails(kind, e) }, 'View'));
+  if (isGM()) {
+    cardActions.appendChild(h('button', { class: 'btn small',
+      onclick: () => label.openEditor(e, () => navigate(kind)) }, 'Edit'));
+    cardActions.appendChild(h('button', { class: 'btn small danger',
+      onclick: () => deleteLibraryEntry(kind, e.id) }, 'Delete'));
+  }
+  card.appendChild(cardActions);
   return card;
 }
 
@@ -278,10 +290,16 @@ function metaFor(kind, e) {
 }
 
 async function deleteLibraryEntry(kind, id) {
+  if (!isGM()) { notice('GM only.', 'cinnabar'); return; }
   const ok = await confirmDialog('Delete this entry? Characters that reference it keep a frozen copy.');
   if (!ok) return;
+  try {
+    await deleteLibraryEntryRemote(kind, id);
+  } catch (e) {
+    notice('Delete failed: ' + e.message, 'cinnabar');
+    return;
+  }
   state.library[kind] = state.library[kind].filter(e => e.id !== id);
-  saveState();
   navigate(kind);
   notice('Deleted.', 'cinnabar');
 }
@@ -291,17 +309,23 @@ async function deleteLibraryEntry(kind, id) {
 // ============================================================================
 
 function renderCharacterList(root) {
+  const charActions = h('div', { class: 'page-actions' });
+  if (isGM()) {
+    charActions.appendChild(h('button', { class: 'btn primary',
+      onclick: openNewCharacterDialog }, '+ New Character'));
+  }
   root.appendChild(h('div', { class: 'page-header' },
     h('div', { class: 'page-title' },
       h('span', { class: 'chinese' }, '人物'),
       h('span', { class: 'english' }, 'Characters')),
-    h('div', { class: 'page-actions' },
-      h('button', { class: 'btn primary', onclick: openNewCharacterDialog }, '+ New Character'))
+    charActions
   ));
 
   if (!state.characters.length) {
     root.appendChild(h('div', { class: 'note-box' },
-      'No characters yet. Click "+ New Character" to forge your first cultivator.'));
+      isGM()
+        ? 'No characters yet. Click "+ New Character" to forge your first cultivator.'
+        : 'No characters in this campaign yet.'));
     return;
   }
 
@@ -328,11 +352,19 @@ function characterCard(c) {
     h('div', { class: 'card-meta' },
       c.affiliation ? h('span', {}, c.affiliation) : null,
       c.player ? h('span', {}, c.player) : null),
-    h('div', { class: 'card-actions' },
-      h('button', { class: 'btn small',
-        onclick: () => navigate('character-edit', { id: c.id }) }, 'Open'),
-      h('button', { class: 'btn small danger',
-        onclick: () => deleteCharacter(c.id) }, 'Delete')));
+    cardActions(c));
+}
+
+function cardActions(c) {
+  const wrap = h('div', { class: 'card-actions' });
+  wrap.appendChild(h('button', { class: 'btn small',
+    onclick: () => navigate('character-edit', { id: c.id }) },
+    canEditCharacter(c) ? 'Open' : 'View'));
+  if (isGM()) {
+    wrap.appendChild(h('button', { class: 'btn small danger',
+      onclick: () => deleteCharacter(c.id) }, 'Delete'));
+  }
+  return wrap;
 }
 
 function openNewCharacterDialog() {
@@ -352,11 +384,16 @@ function openNewCharacterDialog() {
     content: body,
     actions: [
       { label: 'Cancel', handler: closeDialog },
-      { label: 'Create', primary: true, handler: () => {
+      { label: 'Create', primary: true, handler: async () => {
         if (!c.name?.trim()) { notice('Name required.', 'cinnabar'); return; }
         c.name = c.name.trim();
+        try {
+          await createCharacterRemote(c);
+        } catch (e) {
+          notice('Create failed: ' + e.message, 'cinnabar');
+          return;
+        }
         state.characters.push(c);
-        saveState();
         closeDialog();
         navigate('character-edit', { id: c.id });
         notice('Character forged.');
@@ -395,10 +432,16 @@ function makeBlankCharacter() {
 }
 
 async function deleteCharacter(id) {
+  if (!isGM()) { notice('GM only.', 'cinnabar'); return; }
   const ok = await confirmDialog('Delete this character permanently? This cannot be undone.');
   if (!ok) return;
+  try {
+    await deleteCharacterRemote(id);
+  } catch (e) {
+    notice('Delete failed: ' + e.message, 'cinnabar');
+    return;
+  }
   state.characters = state.characters.filter(c => c.id !== id);
-  saveState();
   navigate('characters');
   notice('Character removed.', 'cinnabar');
 }
@@ -425,27 +468,52 @@ function renderCharacterEdit(root) {
   if (c.root.mutant == null) c.root.mutant = '';
   if (c.root.heavenlyBody == null) c.root.heavenlyBody = '';
 
-  const save = () => { c.updatedAt = nowIso(); saveState(); };
-  const debouncedSave = debounce(save, 250);
+  // saveCharacter is debounced per-character on the api.js side, so we don't
+  // need an extra debounce here. The two names are kept so the existing call
+  // sites stay tidy.
+  const editable = canEditCharacter(c);
+  const save = () => {
+    if (!editable) return;
+    c.updatedAt = nowIso();
+    saveCharacter(c);
+  };
+  const debouncedSave = save;
   const updaters = [];
   const recalc = () => updaters.forEach(fn => fn());
 
+  const headerActions = h('div', { class: 'page-actions' },
+    h('button', { class: 'btn', onclick: () => navigate('characters') }, '← Back'));
+  if (isGM()) {
+    headerActions.appendChild(h('button', { class: 'btn danger',
+      onclick: () => deleteCharacter(c.id) }, 'Delete'));
+  }
   root.appendChild(h('div', { class: 'page-header' },
     h('div', { class: 'page-title' },
       h('span', { class: 'chinese' }, '人'),
       h('span', { class: 'english' }, c.name || 'Cultivator')),
-    h('div', { class: 'page-actions' },
-      h('button', { class: 'btn', onclick: () => navigate('characters') }, '← Back'),
-      h('button', { class: 'btn danger', onclick: () => deleteCharacter(c.id) }, 'Delete'))));
+    headerActions));
+
+  if (!editable) {
+    root.appendChild(h('div', { class: 'note-box readonly-banner' },
+      isPlayer()
+        ? 'Read-only view. Only the GM and the player who claimed this character can edit it.'
+        : 'Read-only view. Sign in to edit.'));
+  }
+
+  // Non-owners get a wrapper that disables interactive controls via CSS.
+  const editorWrap = h('div', {
+    class: 'char-editor-wrap' + (editable ? '' : ' readonly')
+  });
+  root.appendChild(editorWrap);
 
   const idBand = h('div', { class: 'identity-band' });
   idBand.appendChild(fieldText('Character Name', c.name, v => { c.name = v; debouncedSave(); }));
   idBand.appendChild(fieldText('Player', c.player, v => { c.player = v; debouncedSave(); }));
   idBand.appendChild(fieldSelect('Origin', c.origin, ORIGINS, v => { c.origin = v; debouncedSave(); }));
-  root.appendChild(idBand);
+  editorWrap.appendChild(idBand);
 
   const grid = h('div', { class: 'char-editor' });
-  root.appendChild(grid);
+  editorWrap.appendChild(grid);
   const left = h('div', {}); const right = h('div', {});
   grid.appendChild(left); grid.appendChild(right);
 
@@ -1245,49 +1313,59 @@ function renderData(root) {
     root.appendChild(sec2);
   }
 
-  // Import
-  const sec3 = h('div', { class: 'section' });
-  sec3.appendChild(sectionHeader('导入', 'Import'));
-  sec3.appendChild(h('div', { class: 'note-box' },
-    'Imports merge into current data. Library entries with the same id are updated; ' +
-    'new ones are added. Characters always import as new copies (never overwriting).'));
-  const fileInput = h('input', { type: 'file', accept: '.json', style: { display: 'none' } });
-  fileInput.addEventListener('change', async () => {
-    const file = fileInput.files[0];
-    if (!file) return;
-    try {
-      const data = JSON.parse(await file.text());
-      doImport(data);
-    } catch (e) {
-      notice('Import failed: invalid JSON.', 'cinnabar');
-    }
-    fileInput.value = '';
-  });
-  sec3.appendChild(h('button', { class: 'btn primary',
-    onclick: () => fileInput.click() }, 'Choose JSON File'));
-  sec3.appendChild(fileInput);
-  root.appendChild(sec3);
+  // Import — GM only
+  if (isGM()) {
+    const sec3 = h('div', { class: 'section' });
+    sec3.appendChild(sectionHeader('导入', 'Import'));
+    sec3.appendChild(h('div', { class: 'note-box' },
+      'Imports merge into current data. Library entries with the same id are updated; ' +
+      'new ones are added. Characters always import as new copies (never overwriting).'));
+    const fileInput = h('input', { type: 'file', accept: '.json', style: { display: 'none' } });
+    fileInput.addEventListener('change', async () => {
+      const file = fileInput.files[0];
+      if (!file) return;
+      try {
+        const data = JSON.parse(await file.text());
+        await doImport(data);
+      } catch (e) {
+        notice('Import failed: ' + (e.message || 'invalid JSON'), 'cinnabar');
+      }
+      fileInput.value = '';
+    });
+    sec3.appendChild(h('button', { class: 'btn primary',
+      onclick: () => fileInput.click() }, 'Choose JSON File'));
+    sec3.appendChild(fileInput);
+    root.appendChild(sec3);
 
-  // Danger
-  const sec4 = h('div', { class: 'section' });
-  sec4.appendChild(sectionHeader('毁', 'Danger'));
-  sec4.appendChild(h('div', { class: 'note-box' },
-    'Erase all data on the server. Make sure you have a backup first.'));
-  sec4.appendChild(h('button', {
-    class: 'btn danger',
-    onclick: async () => {
-      if (!await confirmDialog('Erase ALL data on the server — library, characters, settings?')) return;
-      if (!await confirmDialog('Are you absolutely sure?')) return;
-      replaceState({
-        version: 2, meta: { mode: 'gm' },
-        library: { techniques: [], treasures: [], methods: [], items: [] },
-        characters: []
-      });
-      navigate('home');
-      notice('All data erased.', 'cinnabar');
-    }
-  }, 'Erase Everything'));
-  root.appendChild(sec4);
+    // Danger
+    const sec4 = h('div', { class: 'section' });
+    sec4.appendChild(sectionHeader('毁', 'Danger'));
+    sec4.appendChild(h('div', { class: 'note-box' },
+      'Erase all data on the server. Make sure you have a backup first.'));
+    sec4.appendChild(h('button', {
+      class: 'btn danger',
+      onclick: async () => {
+        if (!await confirmDialog('Erase ALL data on the server — library, characters, settings?')) return;
+        if (!await confirmDialog('Are you absolutely sure?')) return;
+        try {
+          await replaceState({
+            version: 2, meta: { mode: 'gm' },
+            library: { techniques: [], treasures: [], methods: [], items: [] },
+            characters: []
+          });
+        } catch (e) {
+          notice('Erase failed: ' + e.message, 'cinnabar');
+          return;
+        }
+        navigate('home');
+        notice('All data erased.', 'cinnabar');
+      }
+    }, 'Erase Everything'));
+    root.appendChild(sec4);
+  } else {
+    root.appendChild(h('div', { class: 'note-box' },
+      'Import and erase are GM-only.'));
+  }
 }
 
 function exportCard(title, desc, onClick) {
@@ -1309,7 +1387,8 @@ function doExport(data, baseName) {
   notice('Exported.');
 }
 
-function doImport(data) {
+async function doImport(data) {
+  if (!isGM()) { notice('GM only.', 'cinnabar'); return; }
   if (!data || typeof data !== 'object') { notice('Invalid data file.', 'cinnabar'); return; }
   const summary = [];
 
@@ -1342,19 +1421,129 @@ function doImport(data) {
     });
     if (added) summary.push(`characters: +${added}`);
   }
-  saveState();
+  try {
+    await replaceState(state);
+  } catch (e) {
+    notice('Import failed: ' + e.message, 'cinnabar');
+    return;
+  }
   navigate(currentView);
   notice('Imported. ' + (summary.join('; ') || 'No changes.'));
 }
 
 // ============================================================================
-// MODE TOGGLE
+// AUTH UI — sidebar panel + sign-in dialog
 // ============================================================================
 
-export function setMode(mode) {
-  state.meta.mode = mode;
-  saveState();
-  document.querySelectorAll('.mode-btn').forEach(b => {
-    b.classList.toggle('active', b.dataset.mode === mode);
+export function renderAuthPanel() {
+  const panel = document.getElementById('auth-panel');
+  if (!panel) return;
+  clear(panel);
+  if (isGM()) {
+    panel.appendChild(h('div', { class: 'auth-line' },
+      h('span', { class: 'auth-badge gm' }, 'GM'),
+      h('span', { class: 'auth-name' }, 'Game Master')));
+    panel.appendChild(h('button', {
+      class: 'btn small ghost',
+      onclick: async () => { await logout(); afterAuthChange(); }
+    }, 'Sign out'));
+  } else if (isPlayer()) {
+    const c = state.characters.find(x => x.id === session.characterId);
+    panel.appendChild(h('div', { class: 'auth-line' },
+      h('span', { class: 'auth-badge player' }, 'Player'),
+      h('span', { class: 'auth-name' }, c ? (c.name || 'Cultivator') : '(unclaimed)')));
+    panel.appendChild(h('button', {
+      class: 'btn small ghost',
+      onclick: async () => { await logout(); afterAuthChange(); }
+    }, 'Sign out'));
+  } else {
+    panel.appendChild(h('div', { class: 'auth-line' },
+      h('span', { class: 'auth-badge anon' }, 'Read-only'),
+      h('span', { class: 'auth-name' }, 'Not signed in')));
+    panel.appendChild(h('button', {
+      class: 'btn primary small',
+      onclick: openSignInDialog
+    }, 'Sign in'));
+  }
+}
+
+function openSignInDialog() {
+  const body = h('div', {});
+  body.appendChild(h('div', { class: 'note-box' },
+    'Pick the GM if you run the game; otherwise claim your character.'));
+
+  // GM section
+  const gmSec = h('div', { class: 'section', style: { marginTop: '12px' } });
+  gmSec.appendChild(sectionHeader('掌门', 'Sign in as GM'));
+  let pwd = '';
+  gmSec.appendChild(fieldText('GM Password', '', v => pwd = v, { type: 'password' }));
+  gmSec.appendChild(h('button', {
+    class: 'btn primary',
+    onclick: async () => {
+      try {
+        await loginAsGM(pwd);
+        closeDialog();
+        afterAuthChange();
+        notice('Signed in as GM.');
+      } catch (e) {
+        notice('Login failed: ' + e.message, 'cinnabar');
+      }
+    }
+  }, 'Sign in as GM'));
+  body.appendChild(gmSec);
+
+  // Player section
+  const playerSec = h('div', { class: 'section', style: { marginTop: '12px' } });
+  playerSec.appendChild(sectionHeader('弟子', 'Claim a Character'));
+  if (!state.characters.length) {
+    playerSec.appendChild(h('div', { class: 'list-empty' },
+      'No characters in this campaign yet. Wait for the GM to forge one.'));
+  } else {
+    const list = h('div', { class: 'picker-list' });
+    [...state.characters]
+      .sort((a, b) => (a.name || '').localeCompare(b.name || ''))
+      .forEach(c => {
+        const item = h('div', { class: 'picker-item', onclick: async () => {
+          try {
+            await claimCharacter(c.id);
+            closeDialog();
+            afterAuthChange();
+            notice('Playing as ' + (c.name || 'Cultivator') + '.');
+          } catch (e) {
+            notice('Claim failed: ' + e.message, 'cinnabar');
+          }
+        } });
+        item.appendChild(h('div', { class: 'picker-item-name' }, c.name || '(Unnamed)'));
+        item.appendChild(h('div', { class: 'picker-item-meta' },
+          [c.player, c.realm, c.affiliation].filter(Boolean).join(' · ')));
+        list.appendChild(item);
+      });
+    playerSec.appendChild(list);
+  }
+  body.appendChild(playerSec);
+
+  openDialog({
+    title: 'Sign In',
+    content: body,
+    actions: [{ label: 'Cancel', handler: closeDialog }]
   });
 }
+
+// Re-render after sign-in/sign-out so visible buttons match the new role.
+function afterAuthChange() {
+  renderAuthPanel();
+  applyRoleVisibility();
+  navigate(currentView);
+}
+
+// Toggle a body-level class so CSS can hide GM-only buttons in one shot.
+export function applyRoleVisibility() {
+  document.body.classList.toggle('role-gm', isGM());
+  document.body.classList.toggle('role-player', isPlayer());
+  document.body.classList.toggle('role-anon', !isGM() && !isPlayer());
+}
+
+onSessionChange(() => {
+  renderAuthPanel();
+  applyRoleVisibility();
+});

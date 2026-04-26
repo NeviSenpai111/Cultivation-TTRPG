@@ -138,26 +138,59 @@ html, body {
 .connection.ok { color: var(--green-jade); }
 .connection.err { color: var(--cinnabar); }
 
-.mode-toggle {
+.auth-panel {
   display: flex;
+  flex-direction: column;
+  gap: 8px;
   border: 1px solid var(--ink);
   margin: 0 24px 18px;
+  padding: 10px 12px;
 }
-.mode-btn {
-  flex: 1;
-  padding: 7px 8px;
-  background: transparent;
-  border: none;
+.auth-line {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+.auth-badge {
+  display: inline-block;
   font-family: 'Cormorant SC', serif;
-  font-size: 10px;
+  font-size: 9px;
   letter-spacing: 2px;
-  color: var(--ink);
-  cursor: pointer;
   text-transform: uppercase;
+  padding: 2px 6px;
+  border: 1px solid currentColor;
 }
-.mode-btn.active {
-  background: var(--ink);
-  color: var(--paper);
+.auth-badge.gm { color: var(--cinnabar-deep); }
+.auth-badge.player { color: var(--ink); }
+.auth-badge.anon { color: var(--ink-faded); }
+.auth-name {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 13px;
+  color: var(--ink-soft);
+  flex: 1;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+/* Read-only character editor: disable interactive controls without
+   blocking the page-header's Back button. */
+.char-editor-wrap.readonly input,
+.char-editor-wrap.readonly select,
+.char-editor-wrap.readonly textarea,
+.char-editor-wrap.readonly button {
+  pointer-events: none;
+  opacity: 0.6;
+}
+.char-editor-wrap.readonly .dot,
+.char-editor-wrap.readonly .box-cell,
+.char-editor-wrap.readonly .chip {
+  pointer-events: none;
+  opacity: 0.6;
+}
+.readonly-banner {
+  border-color: var(--cinnabar);
+  color: var(--cinnabar-deep);
 }
 
 /* ===== MAIN ===== */

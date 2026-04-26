@@ -4,7 +4,7 @@
 // =============================================================================
 
 import { h, clear, openDialog, closeDialog, notice } from './ui.js';
-import { saveState } from './api.js';
+import { saveCharacter, canEditCharacter } from './api.js';
 
 import {
   computeDerived, techniqueBonusDice, masteryDiceBonus, masteryQiReduction,
@@ -358,6 +358,10 @@ export function openUseTechniqueDialog(character, techInfo, charTech, onAfter) {
   body.appendChild(resultArea);
 
   function doRoll() {
+    if (!canEditCharacter(character)) {
+      notice('Read-only — only the GM or the character\'s owner can roll for them.', 'cinnabar');
+      return;
+    }
     const have = character.qi?.current || 0;
     if (have < qiCost) { notice('Not enough qi.', 'cinnabar'); return; }
     character.qi.current = have - qiCost;
@@ -379,7 +383,7 @@ export function openUseTechniqueDialog(character, techInfo, charTech, onAfter) {
         letterSpacing: '2px', color: 'var(--ink-faded)', textTransform: 'uppercase' }
     }, `Qi remaining: ${character.qi.current}`));
 
-    saveState();
+    saveCharacter(character);
     if (onAfter) onAfter();
     updateQiBadge();
   }

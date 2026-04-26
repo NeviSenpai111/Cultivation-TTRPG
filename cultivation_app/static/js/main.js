@@ -1,36 +1,38 @@
 // =============================================================================
-// main.js — Entry point. Wires the dialog, loads state from the backend,
-// installs the nav, and renders the home view.
+// main.js — Entry point. Wires the dialog, loads session+state from the
+// backend, installs the nav, and renders the home view.
 // =============================================================================
 
 import { initDialog } from './ui.js';
-import { state, loadState, onAfterSave } from './api.js';
-import { navigate, refreshCounts, setMode } from './views.js';
+import {
+  state, loadState, fetchSession, onAfterSave, isGM, replaceState
+} from './api.js';
+import {
+  navigate, refreshCounts, renderAuthPanel, applyRoleVisibility
+} from './views.js';
 import { uid, nowIso } from './ui.js';
 
 initDialog();
 
-// Sidebar nav clicks → navigate()
 document.querySelectorAll('.nav-item').forEach(el => {
   el.addEventListener('click', () => navigate(el.dataset.view));
-});
-
-document.querySelectorAll('.mode-btn').forEach(btn => {
-  btn.addEventListener('click', () => setMode(btn.dataset.mode));
 });
 
 onAfterSave(refreshCounts);
 
 (async function init() {
+  await fetchSession();
   await loadState();
-  seedIfEmpty();
-  setMode(state.meta?.mode || 'gm');
+  applyRoleVisibility();
+  renderAuthPanel();
+  if (isGM()) await seedIfEmpty();
   refreshCounts();
   navigate('home');
 })();
 
-// First-run sample entries so the app isn't empty.
-function seedIfEmpty() {
+// First-run sample entries so the app isn't empty. GM-only — players hitting
+// an empty ledger just get an empty UI until the GM seeds it.
+async function seedIfEmpty() {
   const empty = !state.library.techniques.length &&
                 !state.library.treasures.length &&
                 !state.library.methods.length &&
@@ -139,4 +141,11 @@ function seedIfEmpty() {
       effect: 'One-use: instant short-range teleport (~50m) out of danger.',
       description: 'Sect-issued. Activate by tearing or crushing.' }
   ].forEach(i => state.library.items.push({ id: uid(), createdAt: now, updatedAt: now, ...i }));
+
+  // Push the seeded blob in a single bulk write. Safe because we're GM.
+  try {
+    await replaceState(state);
+  } catch (e) {
+    console.error('Seed failed:', e);
+  }
 }
