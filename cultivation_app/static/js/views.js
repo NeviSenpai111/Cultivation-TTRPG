@@ -30,6 +30,8 @@ import {
 
 import { openDetails, openUseTechniqueDialog } from './details.js';
 
+import { openCharacterWizard } from './wizard.js';
+
 // ============================================================================
 // ROUTER
 // ============================================================================
@@ -393,44 +395,14 @@ function cardActions(c) {
 }
 
 function openNewCharacterDialog() {
-  const c = makeBlankCharacter();
-  const body = h('div', {});
-  body.appendChild(fieldText('Character Name', c.name, v => c.name = v, { placeholder: 'Wang Lin' }));
-  body.appendChild(fieldText("Player's Name", c.player, v => c.player = v, { placeholder: 'Optional' }));
-  const r = h('div', { class: 'field-row two' });
-  r.appendChild(fieldSelect('Origin', c.origin, ORIGINS, v => c.origin = v));
-  r.appendChild(fieldSelect('Affiliation', c.affiliation, AFFILIATIONS, v => c.affiliation = v));
-  body.appendChild(r);
-  body.appendChild(h('div', { class: 'note-box' },
-    "You can refine attributes, realm, roots, and everything else on the next screen."));
-
-  openDialog({
-    title: 'Forge a New Cultivator',
-    content: body,
-    actions: [
-      { label: 'Cancel', handler: closeDialog },
-      { label: 'Create', primary: true, handler: async () => {
-        if (!c.name?.trim()) { notice('Name required.', 'cinnabar'); return; }
-        c.name = c.name.trim();
-        try {
-          await createCharacterRemote(c);
-        } catch (e) {
-          notice('Create failed: ' + e.message, 'cinnabar');
-          return;
-        }
-        state.characters.push(c);
-        closeDialog();
-        navigate('character-edit', { id: c.id });
-        notice('Character forged.');
-      }}
-    ]
-  });
+  openCharacterWizard(navigate);
 }
 
 function makeBlankCharacter() {
   return {
     id: uid(),
     name: '', player: '',
+    age: null, appearance: '',
     origin: 'Mortal Village Youth',
     affiliation: 'Sect Disciple',
     realm: 'Mortal', substage: 'Early',
@@ -450,6 +422,11 @@ function makeBlankCharacter() {
     qi: { current: 0 },
     wounds: 0, woundsCritical: 0,
     ties: '',
+    tiesNamed: [],
+    heartOath: { text: '', daoBonus: false, takenAtCreation: false },
+    personalItem: { name: '', description: '' },
+    countermeasures: '',
+    spatialRing: '',
     notes: '',
     createdAt: nowIso(),
     updatedAt: nowIso()
@@ -492,6 +469,14 @@ function renderCharacterEdit(root) {
   if (!Array.isArray(c.root.elements)) c.root.elements = [];
   if (c.root.mutant == null) c.root.mutant = '';
   if (c.root.heavenlyBody == null) c.root.heavenlyBody = '';
+  if (!Array.isArray(c.tiesNamed)) c.tiesNamed = [];
+  if (!c.heartOath || typeof c.heartOath !== 'object')
+    c.heartOath = { text: '', daoBonus: false, takenAtCreation: false };
+  if (!c.personalItem || typeof c.personalItem !== 'object')
+    c.personalItem = { name: '', description: '' };
+  if (typeof c.countermeasures !== 'string') c.countermeasures = '';
+  if (typeof c.spatialRing !== 'string') c.spatialRing = '';
+  if (typeof c.appearance !== 'string') c.appearance = '';
 
   // saveCharacter is debounced per-character on the api.js side, so we don't
   // need an extra debounce here. The two names are kept so the existing call
@@ -535,6 +520,7 @@ function renderCharacterEdit(root) {
   idBand.appendChild(fieldText('Character Name', c.name, v => { c.name = v; debouncedSave(); }));
   idBand.appendChild(fieldText('Player', c.player, v => { c.player = v; debouncedSave(); }));
   idBand.appendChild(fieldSelect('Origin', c.origin, ORIGINS, v => { c.origin = v; debouncedSave(); }));
+  idBand.appendChild(fieldNumber('Age', c.age, v => { c.age = v; debouncedSave(); }, { min: 10, max: 9999 }));
   editorWrap.appendChild(idBand);
 
   const grid = h('div', { class: 'char-editor' });
@@ -1278,14 +1264,108 @@ function renderCharacterEdit(root) {
     right.appendChild(sec);
   }
 
-  // Ties & Notes
+  // Kit & Countermeasures
   {
     const sec = h('div', { class: 'section' });
-    sec.appendChild(sectionHeader('缘·记', 'Ties & Notes'));
-    sec.appendChild(fieldTextarea('Ties (family, allies, oaths, blood debts)',
+    sec.appendChild(sectionHeader('行装', 'Kit & Countermeasures'));
+    sec.appendChild(fieldText('Personal Item — name', c.personalItem.name,
+      v => { c.personalItem.name = v; debouncedSave(); },
+      { placeholder: "Mother's ring, dead brother's sword, master's calligraphy…" }));
+    sec.appendChild(fieldTextarea('Personal Item — why it matters',
+      c.personalItem.description,
+      v => { c.personalItem.description = v; debouncedSave(); },
+      'Anchor for Karma; the thing you lose at your lowest.'));
+    sec.appendChild(fieldTextarea('Countermeasures (life-saving talismans, escape items)',
+      c.countermeasures, v => { c.countermeasures = v; debouncedSave(); },
+      'Spirit-tier life-saving talisman (sect-issued, single-use)…'));
+    sec.appendChild(fieldText('Spatial Ring', c.spatialRing,
+      v => { c.spatialRing = v; debouncedSave(); },
+      { placeholder: 'None / Spirit-grade / Mysterious-grade…' }));
+    right.appendChild(sec);
+  }
+
+  // Ties, Heart Oath & Notes
+  {
+    const sec = h('div', { class: 'section' });
+    sec.appendChild(sectionHeader('缘·誓', 'Ties, Heart Oath & Notes'));
+
+    // Named Ties
+    const tiesWrap = h('div', {});
+    sec.appendChild(h('div', { class: 'field-label' }, 'The Three Ties (named — love · owe · hate)'));
+    sec.appendChild(tiesWrap);
+    const renderTies = () => {
+      clear(tiesWrap);
+      if (!c.tiesNamed.length) {
+        tiesWrap.appendChild(h('div', { class: 'list-empty' },
+          'No structured Ties yet. Use + to add one, or fill the free-text box below.'));
+      }
+      c.tiesNamed.forEach((tie, idx) => {
+        const row = h('div', {
+          style: { padding: '8px 10px', border: '1px solid var(--paper-edge)',
+            background: 'var(--paper-dark)', marginBottom: '8px' }
+        });
+        const headerRow = h('div', { style: { display: 'flex', gap: '8px', alignItems: 'center' } });
+        const kindSel = h('select', { class: 'field-select', style: { width: '120px' } });
+        [['love', 'Love'], ['owe', 'Owe'], ['hate', 'Hate']].forEach(([v, l]) => {
+          const o = h('option', { value: v }, l);
+          if (tie.kind === v) o.setAttribute('selected', '');
+          kindSel.appendChild(o);
+        });
+        kindSel.value = tie.kind || 'love';
+        kindSel.addEventListener('change', () => { tie.kind = kindSel.value; debouncedSave(); });
+        headerRow.appendChild(kindSel);
+        const nameIn = h('input', { class: 'field-input', value: tie.name || '',
+          placeholder: 'Named person — be specific' });
+        nameIn.addEventListener('input', () => { tie.name = nameIn.value; debouncedSave(); });
+        headerRow.appendChild(nameIn);
+        headerRow.appendChild(h('button', { class: 'row-delete',
+          onclick: () => { c.tiesNamed.splice(idx, 1); save(); renderTies(); } }, '×'));
+        row.appendChild(headerRow);
+        const descIn = h('textarea', { class: 'field-textarea',
+          style: { marginTop: '6px' },
+          placeholder: 'Why they matter — the more specific, the better.' }, tie.description || '');
+        descIn.addEventListener('input', () => { tie.description = descIn.value; debouncedSave(); });
+        row.appendChild(descIn);
+        tiesWrap.appendChild(row);
+      });
+    };
+    renderTies();
+    sec.appendChild(h('button', {
+      class: 'btn small', style: { marginTop: '4px' },
+      onclick: () => {
+        c.tiesNamed.push({ kind: 'love', name: '', description: '' });
+        save(); renderTies();
+      }
+    }, '+ Add Tie'));
+
+    // Heart Oath
+    sec.appendChild(h('div', { class: 'field-label', style: { marginTop: '14px' } },
+      'Heart Oath (binding cultivation oath)'));
+    const oathRow = h('div', { style: { display: 'flex', gap: '8px', alignItems: 'center', marginBottom: '6px' } });
+    const cb = h('input', { type: 'checkbox' });
+    if (c.heartOath.takenAtCreation) cb.setAttribute('checked', '');
+    cb.addEventListener('change', () => {
+      c.heartOath.takenAtCreation = cb.checked;
+      c.heartOath.daoBonus = cb.checked;
+      debouncedSave();
+    });
+    oathRow.appendChild(cb);
+    oathRow.appendChild(h('span', { style: { fontSize: '12px' } },
+      'Active Heart Oath (taken at creation grants +2 Insight in Dao Seed)'));
+    sec.appendChild(oathRow);
+    sec.appendChild(fieldTextarea('Oath text', c.heartOath.text,
+      v => { c.heartOath.text = v; debouncedSave(); },
+      'Example: "I swear on my Dao to protect [name] until they are grown."'));
+
+    // Free-text ties (legacy / overflow)
+    sec.appendChild(fieldTextarea('Other Ties / blood debts / favors (free text)',
       c.ties, v => { c.ties = v; debouncedSave(); },
-      'Living parents in home village · Sworn brother Zhang Hu · Blood debt owed to Lu family…'));
-    sec.appendChild(fieldTextarea('Player Notes', c.notes, v => { c.notes = v; debouncedSave(); },
+      'Use this for overflow Ties, ongoing blood debts, or campaign-specific notes that don\'t fit the Three.'));
+    sec.appendChild(fieldTextarea('Appearance', c.appearance,
+      v => { c.appearance = v; debouncedSave(); },
+      'Distinguishing marks, robes/garb, carried objects.'));
+    sec.appendChild(fieldTextarea('Player Notes', c.notes,
+      v => { c.notes = v; debouncedSave(); },
       'Countermeasures prepared, favor tracking, session to-dos…'));
     right.appendChild(sec);
   }
