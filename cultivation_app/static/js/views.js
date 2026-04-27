@@ -48,9 +48,34 @@ const VIEWS = {
   data: renderData
 };
 
+function _hashFor(view, params) {
+  const qs = Object.entries(params || {})
+    .filter(([, v]) => v != null && v !== '')
+    .map(([k, v]) => `${encodeURIComponent(k)}=${encodeURIComponent(v)}`)
+    .join('&');
+  return '#' + view + (qs ? '?' + qs : '');
+}
+
+export function parseHash() {
+  const raw = (window.location.hash || '').replace(/^#/, '');
+  if (!raw) return null;
+  const [view, qs] = raw.split('?');
+  if (!view || !VIEWS[view]) return null;
+  const params = {};
+  if (qs) qs.split('&').forEach(kv => {
+    const [k, v] = kv.split('=');
+    if (k) params[decodeURIComponent(k)] = decodeURIComponent(v || '');
+  });
+  return { view, params };
+}
+
 export function navigate(view, params = {}) {
   currentView = view;
   routeParams = params;
+  const newHash = _hashFor(view, params);
+  if (window.location.hash !== newHash) {
+    history.replaceState(null, '', newHash);
+  }
   document.querySelectorAll('.nav-item').forEach(el => {
     el.classList.toggle('active', el.dataset.view === view ||
       (view === 'character-edit' && el.dataset.view === 'characters'));
@@ -1022,6 +1047,7 @@ function renderCharacterEdit(root) {
     const qiLine = h('div', { class: 'qi-line' });
     const qiCur = h('input', { type: 'number', class: 'qi-current', min: '0', value: c.qi.current });
     qiCur.addEventListener('input', () => { c.qi.current = Number(qiCur.value) || 0; debouncedSave(); });
+    updaters.push(() => { qiCur.value = c.qi.current; });
     const qiMaxEl = h('span', { class: 'qi-max' }, String(computeDerived(c).qiMax));
     qiLine.appendChild(qiCur);
     qiLine.appendChild(h('span', { class: 'qi-slash' }, '/'));

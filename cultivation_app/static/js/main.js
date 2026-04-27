@@ -8,7 +8,7 @@ import {
   state, loadState, fetchSession, onAfterSave, isGM, replaceState
 } from './api.js';
 import {
-  navigate, refreshCounts, renderAuthPanel, applyRoleVisibility
+  navigate, refreshCounts, renderAuthPanel, applyRoleVisibility, parseHash
 } from './views.js';
 import { uid, nowIso } from './ui.js';
 
@@ -27,7 +27,14 @@ onAfterSave(refreshCounts);
   renderAuthPanel();
   if (isGM()) await seedIfEmpty();
   refreshCounts();
-  navigate('home');
+  const initial = parseHash();
+  if (initial) navigate(initial.view, initial.params);
+  else navigate('home');
+  window.addEventListener('hashchange', () => {
+    const next = parseHash();
+    if (next) navigate(next.view, next.params);
+    else navigate('home');
+  });
 })();
 
 // First-run sample entries so the app isn't empty. GM-only — players hitting
