@@ -58,7 +58,7 @@ Cultivation worlds break most TTRPG assumptions. The framework must solve:
 
 ### Pillar 4: Dao Comprehension (Parallel Track)
 - Independent of realm.
-- Players pick a Dao Seed; accumulate Insight through meaningful experience (not just combat).
+- Players pick a Dao Heart whose aligned Daos; accumulate Insight through meaningful experience (not just combat).
 - Duels, loss, witnessing, meditation — all can grant Insight.
 - Insight unlocks perks that pierce Realm Barriers. This is where "great Dao beats higher realm" lives.
 
@@ -265,61 +265,108 @@ Resentment caps at (starting pool + 3). It cannot be grinded — the Heavens see
 
 **Design intent:** Resentment mechanizes *defiance*. A Wang Lin character isn't just weak — they're *angry*, and that anger is a resource. It keeps low-root characters competitive without handing them power they didn't earn.
 
-### Step 4: Dao Seed
+### Step 4: Dao Heart
 
-You don't *comprehend* a Dao at creation. You have a **predisposition** — a Dao Seed. Insight into this Dao accumulates at **2× the normal rate**. Other Daos remain accessible, just slower.
+Cultivation in *Renegade Immortal* uses three distinct related concepts that the framework had previously muddled. Untangled:
 
-**Starting Dao Insight: 0** in your Seed Dao. You'll earn the first points through play (combat Moments of Truth, seclusion meditation, key experiences).
+- **Dao Heart (道心)** — your *inner conviction* — the philosophical anchor of your cultivation. Set at character creation. *Who you are.* Affects Heart Demon resistance, tribulation outcomes, and which Daos you naturally gravitate toward.
+- **Dao (道)** — a *path of comprehension* you study — Sword, Karma, Slaughter, Space, etc. You earn Insight in Daos through play. You can pursue many across a campaign.
+- **Domain (领域)** — the *manifestation* formed at Soul Formation by fusing your most-comprehended Dao with your Nascent Soul. A late-campaign milestone, not a starting choice.
 
-#### Dao Categories
+This step covers only the **Dao Heart** — what you *are*. Dao comprehension is handled separately in section 7.6 (it accumulates through play); Domains are formed at the Soul Formation breakthrough (section 8.3.2).
 
-**Elemental** — common, combat-versatile, well-documented
-- **Sword** — blade-work incarnate; bonus to sword techniques; sentient swords favor you
-- **Fire** — destructive, volatile, common among young masters
-- **Water** — flowing, adaptive, healing-adjacent
-- **Earth** — defensive, formation-adjacent, slow but enduring
-- **Metal** — sharp, piercing, armor and weapons
-- **Wood** — life, growth, healing; harmonizes with Medicine Dao
-- **Wind** — speed, evasion, reconnaissance
-- **Lightning** — fast breakthroughs, harsh tribulations, high-risk-high-reward
+#### What a Dao Heart Is
 
-**Conceptual** — rare, difficult, incredibly powerful at Adept+
-- **Space** — teleportation, spatial storage, distance manipulation (Wang Lin's Core-Treasure Sword had this)
-- **Time** — slow/speed/loop; almost always Void+ tier; campaign-defining if reached
-- **Karma** — see karmic threads; manipulate debts; canonical peak of Wang Lin's Daos
-- **Cause & Effect** — subtle influence over outcomes; detective/political power
+Your Dao Heart is the deepest truth your cultivator believes about existence. It's not a power — it's a stance. When pressure hits, when temptation arrives, when loved ones die, when the Heavens themselves test you, **your Dao Heart is what holds**.
 
-**Dark** — fast progression, karmic cost
-- **Slaughter** — gains from kills; demands them
-- **Demonic** — brute power with corruption track
-- **Ghost** — soul-adjacent, spectral
-- **Corpse** — undeath, reanimation, reach into death
+In play, it does three things:
 
-**Life-Death**
-- **Life** — healing, resurrection, bloom
-- **Death** — decay, entropy, endings
-- **Medicine** — heals; pairs with Alchemy craft; orthodox healer path
-- **Poison** — debilitates; pairs with Alchemy craft; demonic/assassin path
+1. **Sets your Heart Demon Resistance baseline.** When tribulation throws Heart Demons at you, you roll Soul Defense + your Dao Heart's modifier (see table below) to resist. A weak Dao Heart fails; a strong one carries you through.
+2. **Modifies Insight gain in compatible Daos.** Each Dao Heart has natural Dao alignments. Insight in those Daos accumulates at **2× rate** (replacing the old "Dao Seed" rule).
+3. **Defines the moments that test you.** The GM uses your Dao Heart to design personal trials, heart demon manifestations, and Karma resolutions. A Ruthless Heart cultivator's tribulation looks nothing like a Benevolent one's.
 
-**Craft Daos** — slow in combat, devastating in downtime
-- **Formation** — inscribed arrays; tactical master-planning
-- **Artifact** — forge treasures; the path of refiner-masters
-- **Alchemy** — can overlap Medicine/Poison as primary craft Dao
+#### The Seven Canonical Dao Hearts
 
-**Personal / Unconventional** — Wang Lin-style
-- **Solitude** — the strength of being alone against the world
-- **Endurance** — outlast everything
-- **Resentment** — the will to defy Heaven; pairs naturally with Heavenly Resentment pool
-- **Perseverance** — refusing to stop
+| Dao Heart | Conviction | Aligned Daos (2× Insight) | Tribulation Stance |
+|---|---|---|---|
+| **Ruthless** (无情) | "Emotion is weakness. Cut what hinders." | Slaughter, Demonic, Sword, Poison | +2 dice vs Heart Demons; **−2 dice on Karma-cleansing rolls** |
+| **Sword** (剑心) | "I am the blade. The blade is truth." | Sword, Metal, Wind, Lightning | +2 dice vs Heart Demons in single combat; standard otherwise |
+| **Seeking** (求道) | "I must know. Truth is the only treasure." | Karma, Cause & Effect, Space, Time, all Craft Daos | +1 die vs Heart Demons; **+1 die to all Insight rolls** |
+| **Free Path** (逍遥) | "I refuse to be bound." | Wind, Space, Wood (growth-aspect), all Craft Daos | +2 dice vs Heart Demons related to obligation; vulnerable to demons of meaning |
+| **Benevolence** (仁心) | "I cultivate for others, not myself." | Life, Medicine, Wood, Cause & Effect | +1 die vs Heart Demons; **−2 dice on Slaughter/Demonic Insight** |
+| **Slaughter** (杀道) | "Strength alone justifies. The strong rise on corpses." | Slaughter, Demonic, Fire, Metal | +3 dice vs Heart Demons; **double Black Karma per kill, halved Karma cleansing** |
+| **Defiance** (逆道) | "I defy Heaven itself. My path is my own." *(Wang Lin's Heart)* | Karma, Resentment, Solitude, any "personal" Dao | +1 die vs Heart Demons; **Resentment pool refills 1 extra/session**; Heavenly Tribulation +1 wave |
 
-#### Dao Compatibility
+#### Dao Heart in Action
 
-You can pursue multiple Daos, but not all pair well:
-- **Natural pairings:** Sword + Wind, Fire + Lightning, Metal + Earth, Medicine + Life, Slaughter + Demonic
-- **Difficult but powerful:** Space + Time (Void+ tier; ludicrous power ceiling), Karma + Cause & Effect
-- **Opposing pairs** (one cancels the other): Life vs. Death, Medicine vs. Poison, Slaughter vs. Life, Order (Cause & Effect) vs. Demonic
+**Heart Demon Resistance:** when tribulation, mind attacks, or breakthrough trials throw heart demons at you, roll **Soul Defense + Dao Heart modifier** vs the demon's target successes. Failing means the heart demon takes hold — for the duration of the scene you suffer some specific consequence (compulsion, paralysis, loss of dice from doubt, etc.).
 
-Pursuing opposing Daos simultaneously is canonically possible but brutally hard — the tension can grant unique insights but often causes qi deviation at breakthroughs.
+**Dao Alignment:** Insight you earn in any Dao listed under your Heart's "Aligned Daos" comes at **2× rate**. This replaces the old "Dao Seed" mechanic — your Heart determines your natural Dao gravity, not a single chosen seed.
+
+**Karma Interactions:** some Dao Hearts have natural Karma effects:
+- **Ruthless** can resist remorse but generates +1 Black Karma per significant betrayal
+- **Slaughter** doubles Black Karma per kill (canonical — the cost of the path)
+- **Defiance** generates +1 Black Karma per major Heavenly transgression (which a defiant cultivator does often) but can spend Resentment to reduce the karmic backlash
+
+**Personal Trials:** the GM uses your Heart to design your tribulation:
+- A **Ruthless** cultivator faces heart demons of *attachment* — visions of the loved ones they discarded
+- A **Sword** Heart faces demons of *doubt* — moments where their blade failed
+- A **Benevolence** Heart faces demons of *futility* — those they tried to save and couldn't
+- A **Defiance** Heart faces the Heavenly Will *itself* manifesting to demand submission
+
+#### Choosing Your Dao Heart
+
+Pick one at character creation. Your Heart should be deeply tied to your origin and starting Ties. A Mortal Village Youth who lost his parents young would naturally lean toward **Defiance**, **Seeking**, or **Ruthless** depending on how he chose to cope. A Young Master raised in court might be **Free Path** (chafing at expectation) or **Sword** (refined through duels). A Battlefield Survivor might be **Slaughter** or **Ruthless**, having already cut away tenderness to live.
+
+**Wang Lin reference:** he begins with a **Defiance** Dao Heart — the canonical "I refuse Heaven's denial" stance that gives the novel its title. His Heart is set at character creation and persists; what changes through the story is the Daos he comprehends (Karma, Slaughter, Life-Death, etc.) and eventually the Domains he forms.
+
+#### Can a Dao Heart Change?
+
+In theory yes, in practice rarely. A Dao Heart change is canonical and possible — a **Heart Transition** — but it's a campaign-defining trauma, not a casual reframe. If a player wants to shift Heart, the GM should require:
+- A profound, irreversible event (death of a Tie, betrayal by your sect, witnessing the failure of your old Heart)
+- A full Seclusion Slot dedicated to the transition
+- A Heart Demon trial during the transition — failing it means temporary heart demons, not Heart change
+- One sub-stage of cultivation lost (the foundation reshuffles)
+
+Most cultivators die with the Heart they started with. Wang Lin's Defiance never wavers across thousands of chapters — it deepens, but doesn't break.
+
+#### Hybrid Hearts (advanced option)
+
+Some cultivators canonically combine elements — a Sword-Ruthless Heart, a Seeking-Defiance Heart. These are **harder** to maintain (the dual conviction creates internal tension) but offer broader Dao alignment.
+
+A hybrid Heart:
+- Combines the aligned Daos of both, but only the **shared** Daos benefit from 2× Insight (the union, not the sum)
+- Heart Demon resistance is the **average** of both contributing Hearts
+- Tribulation is harsher: +1 wave, but with one wave specifically testing the *tension between* the two Hearts
+
+Hybrid Hearts are GM-permission only and best reserved for experienced players who understand the framework.
+
+---
+
+#### Dao Comprehension (cross-reference)
+
+Once your Dao Heart is set, the actual *pursuit* of Daos happens through play. See section 7.6 for the Insight system: how you earn Insight, the comprehension levels (Novice → Initiate → Adept → Master → Grandmaster → Dao Lord), and how Insight affects techniques and Realm Barrier bypass.
+
+The Daos themselves remain as listed in 7.6:
+
+- **Elemental:** Sword, Fire, Water, Earth, Metal, Wood, Wind, Lightning
+- **Conceptual:** Space, Time, Karma, Cause & Effect
+- **Dark:** Slaughter, Demonic, Ghost, Corpse
+- **Life/Death:** Life, Death, Medicine, Poison
+- **Craft:** Formation, Artifact, Alchemy
+- **Personal/Unconventional:** Solitude, Endurance, Resentment, Perseverance
+
+#### Domain (cross-reference)
+
+Domains form at Soul Formation. See section 8.3.2 — the Soul Formation breakthrough requires Initiate-level comprehension in at least one Dao, which you fuse with your Nascent Soul to form your Domain. The Domain is your personal manifestation of that Dao — Wang Lin's eventual Karma Domain, the Slaughter Domain of an old killer, the Sword Domain of a duelist who never sheathed.
+
+**Domain effects** (added to existing Soul Formation breakthrough mechanics):
+- Within your Domain, you control reality at the Dao's level — gravity, time-flow, karmic threads, etc., depending on what your Domain is
+- The Domain extends from your person; size grows with realm (Soul Formation: ~10m radius; Soul Transformation: ~50m; Ascendant: ~200m+)
+- Inside your Domain, lower-realm cultivators face an additional Realm Barrier multiplier (×1.5 the gap)
+- Two Domains clashing produces a contest of Dao masteries — the more profoundly comprehended Domain wins
+
+Domains can later evolve at Nirvana realms by absorbing additional Dao comprehension, eventually crystallizing into Essences at the Third Step (beyond the framework's campaign cap, but a narrative horizon).
 
 ### Step 5: Starting Cultivation Method
 
@@ -388,7 +435,7 @@ Players can also propose original Spirit-tier techniques with GM approval. The e
 
 #### Technique Compatibility
 
-Techniques with your **Dao Seed** resonate — they're easier to master (Mastery advances with ×1.5 Insight) and may gain flavor bonuses. A Sword Dao cultivator picking "Azure Wind Slash" is a stronger choice than picking "Cloud Piercing Finger."
+Techniques aligned with your **Dao Heart** resonate — they're easier to master (Mastery advances with ×1.5 Insight) and may gain flavor bonuses. A Sword Heart cultivator picking "Azure Wind Slash" is a stronger choice than picking "Cloud Piercing Finger."
 
 ### Step 7: Starting Kit, Wealth, and Countermeasures
 
@@ -571,7 +618,7 @@ You may choose to begin play with **one Heart Oath** (see section 9.3.4) — a c
 - "I swear on my Dao to protect my younger sister's child until she is grown."
 - "I swear never to take a human life unnecessarily."
 
-A Starting Heart Oath grants **+2 Insight toward your Dao Seed** at character creation — the oath crystallizes your conviction. Breaking it triggers full Heart Oath consequences (Qi Deviation, Black Karma, Face loss).
+A Starting Heart Oath grants **+2 Insight toward an aligned Dao** at character creation — the oath crystallizes your conviction. Breaking it triggers full Heart Oath consequences (Qi Deviation, Black Karma, Face loss).
 
 #### Starting Karma Balance
 
@@ -628,7 +675,8 @@ At the end of creation, your sheet should contain:
 - **Origin** (with listed skills and starting wealth tier)
 - **Attributes** — Body / Qi / Soul (with origin bonus applied)
 - **Spiritual Root** (grade, any elements, Heavenly Resentment pool if applicable)
-- **Dao Seed** (current Insight: 0 or +2 if Heart Oath taken)
+- **Dao Heart** (one of seven canonical Hearts; defines aligned Daos and Heart Demon resistance)
+- **Daos pursued** (initially: 0 Insight in any; +2 in an aligned Dao if Heart Oath taken)
 - **Cultivation Method** (type, peak realm, any corruption tracks)
 - **Realms** — Body / Qi / Soul each at Tier 0 (Mortal) initially, advancing to Qi Condensation Early (Tier 1) during session one play
 - **Techniques** — 2 Spirit-tier, with Mastery Rough; qi costs noted
@@ -755,7 +803,7 @@ Heavenly Body characters start with an extra Karmic Debt: **The World Knows.**
 - **Origin:** Mortal Village Youth
 - **Attributes:** Body 2 (+1 from Origin = 3), Qi 1, Soul 2
 - **Spiritual Root:** Mortal Root (rolled 14). Heavenly Resentment pool: 3.
-- **Dao Seed:** Solitude
+- **Dao Heart:** Defiance (逆道) — *the canonical Wang Lin Heart; refuses Heaven's denial of his cultivation*
 - **Cultivation Method:** Incomplete family scroll — fragmentary method found in a junk pile.
 - **Techniques:** Cloud Piercing Finger (Spirit-tier qi strike), Concealment Step (Spirit-tier movement)
 - **Lores:** Mortal Lore, Herb Lore *(from Origin)*, Cultivation Lore *(from Sect Disciple affiliation)*
@@ -812,7 +860,7 @@ Each slot can be spent on one of:
 | **Cultivate** | Progress toward next sub-stage milestone (see 7.3). Primary slot use. |
 | **Study Technique** | Master a known technique (raise its Mastery tier) or begin learning a new one. |
 | **Refine Pill / Artifact** | Craft — requires the relevant Dao/skill. Produces consumables or items. |
-| **Comprehend Dao** | Meditate on a Dao track. Gain 1 Insight toward a chosen Dao (2 if it's your Dao Seed). |
+| **Comprehend Dao** | Meditate on a Dao track. Gain 1 Insight toward a chosen Dao (2 if aligned with your Dao Heart). |
 | **Scout / Travel / Prepare** | Narrative prep — establish caches, set formations, gather rumors, scout locations. |
 | **Recover** | Heal from Qi Deviation, injuries, or tribulation backlash. Some wounds require multiple slots. |
 | **Seek a Master / Tutor** | Narrative pursuit of instruction — may require multiple slots and GM pacing. |
@@ -901,7 +949,7 @@ Dao Insight is earned, not bought. It accumulates in specific Daos through play.
 | **Grandmaster** | 300 | Full Realm Barrier bypass in Dao-relevant situations; your techniques in this Dao gain a tier |
 | **Dao Lord** | ??? | Nirvana-tier comprehension — you have *walked* the Dao. Setting-defining. |
 
-**Your Dao Seed gains Insight at 2× rate.** Other Daos can still be pursued but slower.
+**Daos aligned with your Dao Heart gain Insight at 2× rate.** Other Daos can still be pursued but slower.
 
 **Insight sources:**
 - Seclusion: Comprehend Dao slot (1 Insight, or 2 for Seed)
@@ -955,7 +1003,7 @@ Requires **access** to the technique in some form. Access comes in grades of qua
 |---|---|
 | Complete manual available | +2 dice |
 | Teacher actively instructing (present during study) | +4 dice |
-| Technique matches your Dao Seed's element/concept | +2 dice |
+| Technique matches an aligned Dao of your Heart | +2 dice |
 | Witnessed multiple times in combat | +2 dice |
 | Witnessed once in combat | +1 die |
 | Inheritance / bloodline match | +2 dice |
@@ -992,7 +1040,7 @@ Once a technique is Rough, advancement happens through accumulating **Mastery Po
 |---|---|
 | **Use the technique in real combat** | +1 MP per use (cap: 3 MP per combat scene, to prevent grinding) |
 | **Use the technique during a Moment of Truth** (section 7.8.1) | +2 MP bonus (stacks with combat use) |
-| **Use the technique in a Dao-resonant way** (Dao Seed matches effect) | +1 MP bonus |
+| **Use the technique in a Dao-resonant way** (aligned Dao of your Heart) | +1 MP bonus |
 | **Use against a higher-realm opponent** | +2 MP bonus (you learn more fighting up) |
 | **Seclusion Study** (1 slot dedicated) | Roll 1d6 + Soul Attribute MP (minimum 2, max 12) |
 | **Master's Teaching** (1 slot + teacher who knows it at Mastered+) | +8 MP |
@@ -1111,7 +1159,7 @@ A cultivator who sticks with their original method can eventually **refine it** 
 At Soul Formation and above, a cultivator with enough Dao Insight and accumulated experience can **compose their own method from scratch**. This is essentially the same as refining a method to its highest possible form, but starting from blank parchment.
 
 - Requires Soul Formation or above
-- Requires **Master-level comprehension** in at least one Dao (usually your primary Dao Seed)
+- Requires **Master-level comprehension** in at least one Dao (usually a Dao aligned with your Heart)
 - Takes **8–12 Seclusion Slots** over multiple sessions
 - Banks **30+ Insight** from various Daos
 - Results in a method uniquely suited to the creator — often not compatible with any other cultivator (inheritance difficulty)
@@ -1771,7 +1819,7 @@ A **Heart Oath** is a cultivation-binding promise sworn on your own cultivation 
 - The terms must be specific and fulfillable
 - The swearer chooses the consequence of breaking (severity matches the weight of the oath)
 
-**If fulfilled against hardship:** the swearer gains 2 Insight toward their Dao Seed (or chosen Dao). Significant oaths may grant more. This is why sect inductions, master-disciple bonds, and sworn brotherhood oaths are common — they're a cultivation accelerator.
+**If fulfilled against hardship:** the swearer gains 2 Insight toward an aligned Dao (or chosen Dao). Significant oaths may grant more. This is why sect inductions, master-disciple bonds, and sworn brotherhood oaths are common — they're a cultivation accelerator.
 
 **If broken:**
 - Immediate **Qi Deviation** (drop 1 sub-stage; may drop a full realm if the oath was severe)
@@ -1959,7 +2007,7 @@ Higher-grade crafting requires Dao comprehension in the relevant craft Dao:
 | Void | Adept |
 | Nirvana | Master |
 
-Choosing **Medicine, Poison, Formation, Artifact, or Alchemy** as your Dao Seed at character creation means you gain Insight in that craft at 2× rate — the dedicated-crafter build.
+Choosing **Medicine, Poison, Formation, Artifact, or Alchemy** as your primary cultivation focus at character creation means you gain Insight in that craft at 2× rate — the dedicated-crafter build.
 
 #### 10.2.5 Materials
 
@@ -3193,7 +3241,7 @@ During your prep time, resolve everyone's seclusion together:
 - **Milestone advancement** — automatic if conditions met; note on sheet
 - **Cultivation** — check for sub-stage advancement (usually 1–2 slots per sub-stage)
 - **Crafting** — roll the craft pool, determine quality
-- **Insight gain** — meditation gives 1 Insight per slot (or 2 for Seed Dao)
+- **Insight gain** — meditation gives 1 Insight per slot (or 2 for Daos aligned with the cultivator's Dao Heart)
 - **Breakthrough attempts** — resolve the full Breakthrough Scene (might warrant a short async scene with the player rather than bulk resolution)
 
 #### 13.9.3 Big Events Get Scenes
@@ -3340,6 +3388,9 @@ Lock these in early; shift only with table consensus.
 - ✅ **Attribute Advancement (section 7.9)** — AP thresholds and six sources per attribute
 - ✅ **Attribute scores scale 1–5** (starting cap 3, grows through play)
 - ✅ **GM Tools (section 13)** — one-sentence core loop, session prep, NPC templates, encounter building, tribulation template, player-invention heuristic, pacing, house-rule checklist
+- ✅ **Spiritual Root element selection** — grade rolled, elements chosen within grade constraints; Five Elements + Mutant Root table for exotic types
+- ✅ **Dao Heart / Dao / Domain trichotomy** — replaced "Dao Seed" with the canonical Xian Ni split: Dao Heart is set at creation (the conviction), Dao is comprehended through play (the path), Domain forms at Soul Formation (the manifestation). Seven canonical Hearts: Ruthless, Sword, Seeking, Free Path, Benevolence, Slaughter, Defiance.
+- ✅ **Heart Demon Resistance** baked in — Soul Defense + Dao Heart modifier; tribulation trials become personal
 
 ### Up Next (choose direction)
 - **Standalone GM One-Pager** — a separate printable quick-reference artifact
