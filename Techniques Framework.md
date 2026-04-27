@@ -14,7 +14,7 @@
 4. Tier Anchors — what each tier can do
 5. Action Economy
 6. Mastery Scaling Conventions
-7. System Interactions (Realm Barrier, Dao, Method, Counters, Artifacts)
+7. System Interactions (Realm Barrier, Dao, Method, Counters, Artifacts) + Canonical Xian Ni Forms (Restrictions, Divine Sense, Ji Realm, Domains, Essences, Blood Refining, Dao Realm)
 8. Lifecycle Summary (learning, progression, evolution, loss)
 
 **Part B — Technique Creation Framework**
@@ -30,6 +30,19 @@
 18. Three Worked Examples
 19. Quick-Reference Design Sheet
 20. Canonical Xian Ni Technique Cards
+
+**Part C — Cultivation Methods (功法)**
+21. What is a Method?
+22. Method Anatomy
+23. The Five Method Categories
+24. Method Quality Tiers
+25. Method Effects Menu
+26. Method Restrictions (Budget Refunds)
+27. Method Stages — Layered Cultivation
+28. The Method Creation Process
+29. Method Compatibility & Switching
+30. Canonical Xian Ni Method Examples
+31. Quick-Reference Method Design Sheet
 
 ---
 
@@ -49,7 +62,8 @@ Before the mechanics, a quick alignment check. Renegade Immortal has several dis
 | **Fragmentary techniques** (partial manuals, incomplete scrolls) | Covered via learning modifiers (Cultivation Framework §7.7.1). |
 | **Restrictions** (禁制) — trap/ward/area-denial arts | See §7.6.1 — a distinct Form any Utility or Defense technique may take. |
 | **Divine Sense / Spiritual Sense techniques** | Soul-source Utility-Perception family. See §7.6.2. |
-| **Ji Realm** — "invincible within one's realm" | Canonical name for Perfected mastery scaling. See §6, §7.6.3. |
+| **Ji Realm** — "invincible within one's realm" | Aspect-wide invincibility, distinct from per-technique Perfected mastery. Acquisition procedure in §7.6.3. |
+| **Dao Realm** — comprehension of Dao as law | Late-game transformative state with multi-stage tribulation. See §7.6.7. |
 | **Domains** (Life and Death Domain, Karma Domain, etc.) | Void+ Special Property. See §7.6.4, §13. |
 | **Essences** (Nirvana-tier concept-as-substance) | Nirvana-tier Special Property. See §7.6.5, §13. |
 | **Blood Refining / Blood Essence burning** | Native as a Restriction (lifespan cost). See §7.6.6, §15. |
@@ -255,15 +269,73 @@ Divine Sense techniques are Soul-source Utility or Attack techniques that weapon
 
 **Soul Piercing Eyes / Divine Sense Eyes** — a Celestial-tier Utility technique that grants the user's Divine Sense the ability to read Restrictions, formations, and concealed bloodlines.
 
-#### 7.6.3 Ji Realm (极境) — Canonical Perfection
+#### 7.6.3 Ji Realm (极境) — Aspect-Wide Invincibility
 
-The canonical concept of **Ji Realm** is "invincibility within one's realm" — a cultivator who has reached Ji Realm in a cultivation base can dominate any opponent of equal realm who has not. Early Core Formation with Ji Realm can kill Peak Core Formation without it.
+**Ji Realm is not a technique mastery state — it is a transformative cultivator-level achievement.** Perfected mastery on a single technique is the gateway to Ji Realm in that technique's aspect, but Ji Realm itself is much harder to obtain and gives much more.
 
-**Mechanical identity:** Ji Realm is the canonical name for what this framework calls **Perfected mastery** (technique functions one tier higher). A technique that reaches Perfected has entered its Ji Realm.
+##### What Ji Realm Is
 
-A cultivator may have Ji Realm in *some* techniques without having it in others. "Ji Realm in Sword Dao" canonically means every one of their sword techniques is Perfected.
+A cultivator in Ji Realm of an *aspect* — a Dao, a weapon style, a cultivation base path (Body / Qi / Soul), or a Divine Sense focus — is **invincible against equal-realm opponents within that aspect**. An early Core Formation cultivator with Ji Realm of Sword Dao can kill a Peak Core Formation cultivator without Ji Realm; their swordwork is functionally one full realm above their nominal cultivation.
 
-**Design note:** when writing flavor text, call Perfected-tier effects "Ji Realm" to align with canon. "Ji Realm Cloud Piercing Finger" and "Perfected Cloud Piercing Finger" are the same thing.
+Ji Realm is **aspect-specific.** A cultivator may have Ji Realm in Sword Dao, Divine Sense, and Slaughter Dao without having it in Body, Fire, or Restrictions. Wang Lin canonically reaches Ji Realm in multiple aspects at different points (Slaughter Dao, Lightning/Fire, Divine Sense). Each is a separate achievement.
+
+##### Mechanical Effect
+
+While operating within an aspect for which the cultivator holds Ji Realm:
+
+- **Equal-realm Realm Barrier is auto-canceled** — the cultivator effectively counts as one realm higher within that aspect
+- **All techniques within the aspect** gain +2 dice when used as primary action
+- **Realm Barrier piercing** stacks with existing technique piercing (a Mysterious-tier technique that pierced 1 realm now pierces 2 if used within an Ji Realm aspect)
+- **Narrative permission:** the cultivator can attempt punch-up actions that would otherwise be impossible — e.g., dueling cultivators a full realm above and winning through skill alone, not just luck or treasures
+
+Notably, Ji Realm does *not* give the "function one tier higher" effect of Perfected mastery directly — Perfected mastery is a *prerequisite*, and the Ji Realm is the *aspect-wide upgrade* that goes beyond it.
+
+##### Prerequisites (all required)
+
+To attempt the Ji Realm breakthrough in an aspect, the cultivator must have:
+
+1. **Three Perfected techniques** within that aspect (a "Sword Dao" Ji Realm requires three Perfected sword techniques; a "Divine Sense" Ji Realm requires three Perfected Soul-source perception or attack techniques)
+2. **Master-level Dao comprehension** in the linked Dao (300+ Insight — the top tier of the Dao Insight track per Cultivation Framework §7.6)
+3. **Realm minimum: Foundation Establishment.** Below this, the cultivator's qi pool and Soul are insufficient to sustain the transformation. (The few canonical exceptions — Wang Lin moments — involve Heavenly Resentment burning, see below.)
+4. **A defining Moment of Truth** within the aspect during the current arc — a battle survived, a master witnessed, a Heart Oath fulfilled, or another scene the GM marks as transformative
+
+##### The Ji Realm Breakthrough
+
+Once all four prerequisites are met, the cultivator may attempt the Ji Realm breakthrough during a Seclusion of at least 4 slots dedicated to the aspect.
+
+**The Roll:** primary attribute (Body / Qi / Soul depending on aspect) + Realm Tier + Dao Insight ÷ 50 (rounded down) dice, against a target of **15 successes**.
+
+**Modifiers:**
+
+| Condition | Modifier |
+|---|---|
+| 4+ Perfected techniques (instead of the minimum 3) | +2 dice each |
+| Heavenly Body that aligns with the aspect | +3 dice |
+| A master of the same aspect provides guidance | +5 dice |
+| Cultivator burns 1 Heavenly Resentment to force the breakthrough | +3 dice (one-shot use) |
+| Cultivator has previously attempted and failed | −2 dice cumulative |
+| Cultivator's Cultivation Method is incompatible with the aspect (e.g. Body Method attempting Qi-aspect Ji Realm) | −5 dice |
+
+**Outcomes:**
+
+- **Success (15+):** Ji Realm achieved in the aspect. Permanent.
+- **Marginal success (12–14):** Ji Realm not achieved, but progress is real. +5 to all aspect-related Insight. Re-attempt available after one full session of new aspect-related events.
+- **Failure (8–11):** No progress. Re-attempt requires a new Moment of Truth within the aspect. May not retry in the same arc.
+- **Catastrophic failure (0–7):** **Heart Demon manifests.** Lose 1d10 Insight in the relevant Dao; gain a permanent Heart Demon entry tied to the aspect (a doubt, an obsession, a fear) that imposes −2 dice on aspect rolls until resolved through dedicated arc work. Re-attempt requires the Heart Demon's resolution.
+
+##### Loss of Ji Realm
+
+Ji Realm can be *lost.* Canonically rare but mechanically real:
+
+- **Cultivation Base shattered or sealed** — Ji Realm is gone with the base
+- **Dao corruption** — if the cultivator's Dao Insight in the linked Dao drops below 300 (e.g., through Karma backlash, demonic corruption, or oath violation), Ji Realm in that aspect lapses until restored
+- **Aspect Severance** — certain Nirvana-tier counter-arts can specifically sever an opponent's Ji Realm; this is a major story event
+
+##### Design note for Perfected mastery
+
+Perfected mastery on a single technique remains "functions one tier higher" — it is the technique's apotheosis, the gateway to Ji Realm in its aspect, and a major character moment in its own right. It is *not* the same thing as Ji Realm. Use the canonical name "Ji Realm" only for the aspect-wide state.
+
+In flavor: "He has reached Ji Realm in his Sword Dao" is correct. "His Cloud Piercing Finger has reached Perfected mastery" is correct. "His Cloud Piercing Finger has reached Ji Realm" is *informal* but acceptable shorthand if the technique is part of an aspect for which the cultivator holds Ji Realm — otherwise it's category error.
 
 #### 7.6.4 Domains (领域) — Void+ Area Dominance
 
@@ -304,6 +376,67 @@ A canonical cultivator trope — Situ Nan's signature method — is to **burn Bl
 - **Permanent loss of 1 year of Nirvana-tier lifespan** at Nirvana
 
 For a Qi Condensation cultivator (120-year natural lifespan), even a single Mysterious-tier Blood Refining is a major sacrifice. This is how low-realm cultivators survive duels with higher realms — and why they die young.
+
+#### 7.6.7 Dao Realm (道境) — Comprehension of Law
+
+**Dao Realm is the rarest and most coveted state in cultivation.** Where Ji Realm is *invincibility within one's realm*, Dao Realm is *comprehension of the Dao itself* — the cultivator no longer merely uses techniques aligned with a Dao, they grasp the Dao as a law of reality. Canonically considered impossible below Soul Formation; the few outliers who reach it earlier are setting-defining figures.
+
+##### What Dao Realm Is
+
+A cultivator in Dao Realm of a specific Dao has comprehended that Dao to the point that **reality itself responds to their will within that Dao's domain**. A Sword Dao Realm cultivator can manifest swords from intention; a Karma Dao Realm cultivator can perceive and lightly manipulate karmic threads as a matter of awareness; a Time Dao Realm cultivator may briefly slow or hold moments.
+
+**Critically, in canon:** spiritual force entering Dao Realm allows a cultivator to *quickly reach the Soul Formation stage* — Dao Realm is the established path past the Nascent Soul → Soul Formation breakthrough wall.
+
+##### Mechanical Effect
+
+While operating within the Dao Realm's Dao:
+
+- **All techniques aligned with the Dao** function as one tier higher (the "Perfected effect" that Ji Realm explicitly does *not* provide is *here*, applied to every aligned technique at once)
+- **Realm Barrier becomes irrelevant** for opponents within the Dao's reach — a Dao Realm Sword cultivator's swords cut through realm difference for any sword strike, not just specific techniques
+- **Reality manipulation** within the Dao's purview becomes possible without a discrete technique — minor effects are free actions, major effects cost qi
+- **Dao Insight cap removed** — the cultivator continues accruing Insight in this Dao indefinitely; this is what later allows Essence formation at Nirvana
+- **Auto-progression:** if the cultivator is Nascent Soul or below when entering Dao Realm, they auto-progress one full sub-stage immediately, and breakthroughs to Soul Formation thereafter require half the normal resources
+
+##### Prerequisites (all required)
+
+1. **Realm minimum: Soul Formation.** Outliers may attempt at Nascent Soul Peak, but the catastrophic failure chance is much higher (see below). Below Nascent Soul, attempts are categorically impossible.
+2. **Ji Realm in at least two aspects aligned with the target Dao.** A Sword Dao Realm requires Ji Realm in Sword aspect *and* in at least one supporting aspect (Wind, Metal, Soul, or specific weapon aspects). This represents the cultivator having mastered the Dao as practice before grasping it as law.
+3. **Dao Insight: 1000+.** This is well past the normal Master tier (300). The points beyond 300 are accumulated through extraordinary experiences — major narrative arcs, witnessed Dao Realm cultivators of the same Dao, Dao Comprehension Pills consumed at high realm, ancient Dao stones, etc.
+4. **A Dao Heart Forging event.** A profound test of the cultivator's connection to the Dao — typically an arc-level narrative event, not a single scene. The GM declares a candidate event; the player accepts and the event plays out as a full scenario whose stakes are the Dao Heart's integrity.
+
+##### The Dao Realm Breakthrough
+
+Unlike Ji Realm's single breakthrough roll, Dao Realm is a **multi-stage event spanning multiple sessions**, structured as a Dao-specific tribulation.
+
+**Stage 1: Dao Heart Forging** — the narrative event that crystallizes the cultivator's connection to the Dao. Played out fully as a session arc.
+
+**Stage 2: The Dao Tribulation** — a unique tribulation specific to the Dao being entered. Three waves of escalating challenge, each testing a different facet:
+- *Wave 1:* mechanical mastery (a combat or technical challenge using techniques aligned with the Dao)
+- *Wave 2:* moral/identity test (Heart Demons specific to the Dao manifest — a Slaughter cultivator faces the question of whether they kill for principle or compulsion; a Karma cultivator faces a debt they cannot pay)
+- *Wave 3:* the Dao's own opposition — the cultivator confronts an avatar of the Dao itself, often appearing as a critique of the cultivator's understanding
+
+Each wave uses standard combat/social mechanics but with stakes set by the GM and *no countermeasures permitted* — Dao Tribulation is an examination, not a fight to win at any cost.
+
+**Stage 3: Comprehension** — if the cultivator survives all three waves, they enter Dao Realm. This is narratively a moment of stillness rather than a roll.
+
+##### Outcomes
+
+- **Full success (all three waves passed):** Dao Realm achieved. Permanent. Auto-progression triggers if applicable.
+- **Partial success (1–2 waves passed):** Dao Realm not achieved, but the cultivator has glimpsed it. +500 Insight in the Dao (a massive bank). Re-attempt available after a major arc.
+- **Failure (0 waves passed):** Dao Heart cracked. Lose all Insight in the Dao above 100. Cannot re-attempt for the rest of the campaign without a Dao Restoration arc (canonically: the Heaven Defying Bead, an ancient inheritance, or a senior of the same Dao mentoring the cultivator's recovery).
+- **Catastrophic failure (Wave 1 outright failed at Nascent Soul or below):** Dao Heart shattered. The cultivator can never enter Dao Realm in this Dao. They may pursue another Dao, but this one is closed forever.
+
+##### Loss of Dao Realm
+
+Dao Realm is essentially permanent — it is comprehension, and comprehension cannot be unlearned. However:
+
+- **The Dao itself can change** if the cultivator's Heavenly Body or fundamental nature transforms (rare, story-level events)
+- **Specific Nirvana-tier techniques exist** that can suppress Dao Realm temporarily (canon: certain Devil Dao counter-techniques)
+- **Voluntary abandonment** is possible if the cultivator changes Dao paths at Nirvana — this is what enables Essence-shifting
+
+##### Design note for game balance
+
+Dao Realm is intentionally a *late-game* state. A campaign that runs from Qi Condensation to Nascent Soul should not see PCs reach Dao Realm; one that runs to Soul Formation might see a single PC do so as a narrative climax. A campaign reaching Nirvana should expect multiple PCs to hold Dao Realm in their primary Dao, often with a second or third by the campaign's end. This is the rough cadence the canonical material implies.
 
 ---
 
@@ -432,7 +565,7 @@ Slot-based, not PP-costed. Pick from this list, up to your tier's slot count.
 - **Restriction-Inscribable** (Mysterious+) — technique may be inscribed as a persistent Restriction; see §7.6.1
 - **Domain-Form** (Void+, 1 slot) — technique *is* a Domain; see §7.6.4. Only taken on Void or Nirvana techniques.
 - **Essence-Linked** (Nirvana only, 1 slot) — technique draws directly on a cultivator Essence; see §7.6.5. Bypasses all Realm Barrier, +6 dice, cannot be fully countered by non-Essence techniques of equal-or-lower tier.
-- **Ji Realm Signature** (any tier) — at Perfected mastery, this technique gains an additional unique property defined at design time (one freebie above the normal "functions one tier higher"). This canonicalizes Ji Realm flavor — pick an effect that makes sense for the technique reaching its invincibility state.
+- **Ji Realm Anchor** (any tier) — at Perfected mastery, this technique gains an additional unique property defined at design time. The technique is also marked as a *qualifying technique* for Ji Realm in its aspect (counts toward the three-Perfected-technique prerequisite per §7.6.3). Pick an effect at design time that makes sense for the technique reaching its apotheosis.
 
 ## 14. Mastery Scaling Recipes
 
@@ -712,21 +845,20 @@ The foundational telekinetic technique of cultivation. An invisible "hand" of qi
 - **Range:** Short (10m) at Spirit; extends with mastery
 - **Action:** Standard
 - **Effect:** Roll Qi + Qi Realm Tier + 2 dice. Successes determine what the technique can do this turn:
-    - **1 success:** lift / move a small object (a few kg) at walking speed
-    - **2 successes:** grip-restrain a person briefly OR throw an object at attack speed
-    - **3+ successes:** forceful telekinetic _swipe_ — treat as a Body-equivalent attack with the rolled successes; can hurl a person multiple meters
-    - May also be used as **Reactive** to interpose against an incoming attack (catch a blade, redirect a projectile) at the cost of your next turn's action
+  - **1 success:** lift / move a small object (a few kg) at walking speed
+  - **2 successes:** grip-restrain a person briefly OR throw an object at attack speed
+  - **3+ successes:** forceful telekinetic *swipe* — treat as a Body-equivalent attack with the rolled successes; can hurl a person multiple meters
+  - May also be used as **Reactive** to interpose against an incoming attack (catch a blade, redirect a projectile) at the cost of your next turn's action
 - **Budget:** Spirit 4 PP. Spend: 2 PP (utility — object manipulation, multi-purpose) + 1 PP (short range) + 1 PP (+1 die for combat scaling) = 4 PP. Full budget. The Reactive option is implicit in the multi-purpose utility framing.
 
 **Mastery (Recipe C — Reach Curve):**
-
 - Proficient: range extends to Medium (30m); can manipulate objects up to ~50 kg
 - Mastered: can manipulate multiple objects simultaneously (up to 3); grip is strong enough to hold opponents within 1 realm of the user
-- Perfected (Ji Realm): functions as Mysterious-tier; **unlocks Sword Soaring** — the cultivator can now bind a sword treasure for flight and remote combat (per Treasures Framework §11)
+- Perfected: functions as Mysterious-tier; **unlocks Sword Soaring** — the cultivator can now bind a sword treasure for flight and remote combat (per Treasures Framework §11)
 
 **Dao affinity:** any (this is foundational, not Dao-specific). **Tags:** qi, telekinesis, foundational, sword-prerequisite.
 
-**Design note:** because Attraction Force is a prerequisite for flying-sword combat, characters who skip it are _narratively_ limited in a way the rules should reflect. A Foundation Establishment cultivator who never learned Attraction Force cannot wield a Sword Spirit treasure — period. This makes it the single most-learned technique in the setting.
+**Design note:** because Attraction Force is a prerequisite for flying-sword combat, characters who skip it are *narratively* limited in a way the rules should reflect. A Foundation Establishment cultivator who never learned Attraction Force cannot wield a Sword Spirit treasure — period. This makes it the single most-learned technique in the setting.
 
 ---
 
@@ -743,7 +875,7 @@ The Heng Yue Sect's standard Spirit-tier attack technique. A condensed qi bolt f
 **Mastery (Recipe C — Reach Curve):**
 - Proficient: range extends to 30m
 - Mastered: can fire 2 per action at −1 die each
-- Perfected (Ji Realm): evolves into Mysterious-tier *Cloud Shattering Finger*
+- Perfected: evolves into Mysterious-tier *Cloud Shattering Finger*
 
 **Dao affinity:** Wind, Metal. **Tags:** qi, ranged, standard.
 
@@ -764,7 +896,7 @@ A cold-attribute flame technique granted by the Underworld Ascension Method — 
 **Mastery (Recipe B — Power Curve):**
 - Proficient: +1 die
 - Mastered: drain increases to 10 qi per net success
-- Perfected (Ji Realm): evolves into Celestial-tier *Underworld Flame*; drain can target lifespan instead of qi
+- Perfected: evolves into Celestial-tier *Underworld Flame*; drain can target lifespan instead of qi
 
 **Dao affinity:** Demonic, Fire (inverted), Slaughter. **Tags:** fire, cold, qi-drain, demonic.
 
@@ -784,7 +916,7 @@ A layered stealth technique Wang Lin developed through years of necessity — su
 **Mastery (Recipe E — Depth Curve):**
 - Proficient: pierces 1 additional realm of Barrier *against* Divine Sense detection (can hide from 1 realm higher)
 - Mastered: reduces Divine Sense footprint by two realm tiers instead of one
-- Perfected (Ji Realm): evolves into Celestial-tier *Hidden Path*; effectively invisible to opponents ≤2 realms above the user for 1 scene
+- Perfected: evolves into Celestial-tier *Hidden Path*; effectively invisible to opponents ≤2 realms above the user for 1 scene
 
 **Dao affinity:** Solitude, Shadow, Endurance. **Tags:** stealth, soul, self-hide, sustained.
 
@@ -804,7 +936,7 @@ Situ Nan's signature forbidden art. Burns Blood Essence (lifespan) for a massive
 **Mastery (Recipe B — Power Curve):**
 - Proficient: +1 die (→+9 equivalent effect)
 - Mastered: second Realm Barrier pierced; lifespan cost rises to 75 years
-- Perfected (Ji Realm): functions as Void-tier; lifespan cost rises to 200 years but grants 2 full scenes of effect and bypasses 3 realms of Barrier
+- Perfected: functions as Void-tier; lifespan cost rises to 200 years but grants 2 full scenes of effect and bypasses 3 realms of Barrier
 
 **Dao affinity:** Blood, Slaughter, Endurance, Resentment. **Tags:** forbidden art, body, blood, piercing.
 
@@ -820,12 +952,12 @@ Wang Lin's canonical Ji Realm Divine Sense at Core Formation — red lightning t
 - **Effect:** +8 dice to a Soul attack. Damage applies to Soul Wound track, bypassing physical defenses. Target suffers a major condition: cannot use Soul-source techniques for 1 round.
 - **Budget:** Celestial 16 PP, 2 Special Prop slots. Spend: 8 PP (+8 dice at Celestial cap) + 3 PP (long range) + 4 PP (major condition) = 15 PP; 1 PP cycled to lower per-use qi at Perfected mastery (deferred). Soul-damage is native to Soul-source, no PP cost.
 - **Special Props (2/2):** Piercing (2 realms), Counter-Keyword (ignores physical armor/wounds — travels through Divine Sense channel, not physical space)
-- **Requirements:** Ji Realm in a precursor Lightning or Soul technique (Perfected mastery in a relevant technique).
+- **Requirements:** the user must hold Ji Realm in the Divine Sense aspect (per §7.6.3 — three Perfected Soul-source techniques + Master-level Soul or Lightning Dao Insight + breakthrough event). This is canonically Wang Lin's state when he first manifests Red Lightning at Core Formation.
 
 **Mastery (Recipe E — Depth Curve):**
 - Proficient: 1 additional Realm Barrier pierced
 - Mastered: target cannot perceive user via Divine Sense for 3 rounds after hit
-- Perfected (Ji Realm): functions as Void-tier; damage can shatter a Nascent Soul's escape mechanism — a canonical "this kills a higher-realm cultivator's last resort" technique
+- Perfected: functions as Void-tier; damage can shatter a Nascent Soul's escape mechanism — a canonical "this kills a higher-realm cultivator's last resort" technique
 
 **Dao affinity:** Lightning, Soul, Slaughter. **Tags:** soul, lightning, piercing, ji-realm.
 
@@ -846,7 +978,7 @@ Chapter 1156 debut. A finger-tier technique that invokes a strand of the cultiva
 **Mastery (Recipe E — Depth Curve):**
 - Proficient: charge time reduced to instant
 - Mastered: target also loses 1 Face (their fate has been written against them publicly)
-- Perfected (Ji Realm): functions as Nirvana-tier; the strike cannot be stopped except by an equal Nirvana-tier Fate/Karma technique
+- Perfected: functions as Nirvana-tier; the strike cannot be stopped except by an equal Nirvana-tier Fate/Karma technique
 
 **Dao affinity:** Karma, Fate, Cause & Effect. **Tags:** fate, soul, piercing, undodgeable.
 
@@ -866,7 +998,7 @@ One of Bai Fan's Celestial Emperor Spells, inherited by Wang Lin. A devastating 
 **Mastery (Recipe C — Reach Curve):**
 - Proficient: area expands to 100m radius
 - Mastered: can target two separate areas in one action
-- Perfected (Ji Realm): functions as Nirvana-tier; conjures a literal mountain that persists as difficult terrain for 1 scene
+- Perfected: functions as Nirvana-tier; conjures a literal mountain that persists as difficult terrain for 1 scene
 
 **Dao affinity:** Earth, Destruction, Celestial Emperor. **Tags:** qi, area, earth, environmental.
 
@@ -906,4 +1038,543 @@ This modifier is the mechanical expression of a fully-integrated master. A PC wh
 
 ---
 
-*End of Techniques Framework. Pair this document with sections 7.7, 8.8, and 8.9 of the main Cultivation Framework for full context. For treasures that pair with these techniques, see the Treasures Framework.*
+# PART C — CULTIVATION METHODS (功法)
+
+## 21. What is a Method?
+
+A **Cultivation Method** (功法, *gōngfǎ*) is the foundational system a cultivator follows to absorb qi, refine their body and soul, and progress through the realms. It is not a spell, not an ability, not a single technique — it is the entire framework that makes those things possible.
+
+Every cultivator has exactly one Method active at a time. Without one, they are a mortal. With a low-quality one, they progress slowly and cap out early. With a high-quality one, they can ascend to states that mortals cannot imagine.
+
+A Method defines, at minimum:
+
+- **How** the cultivator gathers qi (orthodox absorption from heaven and earth, demonic devouring from other beings, body-tempering through physical hardship, etc.)
+- **What kind** of qi they hold (orthodox, demonic, neutral, yin-aligned, yang-aligned, elemental, etc.)
+- **How far** they can progress (each Method has a realm cap above which it cannot carry the cultivator without modification or replacement)
+- **How fast** they progress (cultivation speed modifier on Seclusion)
+- **What they're good at** (attribute affinity, element affinity, Dao alignment)
+- **What they cannot do** (technique compatibility limits, restrictions on certain Daos, behavioral requirements)
+
+Canonically, Wang Lin's arc is told *through* his Methods: he starts with the Heng Yue Sect's basic manual (a Common-grade orthodox Method), inherits Situ Nan's Underworld Ascension Method (a Mysterious-grade demonic Method that burns Blood Essence for power), and eventually develops his own self-modified approach as he ascends to Nirvana. The Method is never just background — it is the spine of his cultivation identity.
+
+### Methods vs. Techniques
+
+The distinction matters and should never be blurred at the table:
+
+| | **Method (功法)** | **Technique (法术)** |
+|---|---|---|
+| **Scope** | The entire cultivation framework | A specific learned ability |
+| **Quantity** | Exactly one active per cultivator | Many; Soul × 5 simultaneous slots |
+| **Function** | Generates the cultivator's qi, attributes, realm progression | Spends qi to produce a discrete effect |
+| **Acquisition** | Inheritance, sect, ancient manual, self-creation | Manual, teacher, witnessed combat, inheritance |
+| **Replacement** | Difficult and costly (see §30) | Routine; learn new ones whenever |
+| **Visible in play** | Mostly passive — affects all rolls | Active — declared and cast |
+| **Examples** | Underworld Ascension Method, Heng Yue Standard Cultivation | Cloud Piercing Finger, Blue Flames |
+
+Techniques *use* the qi the Method generates. Methods do not produce techniques — though they often come bundled with a starter set, and they determine which techniques the cultivator can learn well.
+
+### The Methodless State
+
+A cultivator without an active Method is in one of three states:
+
+- **Mortal** — has never cultivated. Cannot progress. Cannot use techniques. Standard human attributes.
+- **Method-Severed** — had a Method but lost it (sect expelled them and revoked inheritance, the manual was destroyed mid-cultivation, the cultivator chose to abandon it). Retains current realm but cannot progress further; existing techniques become harder to use (+1 difficulty on all qi techniques); risk of Qi Deviation rises sharply.
+- **Methodless Sage** — Nirvana-tier cultivators may transcend the need for a discrete Method, having internalized the cultivation process to the point that Method becomes redundant. This is rare, terminal-tier, and not a goal for PCs in most campaigns.
+
+### Method Acquisition
+
+A starting PC has a Method assigned through their Affiliation step (see Cultivation Framework §1.4). During play, new Methods may be acquired through:
+
+- **Sect ascension** — promoted to a tier of disciple that grants access to a higher Method
+- **Inheritance** — surviving a tomb, ruin, or trial that bequeaths an ancient Method
+- **Looted manual** — taking a Method from a defeated opponent (carries Karma cost)
+- **Master's gift** — a senior cultivator transmits their Method as legacy
+- **Self-creation** — synthesized from study, comprehension, and Dao Insight (very rare; requires Soul Formation+ and Dao Realm in at least one Dao)
+
+---
+
+## 22. Method Anatomy
+
+Every Method has these fields. When designing, fill all of them.
+
+| Field | Description |
+|---|---|
+| **Name** | Evocative, often referencing the Method's nature or origin |
+| **Category** | Orthodox / Demonic / Body / Yin-Yang / Self-Taught (see §23) |
+| **Quality** | Common / Spirit / Mysterious / Celestial / Immortal (see §24) |
+| **Origin** | Sect / Inheritance / Found / Self-Created / Demonic Pact |
+| **Realm Cap** | Highest realm this Method can carry the cultivator to |
+| **Foundation Effects** | Passive bonuses applied at all times (qi pool, regen, attribute affinity, etc.) |
+| **Stage Unlocks** | What new effects unlock as the cultivator advances through realms |
+| **Compatibility** | Which technique categories the Method supports / penalizes / forbids |
+| **Restrictions** | Costs, Karma, behavioral requirements, lifespan tolls |
+| **Dao Alignment** | Which Daos the Method resonates with |
+| **Tags** | Yin, yang, fire, water, demonic, blood, etc. |
+
+---
+
+## 23. The Five Method Categories
+
+These are the canonical paths. A Method belongs to exactly one — Hybrid Methods exist but are Self-Taught by definition (you cannot officially follow two paths within an orthodox framework).
+
+### 23.1 Orthodox (正道)
+
+The cultivation path of harmony with heaven and earth. Qi is absorbed from the natural world; progression is steady; tribulations are predictable. Most great sects practice Orthodox cultivation.
+
+**Identifying traits:**
+- Qi nature: pure, neutral, or element-aligned
+- Tribulations: standard difficulty
+- Karma cost: low to none for cultivation itself
+- Realm cap potential: any tier (Immortal-grade Orthodox Methods reach Nirvana)
+- **Strength:** safety, sect support, stable progression
+- **Weakness:** slower than competing paths; vulnerable to Demonic counter-arts
+
+### 23.2 Demonic (魔道)
+
+The cultivation path of taking qi from others. Cultivators of this path absorb the qi, blood, or souls of living beings to fuel their own progression — the "Devouring" approach. Faster than Orthodox cultivation but morally and karmically catastrophic.
+
+**Identifying traits:**
+- Qi nature: tainted, inverted, or "cold" (canonically appears as black, red, or dark-tinged)
+- Tribulations: harsher (Heaven hates demonic cultivators); +1 tribulation tier
+- Karma cost: +1 Black Karma per breakthrough (canonical)
+- Realm cap potential: any tier — the path has its own Immortal-grade Methods
+- **Strength:** rapid cultivation, qi-drain capabilities, freedom from sect orthodoxy
+- **Weakness:** Karma accumulation, hunted by Orthodox cultivators, Heart Demons more frequent
+
+### 23.3 Body (体修)
+
+The cultivation path of refining the flesh into something more than mortal. Body cultivators temper their bodies through physical hardship — beating themselves with weapons, bathing in lava, withstanding lightning — until their body itself becomes the cultivation base.
+
+**Identifying traits:**
+- Qi nature: minimal (Body cultivators have small qi pools but enormous physical durability)
+- Body attribute is dramatically elevated; Qi attribute remains low
+- Tribulations: tested through physical destruction, often more brutal than Orthodox
+- Realm cap potential: any tier; high-tier Body Methods produce Heavenly Body cultivators
+- **Strength:** absurd physical attribute, low qi cost on Body-source techniques, immune to many qi attacks
+- **Weakness:** Qi-source techniques cost double qi (per §7.3); slower in non-physical situations
+
+### 23.4 Yin-Yang (双修)
+
+The cultivation path of paired cultivation, requiring a partner of complementary nature (one Yin, one Yang) to progress. The two cultivators' qi cycles support each other; alone, they progress at half speed or worse.
+
+**Identifying traits:**
+- Qi nature: explicitly Yin or Yang aligned
+- Always requires a bonded partner for full effect
+- Tribulations: shared between partners; one fails, both suffer
+- Realm cap potential: any tier; reaches highest with a stable partnership
+- **Strength:** doubled cultivation speed when paired, mutual support, unique paired techniques
+- **Weakness:** loss of partner is catastrophic (lose 1 sub-stage of realm; Heart Demon manifests); rare and hard to find compatible partner
+
+### 23.5 Self-Taught / Hybrid (散修)
+
+The cultivation path of those without a sect or inheritance — synthesizing what they can, learning from observation and trial. This is also where Hybrid Methods (combinations of two paths) live, since no orthodox sect would sanction such a thing.
+
+**Identifying traits:**
+- Qi nature: unique to the cultivator
+- Tribulations: unpredictable — sometimes easier, sometimes worse
+- Realm cap potential: any, but each tier requires self-modification of the Method (a cost)
+- **Strength:** flexibility, no sect obligations, can incorporate any technique compatible with their idiosyncratic Method
+- **Weakness:** no support network, no inheritance pipeline, harder to break through (Self-Taught cultivators get +1 die to learn techniques but +2 difficulty on breakthroughs without external aid)
+
+Wang Lin's mature Method is canonically Self-Taught Hybrid — he combines fragments of Orthodox Heng Yue Sect cultivation, the Underworld Ascension Method, and his own Restriction-focused refinements into a synthesis no sect would recognize.
+
+---
+
+## 24. Method Quality Tiers
+
+Quality determines the Method's Foundation Point (FP) budget, its realm cap, and how many Stages it has.
+
+| Quality | FP Budget | Realm Cap | Stages | Source |
+|---|---|---|---|---|
+| **Common** | 4 FP | Foundation Establishment (Tier 8) | 1–2 | Mortal-grade manuals, basic sect inheritance |
+| **Spirit** | 8 FP | Core Formation (Tier 12) | 3 | Standard sect Methods |
+| **Mysterious** | 16 FP | Nascent Soul (Tier 16) | 5 | Great sect Methods, ancient inheritances |
+| **Celestial** | 32 FP | Soul Formation (Tier 20) | 7 | Top-tier sect Methods, Immortal-touched manuals |
+| **Immortal** | 64 FP | Nirvana (Tier 25+) | 9 | Ancient Immortal inheritances, self-created at peak |
+
+A cultivator who reaches their Method's realm cap *cannot* break through further without:
+- Replacing the Method with one of higher quality (most common path)
+- Modifying their existing Method via Dao Insight (Self-Taught path)
+- Pure stagnation and lifespan-limited death
+
+This is the canonical reason high-quality Methods are so coveted: a cultivator with a Common Method who reaches Foundation Establishment Peak has *capped out* unless they find a better one.
+
+### Stages
+
+Most Methods unfold in stages keyed to realm progression. A Spirit-quality Method might have:
+- **Stage 1** unlocked at Qi Condensation
+- **Stage 2** unlocked at Qi Condensation Layer 6
+- **Stage 3** unlocked at Foundation Establishment (and is the final stage)
+
+Each stage typically grants new Foundation Effects from the Method's budget. Designing a multi-stage Method means *parceling the FP budget across stages*, not spending it all at Stage 1.
+
+---
+
+## 25. Method Effects Menu
+
+Spend FP from your tier's budget on these effects. Most can be taken once per stage; some scale.
+
+### Qi & Cultivation
+| Effect | FP Cost |
+|---|---|
+| +1 qi pool slot per realm tier (cumulative) | 1 FP |
+| +1 qi/round natural regen | 2 FP |
+| +1 die on breakthrough rolls | 2 FP |
+| −10% time on Seclusion to reach next sub-stage | 2 FP |
+| −1 tribulation tier (one-step easier) | 4 FP |
+| +50 years natural lifespan | 1 FP |
+
+### Attribute & Body
+| Effect | FP Cost |
+|---|---|
+| Attribute focus: +1 to Body / Qi / Soul as preferred attribute | 2 FP |
+| Heavenly Body alignment (Method synergizes with one specific Heavenly Body) | 3 FP |
+| Iron Body trait (DR 1 against physical damage; stacks per stage) | 3 FP |
+| Spiritual Sense range bonus (+1 realm tier of Divine Sense range) | 3 FP |
+
+### Element & Dao
+| Effect | FP Cost |
+|---|---|
+| Element affinity (+1 die on aligned-element techniques) | 2 FP |
+| Dao alignment (×1.5 Insight gain in one Dao) | 3 FP |
+| Five Element Mastery (all five elements treated as +1 affinity, but no specialization) | 5 FP |
+| Resonance with one specific technique type (+2 dice using techniques of that type) | 3 FP |
+
+### Signature / Unique
+| Effect | FP Cost |
+|---|---|
+| Qi-Drain (Demonic): each successful Qi-source attack restores 1 qi (Demonic only) | 4 FP |
+| Blood Burn (Body/Demonic): may spend lifespan as qi at 10 years/qi | 4 FP |
+| Yin-Yang Bond Channel (Yin-Yang only): paired partner gains all your Foundation Effects at half value | 3 FP |
+| Method Adaptability (Self-Taught only): may modify the Method without abandoning it; Insight cost in lieu of replacement | 5 FP |
+| Restriction Foundation (Wang Lin's signature): +2 dice on all Restriction-form techniques | 4 FP |
+| Sword Body / Sword Method: all sword techniques cost −1 qi (min 1) | 3 FP |
+| Demonic Heart Suppression: Heart Demon checks reduced by 2 dice | 3 FP |
+
+### Banked / Empty
+Unspent FP becomes "Empty Foundation" — cultivator may, at any later breakthrough, spend a held FP to buy any valid effect from the menu retroactively. A Self-Taught path. Common Methods cannot bank FP.
+
+---
+
+## 26. Method Restrictions (Budget Refunds)
+
+Restrictions refund FP, allowing more effects within a tier's budget. Like technique restrictions, they cap at 50% of the tier's budget.
+
+| Restriction | FP Refund |
+|---|---|
+| Sect-exclusive (lose Method on expulsion) | 1 FP |
+| Element-locked (only works for cultivators with matching Spiritual Root) | 1 FP |
+| Demonic Path nature (gains +1 Black Karma per breakthrough) | 2 FP |
+| Body Path qi-tax (Qi-source techniques cost 2× qi) | 2 FP |
+| Yin-Yang requires bonded partner (half effect when alone) | 3 FP |
+| Lifespan toll (loses 10 years of natural lifespan per breakthrough) | 2 FP |
+| Cannot learn Demonic techniques (Orthodox lock) | 1 FP |
+| Cannot learn Orthodox techniques (Demonic lock) | 1 FP |
+| Behavioral requirement (must meditate daily, must consume blood, must remain celibate, etc.) | 1 FP |
+| Heart Demon vulnerability (+1 difficulty on all Heart Demon checks) | 2 FP |
+| Visible cultivation tells (qi appears unusually colored — black, red, ghostly — making the cultivator readable as Demonic / Forbidden) | 1 FP |
+| Tribulation severity +1 tier | 3 FP |
+| Realm cap one tier below quality default | 3 FP |
+| Specific technique forbidden category (no Soul techniques, no Restriction techniques, etc.) | 1 FP per category |
+
+**Stacking caution:** four or more restrictions on a single Method makes it almost certainly Demonic, Forbidden, or self-taught — even if the design says otherwise. The restrictions tell their own story.
+
+---
+
+## 27. Method Stages — Layered Cultivation
+
+Higher-quality Methods unfold in stages. Each stage unlocks at a specific cultivation realm and grants a portion of the Method's total FP budget.
+
+### Suggested FP allocation per stage:
+
+**Spirit Quality (8 FP, 3 stages):**
+- Stage 1 (Qi Condensation): 4 FP
+- Stage 2 (Foundation Establishment): 2 FP
+- Stage 3 (Core Formation Cap): 2 FP
+
+**Mysterious Quality (16 FP, 5 stages):**
+- Stage 1 (Qi Condensation): 5 FP
+- Stage 2 (Foundation Establishment): 3 FP
+- Stage 3 (Core Formation): 3 FP
+- Stage 4 (Nascent Soul Approach): 3 FP
+- Stage 5 (Nascent Soul Cap): 2 FP
+
+**Celestial Quality (32 FP, 7 stages):**
+- Stage 1: 6 FP
+- Stages 2–6: 4 FP each (20 FP)
+- Stage 7 (Soul Formation Cap): 6 FP
+
+**Immortal Quality (64 FP, 9 stages):**
+- Stage 1: 8 FP
+- Stages 2–8: 6 FP each (42 FP)
+- Stage 9 (Nirvana): 14 FP
+
+Stage 1 always includes the Method's foundational character (qi nature, attribute focus, primary element/Dao alignment). Later stages typically expand and refine — an early stage might give "+1 die on Fire techniques," and a later stage might evolve that into "+3 dice and Fire Essence formation eligibility."
+
+---
+
+## 28. The Method Creation Process
+
+Eight steps. Methods take longer to design than techniques because they're foundational — every other rule on a cultivator's sheet flows from here.
+
+1. **Concept & flavor** — what does this Method feel like? Who would create it? Who would teach it? What does the qi look like when channeled?
+2. **Choose Category** — Orthodox / Demonic / Body / Yin-Yang / Self-Taught.
+3. **Choose Quality** — based on the campaign's expected ceiling and the Method's intended role.
+4. **Choose Origin** — sect / inheritance / found / self-created. Origin influences how PCs acquire it.
+5. **Outline Stages** — sketch what unlocks at each realm. Even Common Methods benefit from a 1–2 stage outline.
+6. **Spend FP across Stages** — buy Foundation Effects from §25, optionally take Restrictions from §26.
+7. **Set Compatibility** — what techniques does the Method support? Which does it forbid or penalize?
+8. **Stress test** — does it interact with at least three other systems (Daos, attributes, qi, Karma, Heart Demons)? Is it strictly better than peer-quality Methods? (must be NO).
+
+---
+
+## 29. Method Compatibility & Switching
+
+### Technique Compatibility
+
+A Method's category determines technique compatibility (per §7.3):
+
+| Method Category | Orthodox Techniques | Demonic Techniques | Body Techniques | Soul Techniques |
+|---|---|---|---|---|
+| **Orthodox** | Full | −2 dice; +1 Demonic Heart per use | Full | Full |
+| **Demonic** | Full but +2 Black Karma per use | Full | Full | Full |
+| **Body** | Full | −2 dice | Full +1 die | Doubled qi cost |
+| **Yin-Yang** | Full when paired; halved alone | −2 dice; +1 Heart Demon when paired | Full | Full |
+| **Self-Taught** | Full | Full at +1 Black Karma | Full | Full |
+
+Self-Taught is the most flexible category for a reason — it has no traditions to violate. The cost is the lack of sect support and harder breakthroughs.
+
+### Switching Methods
+
+A cultivator can replace their active Method with another, but the cost is severe:
+
+- **Realm Regression:** lose 1 sub-stage of cultivation immediately upon switching
+- **Qi Deviation Risk:** roll Soul + Soul Realm vs. 8 successes. Failure = 1 month of cultivation downtime; catastrophic failure (less than 4 successes) = permanent loss of 1 realm sub-stage
+- **Insight Loss:** any Daos misaligned with the new Method lose 1d10 Insight
+- **Heart Demon Manifestation:** automatic, requires resolution
+
+This is why most cultivators stick with one Method for their entire arc, even if better ones become available. Wang Lin canonically goes through *three* Methods in his lifetime — this is exceptional, not normal.
+
+### Hybrid Methods (Self-Taught Only)
+
+A Self-Taught cultivator at Soul Formation+ may *graft* fragments of another Method onto their existing one without full replacement. This costs:
+
+- 1 FP equivalent of effects from the source Method may be transplanted per Soul Formation sub-stage
+- 100 Insight in the linked Dao
+- 1 full Seclusion arc (campaign-level event)
+
+The result is a Hybrid Method — typically Self-Taught in category but carrying traits of its source Methods. This is canonically how Wang Lin's mature cultivation works.
+
+### Dual-Method Cultivators (Forbidden / Mythical)
+
+Carrying two active Methods simultaneously is canonically impossible without specific divine artifacts (e.g., Heaven Defying Bead) or unique Heavenly Bodies. If a campaign features such an artifact, dual-Method status grants:
+
+- Both Methods' Foundation Effects (full)
+- +1 tribulation tier (Heaven hates this)
+- Constant Heart Demon pressure (one check per session)
+- Inability to reach Nirvana without unifying the Methods
+
+This is GM-permission-only and shouldn't be available to PCs without major narrative justification.
+
+---
+
+## 30. Canonical Xian Ni Method Examples
+
+Four canonical Methods statted using this framework.
+
+### 30.1 Heng Yue Sect Standard Cultivation Method (Spirit, Orthodox)
+
+The basic Method taught to all Heng Yue Sect outer disciples. Wang Lin's first cultivation framework. Reliable, balanced, unspectacular.
+
+- **Category:** Orthodox | **Quality:** Spirit (8 FP) | **Realm Cap:** Core Formation
+- **Origin:** Sect inheritance (Heng Yue Sect, a minor sect in Zhao Country)
+- **Stages:** 3
+
+**Stage 1 (Qi Condensation, 4 FP):**
+- +1 qi pool slot per realm tier (1 FP)
+- +1 die on breakthrough rolls (2 FP)
+- Element neutrality — works with any Spiritual Root (1 FP via "no element lock" — this is implicit in not taking the element-locked refund)
+
+**Stage 2 (Foundation Establishment, 2 FP):**
+- Attribute focus: +1 Qi (2 FP)
+
+**Stage 3 (Core Formation Cap, 2 FP):**
+- +1 qi/round regen (2 FP)
+
+**Restrictions taken:** Sect-exclusive (+1 FP refund) — refunded into the Stage 1 element-flexibility option. Cannot learn Demonic techniques (+1 FP refund) — refunded into Stage 3 regen.
+
+**Compatibility:** Standard Orthodox; full with Body and Soul techniques; penalized with Demonic.
+
+**Notes:** This Method is *intentionally average*. It exists to give Heng Yue Sect a baseline for inner-disciple selection. Wang Lin breaks through to Foundation Establishment on it but stalls at Core Formation, which is canonically why he later seeks out the Underworld Ascension Method.
+
+---
+
+### 30.2 Underworld Ascension Method (Mysterious, Demonic)
+
+Situ Nan's signature Method, transmitted to Wang Lin in Book 2. A demonic-aligned cultivation framework that absorbs the qi of others and burns Blood Essence for breakthrough power. The Method that genuinely launches Wang Lin's cultivation.
+
+- **Category:** Demonic | **Quality:** Mysterious (16 FP) | **Realm Cap:** Nascent Soul
+- **Origin:** Inheritance (Situ Nan, Demonic cultivator from a previous era)
+- **Stages:** 5
+
+**Stage 1 (Qi Condensation, 5 FP):**
+- +1 qi pool slot per realm tier (1 FP)
+- Qi-Drain: successful Qi-source attacks restore 1 qi (4 FP)
+
+**Stage 2 (Foundation Establishment, 3 FP):**
+- +2 dice on breakthrough rolls (4 FP — over budget; see refunds below)
+
+**Stage 3 (Core Formation, 3 FP):**
+- Blood Burn: may spend lifespan as qi at 10 years/qi (4 FP — over; see refunds)
+
+**Stage 4 (Nascent Soul Approach, 3 FP):**
+- −10% Seclusion time (2 FP)
+- Bonded with Blue Flames technique (+2 dice when using Blue Flames of the Underworld) (3 FP — over)
+
+**Stage 5 (Nascent Soul Cap, 2 FP):**
+- Demonic Heart Suppression: Heart Demon checks reduced by 2 dice (3 FP — over)
+
+**Restrictions taken (refunding 8 FP across stages):**
+- Demonic Path nature (+1 Black Karma per breakthrough): +2 FP
+- Cannot learn Orthodox techniques without penalty: +1 FP
+- Tribulation severity +1 tier: +3 FP
+- Visible cultivation tells (Wang Lin's qi appears black-tinged): +1 FP
+- Behavioral: requires periodic absorption of others' qi to avoid stagnation: +1 FP
+
+Total refund: 8 FP. Total spent: 24 FP across stages, with 8 refunded — net 16 FP, on budget for Mysterious quality.
+
+**Compatibility:** Full with Demonic techniques; full with Body techniques; standard with Soul; cannot use Orthodox techniques without +2 Black Karma per use.
+
+**Notes:** This is the Method that lets Wang Lin punch above his realm. The Qi-Drain effect alone makes him a nightmare for equal-realm opponents, and Blood Burn is what enables his canonical realm-skipping fights. The cost is real — Karma accumulation, tribulation severity, and the eventual need to either ascend past Demonic or face Heaven's verdict.
+
+---
+
+### 30.3 Iron Bone Body Forging Method (Spirit, Body)
+
+A representative Body cultivation Method — generic enough to use for any "warrior-monk" or "outer-region body cultivator" NPC. Trades qi for raw physical power.
+
+- **Category:** Body | **Quality:** Spirit (8 FP) | **Realm Cap:** Core Formation
+- **Origin:** Sect inheritance (any martial sect; Iron Mountain Hall, Stone Lion Temple, etc.)
+- **Stages:** 3
+
+**Stage 1 (Qi Condensation, 4 FP):**
+- Attribute focus: +1 Body (2 FP)
+- Iron Body trait: DR 1 against physical damage (3 FP — 1 over, see refunds)
+
+**Stage 2 (Foundation Establishment, 2 FP):**
+- Iron Body upgrade: DR 2 against physical damage (3 FP — over)
+
+**Stage 3 (Core Formation Cap, 2 FP):**
+- +50 years natural lifespan (1 FP)
+- +1 die on Body-source techniques (1 FP via implicit Body Path bonus from Resonance, undercosted here)
+
+**Restrictions taken (refunding 4 FP):**
+- Body Path qi-tax (Qi techniques cost 2× qi): +2 FP
+- Cannot learn Soul techniques effectively: +1 FP (specific category lock)
+- Behavioral: Method requires daily physical training regimen: +1 FP
+
+**Compatibility:** Body techniques full and discounted; Qi techniques doubled cost; Soul techniques near-impossible.
+
+**Notes:** This is the Method of the warrior-monk archetype. Body cultivators are tanks — they soak hits and deliver crushing physical strikes. They are bad at ranged combat, illusion-resistance, and Soul interactions, which is why Body-focused parties pair well with Soul-aligned support cultivators.
+
+---
+
+### 30.4 Heaven Defying Bead Self-Cultivation (Immortal, Self-Taught)
+
+Wang Lin's canonical late-game Method, synthesized after he ascends past mortal sects and incorporates the Heaven Defying Bead into his cultivation. A unique Self-Taught Hybrid that combines fragments of Heng Yue Orthodox cultivation, the Underworld Ascension Method, and his own Restriction-focused refinements. This is a *defining cultivator* Method, not a typical PC starting point.
+
+- **Category:** Self-Taught (Hybrid: Orthodox + Demonic + Restriction-specialist) | **Quality:** Immortal (64 FP) | **Realm Cap:** Nirvana
+- **Origin:** Self-created via Heaven Defying Bead inheritance
+- **Stages:** 9
+
+**Foundation Effects across stages (selected highlights — full statline shown for representative stages):**
+
+**Stage 1 (Qi Condensation, 8 FP):**
+- +1 qi pool slot per realm tier (1 FP)
+- +1 qi/round regen (2 FP)
+- Method Adaptability (Self-Taught only): can modify Method per Soul Formation sub-stage (5 FP)
+
+**Stage 5 (Nascent Soul, 6 FP):**
+- Qi-Drain (Demonic fragment carried over): 1 qi per Qi-attack hit (4 FP)
+- Restriction Foundation: +2 dice on all Restriction-form techniques (this is the canonical Wang Lin signature) (4 FP — over without refunds; see below)
+- −1 Tribulation tier (4 FP — see below)
+
+**Stage 9 (Nirvana, 14 FP):**
+- Five Element Mastery: all five elements treated as +1 affinity (5 FP)
+- Dao alignment ×3 (Restrictions, Slaughter, Karma) — 9 FP (3 FP each)
+
+**Restrictions taken (substantial; refunding ~12 FP across stages):**
+- Tribulation severity +1 tier (offsetting late-stage tribulation reduction): +3 FP — yes, the cultivator made the tribulations worse to offset other gains, then bought the reduction back as a feature
+- Heart Demon vulnerability: +2 FP
+- Visible cultivation tells (Wang Lin's mature qi flickers between black and gold — readable as Heaven-Defying): +1 FP
+- Behavioral: must continually deepen Restriction Dao or stagnate: +1 FP
+- Demonic Path nature (Karma backlog): +2 FP
+- Element-locked? No — this Method *un-locks* element flexibility, which is unusual.
+
+**Compatibility:** Universal — Wang Lin can learn techniques from any source at this point, though Karma and Heart Demon costs apply to Demonic techniques as standard.
+
+**Notes:** This Method is shown as an example of what a fully realized Immortal-grade Self-Taught Method looks like in canon. It is *not* recommended as a player starting point; it represents 1500 chapters of cultivation and several Method switches. Use as a goalpost / NPC stat block / inheritance the campaign builds toward.
+
+---
+
+## 31. Quick-Reference Method Design Sheet
+
+Print this. Keep it next to the techniques sheet.
+
+```
+STEP 1 — CONCEPT
+  Pitch (one sentence):
+  Who teaches it? Where is it found?
+  What does the qi look/feel like?
+
+STEP 2 — CATEGORY
+  □ Orthodox  □ Demonic  □ Body  □ Yin-Yang  □ Self-Taught
+
+STEP 3 — QUALITY
+  □ Common (4 FP, cap Foundation Establishment, 1–2 stages)
+  □ Spirit (8 FP, cap Core Formation, 3 stages)
+  □ Mysterious (16 FP, cap Nascent Soul, 5 stages)
+  □ Celestial (32 FP, cap Soul Formation, 7 stages)
+  □ Immortal (64 FP, cap Nirvana, 9 stages)
+
+STEP 4 — ORIGIN
+  □ Sect  □ Inheritance  □ Found Manual
+  □ Self-Created  □ Demonic Pact
+
+STEP 5 — STAGE OUTLINE
+  Stage 1 (___): _____ FP
+  Stage 2 (___): _____ FP
+  Stage 3 (___): _____ FP
+  Stage 4 (___): _____ FP
+  Stage 5 (___): _____ FP
+  ...
+
+STEP 6 — FP SPEND
+  Qi & Cultivation: _____ FP
+  Attribute & Body: _____ FP
+  Element & Dao: _____ FP
+  Signature: _____ FP
+  Restrictions (refund): − _____ FP
+  TOTAL: _____ / _____ budget
+
+STEP 7 — COMPATIBILITY
+  Orthodox techniques: _____
+  Demonic techniques: _____
+  Body techniques: _____
+  Soul techniques: _____
+  Forbidden categories: _____
+
+STEP 8 — STRESS TEST
+  □ Does the Category match the Method's flavor?
+  □ Are Stage unlocks paced across realms?
+  □ Does at least one Stage grant something dramatic, not just numerical?
+  □ Does it interact with three+ other systems (Karma, Heart Demons, Daos, attributes, tribulations)?
+  □ Is it strictly better than peer-quality Methods? (must be NO)
+  □ If Demonic, does Karma cost actually affect play?
+  □ If Body, does the qi-tax bite hard enough?
+  □ If Yin-Yang, is the partner integration meaningful?
+```
+
+---
+
+*End of Techniques Framework. Pair this document with the main Cultivation Framework (§1.4 Affiliation, §7.7 Technique Lifecycle) and the Treasures Framework for full context.*
