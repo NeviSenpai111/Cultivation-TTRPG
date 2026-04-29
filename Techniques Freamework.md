@@ -44,6 +44,14 @@
 30. Canonical Xian Ni Method Examples
 31. Quick-Reference Method Design Sheet
 
+**Part D — Dual Cultivation (双修)**
+32. What is Dual Cultivation?
+33. Dual Cultivation Framework (Compatibility, Rolls)
+34. The Three Pairings (Yin-Yang, Yang-Yang, Yin-Yin)
+35. Risks, Bonds, and Severance
+36. Canonical Resources & Mechanics (Yin Detection, Extreme Yin types, Cold Core, Pure Bodies)
+37. Quick-Reference Dual Cultivation Sheet
+
 ---
 
 # PART A — TECHNIQUE SYSTEM REFERENCE
@@ -1577,4 +1585,320 @@ STEP 8 — STRESS TEST
 
 ---
 
-*End of Techniques Framework. Pair this document with the main Cultivation Framework (§1.4 Affiliation, §7.7 Technique Lifecycle) and the Treasures Framework for full context.*
+# PART D — DUAL CULTIVATION (双修)
+
+## 32. What is Dual Cultivation?
+
+**Dual Cultivation (双修, *shuāngxiū*)** is the practice of two cultivators joining their qi cycles to accelerate progression beyond what either could achieve alone. It is not strictly a Method category — any cultivator may engage in dual cultivation if their nature and partner permit — but it interacts so deeply with the Method system that it warrants its own framework.
+
+**Canonical grounding in Xian Ni:** dual cultivation matters most acutely at the **Illusionary Yin / Corporeal Yang transitional realms** between Ascendant and Nirvana, where a cultivator must master both Yin and Yang to advance. Wang Lin's hunt for sources of pure Yin energy (the Yin Energy Detection Technique, the Cold Core formation in Foundation Establishment) is the canonical example of *solo* dual-aligned cultivation. Paired dual cultivation — two cultivators sharing the work — is treated in canon as both faster and more dangerous.
+
+### The Three Pairings
+
+Canonically, dual cultivation comes in three forms based on the partners' qi alignment:
+
+- **Yin-Yang (balanced)** — one Yin-aligned partner, one Yang-aligned partner. The orthodox form. Maximum efficiency, lowest risk.
+- **Yang-Yang (resonant)** — both partners Yang-aligned. Powerful but volatile; risk of qi conflagration.
+- **Yin-Yin (resonant)** — both partners Yin-aligned. Powerful but stagnant; risk of qi solidification (Cold Core deepening, possible coma).
+
+Each has different mechanical effects, different requirements, and different failure modes. The framework treats all three as legitimate paths — none is morally better than another, though Orthodox sects favor Yin-Yang and Demonic sects often favor same-sign pairings for the raw power gains.
+
+### Dual Cultivation vs. Yin-Yang Method Category
+
+The **Yin-Yang Method category** (§23.4) requires a bonded partner for the Method itself to function — these cultivators *cannot effectively cultivate alone*. Dual cultivation as described here is a *broader* practice: any cultivator (Orthodox, Demonic, Body, Self-Taught) can engage in dual cultivation as a periodic enhancement, not a permanent dependency.
+
+In short: a Yin-Yang Method cultivator *must* dual-cultivate. Cultivators of other Methods *may* dual-cultivate.
+
+### The Dao Companion Bond (道侣)
+
+Most serious dual cultivation requires a **Dao Companion** (道侣, *dàolǚ*) — a deeper partnership than mortal marriage, where the two cultivators bind their fates explicitly. This bond is mechanical, not just narrative:
+
+- Shared Karma — Black Karma or White Karma earned by one is partially shared (1 per 3 earned, rounded down)
+- Shared lifespan capacity — pooled lifespan; one partner near death may receive years from the other (voluntary, ritual-required)
+- Shared Heart Demon vulnerability — one partner's Heart Demon affects both Heart Demon checks for the duration
+- Severance of bond is catastrophic (see §35)
+
+Casual dual cultivation without a Dao Companion bond is possible but limited (see §33).
+
+---
+
+## 33. Dual Cultivation Framework
+
+Dual cultivation is structured as a **paired Seclusion** with mechanical effects determined by the pairing type, the partners' compatibility, and the depth of bond.
+
+### Seclusion as Dual Cultivation
+
+To engage in dual cultivation, both partners spend equal Seclusion slots together. The minimum is 1 slot per partner; the canonical full session is 4 slots per partner (a Cultivation Arc).
+
+Both partners gain the benefits and bear the risks. If one partner's roll fails catastrophically, the other is affected.
+
+### Compatibility Score
+
+Before any pairing rolls, calculate a **Compatibility Score** between the two partners. This determines the dice modifier on all dual cultivation rolls.
+
+| Compatibility Factor | Modifier |
+|---|---|
+| Same Method category (e.g. both Orthodox) | +1 |
+| Compatible Method categories (Orthodox + Self-Taught, Body + Orthodox) | +0 |
+| Conflicting Method categories (Orthodox + Demonic) | −2 |
+| Within 2 realm tiers of each other | +1 |
+| Within 1 realm sub-stage | +2 |
+| 3+ realm tiers apart | −3 |
+| Aligned Daos (one+ shared Dao at Initiate or higher) | +1 per shared Dao (cap +3) |
+| Conflicting Daos (e.g. Slaughter + Mercy, Karma + Cause-Severing) | −2 per conflict |
+| Has formed Dao Companion bond | +2 |
+| Has Pure Yin / Pure Yang Body (or equivalent rare bloodline) | +3 (only the pure-bodied partner contributes this; both being pure-bodied stacks to +6) |
+| Romantic / emotional bond (narrative judgment) | +1 |
+| Hostile or coerced pairing | −5 (and a Karma cost — see §35) |
+
+A net Compatibility Score of **−5 or worse** makes dual cultivation impossible without external aid (a master-grade pill, a formation, a divine artifact). Below **0**, the pairing is technically possible but no rational cultivator would attempt it.
+
+### The Dual Cultivation Roll
+
+At the end of the paired Seclusion, both partners make a single shared roll:
+
+**Roll:** lower of the two partners' (Qi Realm Tier + Soul Realm Tier) + Compatibility Score, in dice. Target depends on pairing type (see §34).
+
+**Outcomes:**
+
+- **Full success:** both partners gain pairing-specific benefits (see §34). Insight gain in any shared Daos.
+- **Marginal success:** benefits halved; no Insight gain; small risk of Heart Demon.
+- **Failure:** no progress for either; cultivation slowed for next Seclusion.
+- **Catastrophic failure:** Qi Deviation for both partners; possible cultivation regression (see §35).
+
+---
+
+## 34. The Three Pairings
+
+### 34.1 Yin-Yang (Balanced Cultivation)
+
+The orthodox dual cultivation: one Yin-aligned partner, one Yang-aligned partner. Yin and Yang qi flow between them, each tempering and refining the other. Bottlenecks dissolve, impurities burn away, both cultivation bases solidify.
+
+**Partner Requirements:**
+- One partner Yin-aligned (born Yin Spiritual Root, or cultivating a Yin-aligned Method, or bearing a Yin Heavenly Body)
+- One partner Yang-aligned (corresponding above)
+- Compatibility Score ≥ 0
+
+**Roll Target:** 6 successes per Seclusion slot (e.g., 24 successes for a full 4-slot Cultivation Arc)
+
+**Benefits on full success:**
+
+| Realm | Benefit |
+|---|---|
+| Qi Condensation – Foundation Establishment | +50% Insight gain on any shared Dao; +1 sub-stage progress |
+| Core Formation – Nascent Soul | Above + dissolution of one cultivation bottleneck (one re-roll on next breakthrough) |
+| Soul Formation – Ascendant | Above + +1 die permanent on any technique aligned with the partner's primary Dao |
+| Illusionary Yin / Corporeal Yang transition | Above + this is the canonical path through these realms; without dual cultivation, the transition takes 5× longer |
+| Nirvana | Above + may co-comprehend a single Essence (rare, requires a Dao Companion bond) |
+
+**Risk profile:** *Low.* This is the safest dual cultivation path. Catastrophic failure typically results in 1 month of cultivation downtime, not regression. **No Karma cost.**
+
+**Narrative weight:** the orthodox path. Sects approve. Heaven approves. Tribulations are slightly more lenient for Yin-Yang Dao Companions.
+
+### 34.2 Yang-Yang (Resonant Cultivation)
+
+Two Yang-aligned partners. Their qi resonates rather than tempering — fire feeding fire. The result is a massive temporary surge in cultivation speed but a high risk of *qi conflagration* (out-of-control Yang qi consuming meridians, lifespan, or sanity).
+
+**Partner Requirements:**
+- Both partners Yang-aligned (Yang Spiritual Root, Yang Method, or Yang Heavenly Body)
+- Compatibility Score ≥ +2 (resonance pairings need higher compatibility to remain stable)
+- At least one partner has Fire, Lightning, Slaughter, or another high-Yang Dao at Initiate or higher
+
+**Roll Target:** 8 successes per Seclusion slot (harder than Yin-Yang)
+
+**Benefits on full success:**
+
+| Realm | Benefit |
+|---|---|
+| Qi Condensation – Foundation Establishment | +100% Insight gain on shared Dao; +1 sub-stage progress; both partners gain a temporary +1 die on Yang-aligned techniques for the next session |
+| Core Formation – Nascent Soul | Above + may temporarily punch one realm above for the next combat scene (lasts one session) |
+| Soul Formation – Ascendant | Above + permanent +2 dice on Yang-Dao Insight rolls for the rest of the campaign |
+| Illusionary Yin / Corporeal Yang transition | Generally inadvisable — Yang-Yang resonance hinders the Yin half of the transition. Use Yin-Yang or solo cultivation instead. |
+| Nirvana | Above + may condense a Yang-aligned Essence faster (−1 stage of Insight requirement) |
+
+**Risk profile:** *High.*
+
+| Outcome | Result |
+|---|---|
+| Marginal success | Both partners must roll Body + Body Realm vs. 6 successes or suffer 1d4 lifespan years burned (qi conflagration scorching) |
+| Failure | As marginal, but lifespan burn rises to 1d10 years; one partner gains a Heart Demon (Recklessness, Bloodlust, or Megalomania) |
+| Catastrophic failure | Both partners suffer Qi Deviation (one full sub-stage cultivation regression); both gain Heart Demons; one partner risks a full Yang Conflagration — roll Body + Body Realm vs. 12 or lose 50–500 years of lifespan as the Yang qi runs wild |
+
+**Karma cost:** +1 Black Karma per session (Yang-Yang resonance is associated with Demonic and Slaughter-aligned cultivation; Heaven views it suspiciously)
+
+**Narrative weight:** the path of fire-walkers. Demonic cultivators, Slaughter-Dao practitioners, and rivals-turned-allies often favor this pairing. Faster, dirtier, hotter. Burn out or break through.
+
+### 34.3 Yin-Yin (Resonant Cultivation)
+
+Two Yin-aligned partners. Their qi pools rather than tempers — cold deepening into colder. The result is *exceptional refinement* — far superior to Yin-Yang or Yang-Yang for crafting subtle techniques, deep Insight, and pure-Yin treasures — but the risk is *qi solidification* (Yin qi crystallizing in meridians, lifespan stasis, possible coma).
+
+**Partner Requirements:**
+- Both partners Yin-aligned
+- Compatibility Score ≥ +2
+- At least one partner has Water, Ice, Death, Karma, Restriction, or another high-Yin Dao at Initiate or higher
+- A pure-Yin location helps (Cold Core formation site, ancient tomb, lunar formation) — adds +2 to the roll if available
+
+**Roll Target:** 8 successes per Seclusion slot
+
+**Benefits on full success:**
+
+| Realm | Benefit |
+|---|---|
+| Qi Condensation – Foundation Establishment | +100% Insight gain on shared Dao; both partners may form a Cold Core early (permanent +1 qi pool slot tied to Yin alignment); +1 sub-stage progress |
+| Core Formation – Nascent Soul | Above + permanent +2 dice on subtle techniques (Restrictions, Stealth, Soul-source perception, Karma-thread reading) |
+| Soul Formation – Ascendant | Above + may attempt to detect or refine one of the four canonical Extreme Yin types (Earth, Xuan, Huang, Heavenly) — see §36 |
+| Illusionary Yin / Corporeal Yang transition | Excellent for the Illusionary Yin half; should be paired with Yin-Yang or Yang-Yang for the Corporeal Yang half |
+| Nirvana | Above + may condense a Yin-aligned Essence; Restriction, Karma, Time, and Death Essences all favor this path |
+
+**Risk profile:** *High but different from Yang-Yang.*
+
+| Outcome | Result |
+|---|---|
+| Marginal success | Both partners must roll Soul + Soul Realm vs. 6 successes or enter a 1-week Yin Stupor — cultivation continues but the partners are unresponsive to outside stimuli |
+| Failure | As marginal, but Yin Stupor extends to 1 month; one partner gains a Heart Demon (Detachment, Apathy, or Obsession) |
+| Catastrophic failure | Both partners enter Yin Coma — cultivation regression of one sub-stage and a coma lasting 1 to 12 months. The Coma can be ended early by external aid (a Yang-aligned senior cultivator, a pill of Pure Yang, a tribulation forced by Heaven). Without aid, one partner risks death — roll Body + Body Realm vs. 12 or perish in the cold. |
+
+**Karma cost:** none directly, but Yin-Yin cultivation *attracts* — the cold qi signature draws beings of the Yin realm (corpse-spirits, Yin demons, Cold Soul wraiths). Each session has a 1-in-6 chance of a hostile encounter during or shortly after.
+
+**Narrative weight:** the path of hidden masters. Restriction Grandmasters, soul-cultivators, formation specialists, and certain Demonic Heart practitioners favor this pairing. Cold, methodical, dangerous to outsiders. The pairing of secrets.
+
+---
+
+## 35. Risks, Bonds, and Severance
+
+### Failed Pairings
+
+A failed dual cultivation session is more than a wasted Seclusion. The specific risks vary by pairing (see §34), but two general consequences apply:
+
+1. **Compatibility damage.** A failed pairing reduces the Compatibility Score between the two partners by 1, permanently. Repeated failures eventually make the pairing impossible.
+2. **Heart Demon vulnerability.** For 1 month after any failed dual cultivation, both partners suffer −2 dice on Heart Demon checks. A Heart Demon manifesting in this window often takes the form of *the partner themselves* — paranoia, jealousy, doubt, possessiveness.
+
+### The Dao Companion Bond
+
+Forming a Dao Companion bond is a deliberate ritual, not a state that emerges automatically from dual cultivation. Requirements:
+
+- At least 3 successful dual cultivation sessions together
+- Both partners willingly oath-bind in front of either a senior Dao Companion couple or a recognized authority (sect master, ancestor, divine treasure)
+- Both partners commit 1 sub-stage of cultivation Insight as the binding cost (paid out of current banked Insight; this is canonically why some couples wait until their cultivation is more advanced — the cost stings less)
+
+Once bonded, the partners gain (per §32):
+- Shared Karma (1 per 3 earned)
+- Pooled lifespan capacity (transferable in ritual)
+- Shared Heart Demon vulnerability (both check together)
+- Compatibility Score +2 (cumulative with other modifiers)
+- A passive *Resonance* — they always know the other's general status and emotional state regardless of distance (within the same world; cross-world resonance requires a treasure)
+
+### Bond Severance
+
+Severing a Dao Companion bond is one of the most damaging events in cultivation. It can be triggered by:
+
+- **Mutual dissolution** (both consent, formal ritual): least painful. Loss of 1 sub-stage cultivation each, loss of all bond-shared benefits. Karma sharing ends. May happen no more than once per cultivator per lifetime.
+- **Unilateral severance** (one partner forces the bond's end): catastrophic for the abandoned partner. They suffer regression of 2 sub-stages, 1d20 years of lifespan, and a permanent Heart Demon. The severing partner gains 1 Black Karma per realm tier of the abandoned.
+- **Death of one partner:** the surviving partner suffers regression of 1 sub-stage and gains a permanent Heart Demon (Grief, Vengeance, or Obsession). White Karma may be earned through extraordinary mourning rituals (e.g., a Cultivation Arc dedicated to the lost partner's resurrection or memorial).
+- **Betrayal severance** (one partner harms the other): both suffer regression; the betraying partner gains massive Black Karma (1d6+1 Black Karma) and is hunted by Heaven's Tribulation early.
+
+### Coerced Dual Cultivation (Forbidden)
+
+Dual cultivation against a partner's will is canonically Demonic and Forbidden. The aggressor:
+
+- Gains the dual cultivation benefits but at half value
+- Gains 3 Black Karma per session
+- Gains a permanent Karmic Brand visible to any cultivator with Karma Dao at Adept+
+- Becomes a legitimate target for Orthodox sect cultivators of Soul Formation+ (this is canon — Wang Lin specifically hunts such practitioners during his Slaughter Dao arc)
+
+The victim:
+- Gains White Karma proportional to the loss
+- Suffers regression of 1 sub-stage
+- May, through narrative work, eventually leverage the karmic bond into a counter-attack ("Karma comes due")
+
+---
+
+## 36. Canonical Resources & Mechanics
+
+### Yin Energy Detection (Xian Ni canon)
+
+A Mysterious-tier Utility-Perception technique Wang Lin learns from Situ Nan that detects pure Yin or pure Yang energy concentrations within 50km. Used to find ideal cultivation sites for Yin-Yin or Yang-Yang resonance pairings. Statted out, this is:
+
+- **Source:** Soul | **Type:** Utility (Perception)
+- **Tier:** Mysterious | **Qi:** 5
+- **Effect:** Detect Yin/Yang concentrations within 50km. Reveals approximate purity grade. Cannot detect cultivators directly — only ambient or environmental energy.
+
+### The Four Extreme Yin Types
+
+Canonically, there are four levels of Extreme Yin cultivation resource — **Earth Yin, Xuan Yin, Huang Yin, Heavenly Yin** — each with four levels and ten grades within. Combined into Heavenly Yin via specialized refinement. Yin-Yin dual cultivators may pursue these as cultivation resources; obtaining one is a campaign-level objective.
+
+Mechanically, exposure to a high-grade Extreme Yin source during a Yin-Yin session adds significant dice (Earth +2, Xuan +4, Huang +6, Heavenly +10) and allows cultivation through bottlenecks that would otherwise require breakthrough rolls.
+
+The corresponding **Extreme Yang** types exist symmetrically: Earth Yang, Xuan Yang, Huang Yang, Heavenly Yang. These are rarer in canon but mechanically equivalent for Yang-Yang sessions.
+
+### Cold Core Formation
+
+A Yin-Yin practitioner at Foundation Establishment may form a **Cold Core** instead of a standard Foundation. Mechanical effect:
+- +1 qi pool slot (permanent)
+- −1 qi cost on all Yin-aligned techniques
+- +2 dice on Restriction-form techniques
+- Requires: completion of at least one Yin-Yin Cultivation Arc at a high-Yin location, plus successful Foundation Establishment breakthrough during or immediately after the session
+
+A Cold Core cannot be undone except by a full cultivation reset. It is canonically Wang Lin's Foundation form via the Underworld Ascension Method.
+
+### Pure Yin / Pure Yang Bodies
+
+A character may be born with a **Pure Yin Body** or **Pure Yang Body** — an extremely rare Heavenly Body (per Cultivation Framework §1.5). Effects:
+
+- Compatibility +3 in dual cultivation sessions where they are the matching pole
+- Cultivation speed in their aligned half (+50% on aligned Seclusion)
+- Dramatic vulnerability when alone — without pairing, cultivation slows to half normal speed at higher realms (canonically, this is why Pure-Body cultivators are so eagerly sought as Dao Companions)
+
+This is a Heavenly Body, not a Method. A Pure Yang cultivator using a Body Method is mechanically distinct from a Pure Yang cultivator using an Orthodox Method.
+
+---
+
+## 37. Quick-Reference Dual Cultivation Sheet
+
+```
+STEP 1 — IDENTIFY PAIRING TYPE
+  □ Yin-Yang (balanced; safest, slowest)
+  □ Yang-Yang (resonant; fast, fiery, risky)
+  □ Yin-Yin (resonant; deep, cold, dangerous)
+
+STEP 2 — CALCULATE COMPATIBILITY
+  Method category:           ___
+  Realm tier difference:     ___
+  Shared Daos:               ___
+  Conflicting Daos:          ___
+  Pure Body present:         ___
+  Dao Companion bond:        ___
+  Romantic bond:             ___
+  TOTAL Compatibility Score: ___
+
+  □ Score ≥ +2: full pairing eligible
+  □ Score 0 to +1: Yin-Yang only
+  □ Score −4 to −1: not advisable; external aid needed
+  □ Score ≤ −5: impossible without artifact/formation
+
+STEP 3 — DETERMINE TARGET
+  □ Yin-Yang: 6 successes per Seclusion slot
+  □ Yang-Yang: 8 successes per Seclusion slot
+  □ Yin-Yin: 8 successes per Seclusion slot
+
+STEP 4 — DICE POOL
+  Lower partner's (Qi Realm Tier + Soul Realm Tier) + Compatibility Score
+  + situational modifiers (location, treasures, pills)
+
+STEP 5 — RESOLVE
+  Full success:    apply pairing benefits per §34
+  Marginal:        halved benefits; risk roll
+  Failure:         no progress; Compatibility −1
+  Catastrophic:    Qi Deviation; pairing-specific consequences
+
+STEP 6 — TRACK PERSISTENT EFFECTS
+  □ Pairing risk effects (lifespan burn, Yin Stupor, etc.)
+  □ Karma adjustments
+  □ Compatibility Score change
+  □ Insight gain or loss
+  □ Heart Demon manifestations
+```
+
+---
+
+*End of Techniques Framework. Pair this document with the main Cultivation Framework (§1.4 Affiliation, §1.5 Heavenly Bodies, §7.7 Technique Lifecycle) and the Treasures Framework for full context.*

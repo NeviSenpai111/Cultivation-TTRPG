@@ -475,7 +475,7 @@ You get **2 Spirit-tier techniques.** They come from your Method, your Origin, o
 - **Muffle Sound** (1 qi) — silence around you for a scene
 - **Minor Flame** (free) — basic fire ignition, illumination
 
-You may also propose a custom Spirit-tier technique with GM approval. See [[techniques_framework]] for full anatomy and PP budgets.
+You may also propose a custom Spirit-tier technique with GM approval. See [[Techniques Freamework]] for full anatomy and PP budgets.
 
 #### 3.6.2 Selection Strategy
 
@@ -1222,7 +1222,7 @@ Beyond your sheet's static information, track:
 | The breakthrough process | [[cultivation_ttrpg_framework#7. Progression & Cultivation Mechanics\|main framework §7]] |
 | Combat dice mechanics | [[cultivation_ttrpg_framework#8. Combat & Dice Mechanics\|main framework §8]] |
 | Karma resolution rules | [[cultivation_ttrpg_framework#9. Karma & Face\|main framework §9]] |
-| Buying / crafting techniques | [[techniques_framework]] |
+| Buying / crafting techniques | [[Techniques Freamework]] |
 | Treasures, pills, formations | [[treasures_framework]] |
 | Sect rank, world structure | [[worlds_sects_framework]] |
 | GM-facing reference | [[gm_one_pager]] |
@@ -1256,8 +1256,8 @@ Beyond your sheet's static information, track:
 | **Full Karma rules** (Pursuit Clocks, Resolution Moments, Heavenly Karma effects on tribulation) | [[cultivation_ttrpg_framework#9. Karma & Face\|main framework §9]] |
 | **Breakthrough rolls and Qi Deviation** | [[cultivation_ttrpg_framework#7.4 The Breakthrough Roll\|main framework §7.4]] |
 | **Combat dice pools, Realm Barrier** | [[cultivation_ttrpg_framework#8. Combat & Dice Mechanics\|main framework §8]] |
-| **Technique anatomy & PP budget** | [[techniques_framework]] |
-| **Buying or finding higher-tier techniques** | [[techniques_framework]] §6 |
+| **Technique anatomy & PP budget** | [[Techniques Freamework]] |
+| **Buying or finding higher-tier techniques** | [[Techniques Freamework]] §6 |
 | **Treasures, sword spirits, sword soaring** | [[treasures_framework]] |
 | **Sect ranks, country ranks, planet ranks** | [[worlds_sects_framework]] |
 | **GM tools, NPC stat blocks, encounter design** | [[cultivation_ttrpg_framework#13. GM Tools\|main framework §13]] / [[gm_one_pager]] |
